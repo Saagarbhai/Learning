@@ -3,6 +3,16 @@ import '../../core/utils/app_export.dart';
 class PasswordScreen extends StatelessWidget {
   const PasswordScreen({super.key});
 
+  // Method to navigate to profile screen
+  void _navigateToProfileScreen(BuildContext context) {
+    print('Navigating to CreateProfileScreen');
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const CreateProfileScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,22 +30,28 @@ class PasswordScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: BlocListener<PasswordBloc, PasswordState>(
+            listenWhen: (previous, current) =>
+                previous.isSuccess != current.isSuccess ||
+                previous.errorMessage != current.errorMessage,
             listener: (context, state) {
+              print(
+                  'BlocListener: isSuccess: ${state.isSuccess}, errorMessage: ${state.errorMessage}');
               if (state.isSuccess) {
+                print('Navigation triggered: going to CreateProfileScreen');
                 // Show success message
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(Lang.of(context).passwordsetsuccessfully),
+                    duration: const Duration(seconds: 1),
                   ),
                 );
-                // Navigate to create profile screen
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const CreateProfileScreen(),
-                  ),
-                );
+                // Navigate to create profile screen with a small delay to allow the snackbar to be seen
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  _navigateToProfileScreen(context);
+                });
               }
               if (state.errorMessage != null) {
+                print('Error message shown: ${state.errorMessage}');
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.errorMessage!)),
                 );
@@ -131,20 +147,27 @@ class PasswordScreen extends StatelessWidget {
                             current.isConfirmPasswordValid ||
                         previous.isSubmitting != current.isSubmitting,
                     builder: (context, state) {
+                      final bool canSubmit = state.isPasswordValid &&
+                          state.isConfirmPasswordValid &&
+                          !state.isSubmitting;
+
                       return CustomButton(
                         text: Lang.of(context).register,
-                        onPressed: state.isSubmitting
-                            ? null
-                            : () {
+                        onPressed: canSubmit
+                            ? () {
+                                print(
+                                    'Register button pressed, submitting password');
                                 context
                                     .read<PasswordBloc>()
                                     .add(PasswordSubmitted());
-                              },
+                              }
+                            : null,
                         width: double.infinity,
                         height: 50,
                         isLoading: state.isSubmitting,
                         showShadow: true,
-                        backgroundColor: const Color(0xFF039855),
+                        backgroundColor:
+                            canSubmit ? const Color(0xFF039855) : Colors.grey,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         borderRadius: 8,

@@ -107,38 +107,38 @@ class CustomPasswordField extends StatelessWidget {
   }
 
   Widget _buildValidationIcon() {
-    // For empty fields in non-confirm mode, show nothing
-    if (!confirmField && !isValid && controller?.text.isEmpty != false) {
+    // For primary password field
+    if (!confirmField) {
+      // Only show check icon if the field is valid and not empty
+      if (isValid) {
+        return Container(
+          width: 24,
+          alignment: Alignment.center,
+          child: const Icon(
+            Icons.check,
+            color: Colors.green,
+            size: 18,
+          ),
+        );
+      }
       return const SizedBox.shrink();
     }
 
-    // For confirm field
-    if (confirmField) {
-      if (controller?.text.isEmpty != false) {
-        return const SizedBox.shrink();
+    // For confirm password field
+    else {
+      // Only show check icon if the confirmation matches and is not empty
+      if (isConfirmMatch && controller?.text.isNotEmpty == true) {
+        return Container(
+          width: 24,
+          alignment: Alignment.center,
+          child: const Icon(
+            Icons.check,
+            color: Colors.green,
+            size: 18,
+          ),
+        );
       }
-      return Container(
-        width: 24,
-        alignment: Alignment.center,
-        child: Icon(
-          Icons.check,
-          color: Colors.green,
-          size: 18,
-        ),
-      );
+      return const SizedBox.shrink();
     }
-
-    // For primary password field
-    return isValid
-        ? Container(
-            width: 24,
-            alignment: Alignment.center,
-            child: const Icon(
-              Icons.check,
-              color: Colors.green,
-              size: 18,
-            ),
-          )
-        : const SizedBox.shrink();
   }
 }

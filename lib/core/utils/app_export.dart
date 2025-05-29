@@ -59,3 +59,6 @@ export '../../viewmodel/password/password_event.dart';
 export '../../viewmodel/password/password_state.dart';
 export '../../view/widgets/custom_password_field.dart';
 export '../../view/profile/create_profile_screen.dart';
+export '../../viewmodel/profile/profile_bloc.dart';
+export '../../viewmodel/profile/profile_event.dart';
+export '../../viewmodel/profile/profile_state.dart';

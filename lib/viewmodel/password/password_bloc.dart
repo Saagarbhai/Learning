@@ -15,6 +15,8 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
         (RegExp(r'[0-9]').hasMatch(password) ||
             RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password));
 
+    print('Password: $password, Valid: $isPasswordValid');
+
     emit(state.copyWith(
       password: password,
       isPasswordValid: isPasswordValid,
@@ -26,6 +28,8 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       ConfirmPasswordChanged event, Emitter<PasswordState> emit) {
     final confirmPassword = event.confirmPassword;
     final isConfirmPasswordValid = confirmPassword == state.password;
+
+    print('Confirm Password: $confirmPassword, Match: $isConfirmPasswordValid');
 
     emit(state.copyWith(
       confirmPassword: confirmPassword,
@@ -48,13 +52,17 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
   }
 
   void _onPasswordSubmitted(
-      PasswordSubmitted event, Emitter<PasswordState> emit) {
+      PasswordSubmitted event, Emitter<PasswordState> emit) async {
+    print(
+        'Password Submission: Password valid: ${state.isPasswordValid}, Confirm valid: ${state.isConfirmPasswordValid}');
+
     // Validate the password first
     if (!state.isPasswordValid) {
       emit(state.copyWith(
         errorMessage:
             'Password must contain at least one number or special character',
       ));
+      print('Password validation failed: ${state.errorMessage}');
       return;
     }
 
@@ -63,18 +71,31 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       emit(state.copyWith(
         errorMessage: 'Passwords do not match',
       ));
+      print('Confirm password validation failed: ${state.errorMessage}');
       return;
     }
 
     // If both validations pass, proceed with submission
     emit(state.copyWith(isSubmitting: true, errorMessage: null));
+    print('Password submission in progress...');
 
-    // Simulate API call
-    Future.delayed(const Duration(seconds: 1), () {
+    // Simulate API call with async/await pattern
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+
+      // This emit will now properly update the state
       emit(state.copyWith(
         isSubmitting: false,
         isSuccess: true,
       ));
-    });
+
+      print('Password submission successful, isSuccess: true');
+    } catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        errorMessage: 'An error occurred during submission',
+      ));
+      print('Password submission failed: $e');
+    }
   }
 }
