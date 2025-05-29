@@ -47,9 +47,9 @@ class PasswordScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 24),
                 // Header text
-                const Text(
-                  'Set password',
-                  style: TextStyle(
+                Text(
+                  Lang.of(context).setPassword,
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Poppins',
