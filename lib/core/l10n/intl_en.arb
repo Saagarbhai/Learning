@@ -55,7 +55,8 @@
   "setPassword": "Set Password",
   "setYourPassword": "Set Your Password",
   "passwordDescription": "Atleast 1 number or a special character",
-  "register": "Register"
-
-
+  "register": "Register",
+  "passwordsetsuccessfully": "Password set successfully!",
+  "hintPassword": "Enter Your Password",
+  "confirmPassword": "COnfirm Password"
 }

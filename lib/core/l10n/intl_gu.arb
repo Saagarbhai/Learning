@@ -53,5 +53,8 @@
   "setPassword": "પાસવર્ડ સેટ કરો",
   "setYourPassword": "તમારો પાસવર્ડ સેટ કરો",
   "passwordDescription": "ઓછામાં ઓછો 1 નંબર અથવા વિશેષ અક્ષર હોવો જોઈએ",
-  "register": "નોંધણી કરો"
-}
+  "register": "નોંધણી કરો",
+  "passwordsetsuccessfully": "પાસવર્ડ સફળતાપૂર્વક સેટ થયો!",
+  "hintPassword": "તમારો પાસવર્ડ દાખલ કરો",
+  "confirmPassword": "પાસવર્ડની પુષ્ટિ કરો"
+  }

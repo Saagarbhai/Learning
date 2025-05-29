@@ -56,9 +56,9 @@ class PasswordScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Set your password',
-                  style: TextStyle(
+                Text(
+                  Lang.of(context).setYourPassword,
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
                     fontFamily: 'Poppins',
@@ -77,7 +77,7 @@ class PasswordScreen extends StatelessWidget {
                               previous.password != current.password,
                           builder: (context, state) {
                             return CustomPasswordField(
-                              hintText: 'Enter Your Password',
+                              hintText: Lang.of(context).hintPassword,
                               isValid: state.isPasswordValid,
                               onChanged: (value) {
                                 context
@@ -97,7 +97,7 @@ class PasswordScreen extends StatelessWidget {
                                   current.isConfirmPasswordValid,
                           builder: (context, state) {
                             return CustomPasswordField(
-                              hintText: 'Confirm Password',
+                              hintText: Lang.of(context).confirmPassword,
                               confirmField: true,
                               isConfirmMatch: state.isConfirmPasswordValid,
                               onChanged: (value) {
@@ -110,9 +110,9 @@ class PasswordScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         // Password requirements text
-                        const Text(
-                          'Atleast 1 number or a special character',
-                          style: TextStyle(
+                        Text(
+                          Lang.of(context).passwordDescription,
+                          style: const TextStyle(
                             fontSize: 12,
                             color: Colors.grey,
                             fontFamily: 'Poppins',
@@ -133,7 +133,7 @@ class PasswordScreen extends StatelessWidget {
                         previous.isSubmitting != current.isSubmitting,
                     builder: (context, state) {
                       return CustomButton(
-                        text: 'Register',
+                        text: Lang.of(context).register,
                         onPressed: state.isSubmitting
                             ? null
                             : () {

@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "apptitle": MessageLookupByLibrary.simpleMessage("Car App"),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "completed": MessageLookupByLibrary.simpleMessage("Onboarding Completed!"),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage("COnfirm Password"),
     "didntReceiveCode": MessageLookupByLibrary.simpleMessage(
       "Didn\'t receive code? ",
     ),
@@ -36,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("Email"),
     "hintGender": MessageLookupByLibrary.simpleMessage("Gender"),
+    "hintPassword": MessageLookupByLibrary.simpleMessage("Enter Your Password"),
     "hintPhone": MessageLookupByLibrary.simpleMessage("Your Mobile Number"),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
@@ -66,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "passwordDescription": MessageLookupByLibrary.simpleMessage(
       "Atleast 1 number or a special character",
+    ),
+    "passwordsetsuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Password set successfully!",
     ),
     "phoneVerification": MessageLookupByLibrary.simpleMessage(
       "Phone verification",

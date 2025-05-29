@@ -479,6 +479,36 @@ class Lang {
   String get register {
     return Intl.message('Register', name: 'register', desc: '', args: []);
   }
+
+  /// `Password set successfully!`
+  String get passwordsetsuccessfully {
+    return Intl.message(
+      'Password set successfully!',
+      name: 'passwordsetsuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Your Password`
+  String get hintPassword {
+    return Intl.message(
+      'Enter Your Password',
+      name: 'hintPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `COnfirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'COnfirm Password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Lang> {
