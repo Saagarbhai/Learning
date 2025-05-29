@@ -1,6 +1,6 @@
 import '../../core/utils/app_export.dart';
 
-class CustomPasswordField extends StatefulWidget {
+class CustomPasswordField extends StatelessWidget {
   final String hintText;
   final ValueChanged<String> onChanged;
   final TextEditingController? controller;
@@ -23,77 +23,82 @@ class CustomPasswordField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomPasswordField> createState() => _CustomPasswordFieldState();
-}
-
-class _CustomPasswordFieldState extends State<CustomPasswordField> {
-  bool _obscureText = true;
-
-  @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      obscureText: _obscureText,
-      style: const TextStyle(
-        fontSize: 16,
-        fontFamily: 'Poppins',
-        color: Color(0xFF333333),
-      ),
-      decoration: InputDecoration(
-        hintText: widget.hintText,
-        hintStyle: const TextStyle(
-          color: Color(0xFF9E9E9E),
-          fontFamily: 'Poppins',
+    return BlocBuilder<PasswordBloc, PasswordState>(
+        buildWhen: (previous, current) {
+      if (confirmField) {
+        return previous.isConfirmPasswordVisible !=
+            current.isConfirmPasswordVisible;
+      } else {
+        return previous.isPasswordVisible != current.isPasswordVisible;
+      }
+    }, builder: (context, state) {
+      final isVisible = confirmField
+          ? state.isConfirmPasswordVisible
+          : state.isPasswordVisible;
+
+      return TextFormField(
+        controller: controller,
+        obscureText: !isVisible,
+        style: const TextStyle(
           fontSize: 16,
+          fontFamily: 'Poppins',
+          color: Color(0xFF333333),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: BorderSide(color: Colors.grey.shade200, width: 1),
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: const TextStyle(
+            color: Color(0xFF9E9E9E),
+            fontFamily: 'Poppins',
+            fontSize: 16,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            borderSide: BorderSide(color: Colors.grey.shade200, width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          suffixIcon: showValidIndicator
+              ? _buildSuffixIcon(context, isVisible)
+              : _buildVisibilityToggle(context, isVisible),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
-        ),
-        filled: true,
-        fillColor: Colors.white,
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        suffixIcon: widget.showValidIndicator
-            ? _buildSuffixIcon()
-            : _buildVisibilityToggle(),
-      ),
-      onChanged: widget.onChanged,
-      validator: widget.validator,
-    );
+        onChanged: onChanged,
+        validator: validator,
+      );
+    });
   }
 
-  Widget _buildSuffixIcon() {
+  Widget _buildSuffixIcon(BuildContext context, bool isVisible) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         // Validation icon
         _buildValidationIcon(),
         // Visibility toggle
-        _buildVisibilityToggle(),
+        _buildVisibilityToggle(context, isVisible),
       ],
     );
   }
 
-  Widget _buildVisibilityToggle() {
+  Widget _buildVisibilityToggle(BuildContext context, bool isVisible) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          _obscureText = !_obscureText;
-        });
+        context
+            .read<PasswordBloc>()
+            .add(TogglePasswordVisibility(isConfirmField: confirmField));
       },
       child: Container(
         width: 48,
         height: 48,
         alignment: Alignment.center,
         child: Icon(
-          _obscureText
-              ? Icons.visibility_off_outlined
-              : Icons.visibility_outlined,
+          isVisible ? Icons.visibility_outlined : Icons.visibility_off_outlined,
           color: Colors.grey,
           size: 22,
         ),
@@ -103,15 +108,13 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
 
   Widget _buildValidationIcon() {
     // For empty fields in non-confirm mode, show nothing
-    if (!widget.confirmField &&
-        !widget.isValid &&
-        widget.controller?.text.isEmpty != false) {
+    if (!confirmField && !isValid && controller?.text.isEmpty != false) {
       return const SizedBox.shrink();
     }
 
     // For confirm field
-    if (widget.confirmField) {
-      if (widget.controller?.text.isEmpty != false) {
+    if (confirmField) {
+      if (controller?.text.isEmpty != false) {
         return const SizedBox.shrink();
       }
       return Container(
@@ -126,7 +129,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
     }
 
     // For primary password field
-    return widget.isValid
+    return isValid
         ? Container(
             width: 24,
             alignment: Alignment.center,

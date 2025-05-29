@@ -26,3 +26,12 @@ class ConfirmPasswordChanged extends PasswordEvent {
 }
 
 class PasswordSubmitted extends PasswordEvent {}
+
+class TogglePasswordVisibility extends PasswordEvent {
+  final bool isConfirmField;
+
+  const TogglePasswordVisibility({this.isConfirmField = false});
+
+  @override
+  List<Object> get props => [isConfirmField];
+}

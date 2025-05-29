@@ -434,6 +434,51 @@ class Lang {
       args: [],
     );
   }
+
+  /// `Registration successful!`
+  String get registrationSuccessful {
+    return Intl.message(
+      'Registration successful!',
+      name: 'registrationSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Password`
+  String get setPassword {
+    return Intl.message(
+      'Set Password',
+      name: 'setPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Your Password`
+  String get setYourPassword {
+    return Intl.message(
+      'Set Your Password',
+      name: 'setYourPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Atleast 1 number or a special character`
+  String get passwordDescription {
+    return Intl.message(
+      'Atleast 1 number or a special character',
+      name: 'passwordDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message('Register', name: 'register', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Lang> {

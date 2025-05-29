@@ -64,10 +64,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpResent": MessageLookupByLibrary.simpleMessage(
       "ઓટીપી કોડ સફળતાપૂર્વક ફરી મોકલાયો!",
     ),
+    "passwordDescription": MessageLookupByLibrary.simpleMessage(
+      "ઓછામાં ઓછો 1 નંબર અથવા વિશેષ અક્ષર હોવો જોઈએ",
+    ),
     "phoneVerification": MessageLookupByLibrary.simpleMessage("ફોન ચકાસણી"),
     "previous": MessageLookupByLibrary.simpleMessage("પાછળ"),
+    "register": MessageLookupByLibrary.simpleMessage("નોંધણી કરો"),
+    "registrationSuccessful": MessageLookupByLibrary.simpleMessage(
+      "નોંધણી સફળ રહી!",
+    ),
     "resendAgain": MessageLookupByLibrary.simpleMessage("ફરી મોકલો"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("ભાષા પસંદ કરો"),
+    "setPassword": MessageLookupByLibrary.simpleMessage("પાસવર્ડ સેટ કરો"),
+    "setYourPassword": MessageLookupByLibrary.simpleMessage(
+      "તમારો પાસવર્ડ સેટ કરો",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("સેટિંગ્સ"),
     "signIn": MessageLookupByLibrary.simpleMessage("સાઇન ઇન કરો"),
     "signTextSpan1": MessageLookupByLibrary.simpleMessage(

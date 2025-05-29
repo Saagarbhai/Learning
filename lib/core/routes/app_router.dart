@@ -1,5 +1,4 @@
 import '../utils/app_export.dart';
-import '../../view/profile/create_profile_screen.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {

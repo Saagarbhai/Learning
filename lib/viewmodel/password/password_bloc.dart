@@ -5,6 +5,7 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
     on<PasswordChanged>(_onPasswordChanged);
     on<ConfirmPasswordChanged>(_onConfirmPasswordChanged);
     on<PasswordSubmitted>(_onPasswordSubmitted);
+    on<TogglePasswordVisibility>(_onTogglePasswordVisibility);
   }
 
   void _onPasswordChanged(PasswordChanged event, Emitter<PasswordState> emit) {
@@ -31,6 +32,19 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       isConfirmPasswordValid: isConfirmPasswordValid,
       errorMessage: null, // Clear previous error messages
     ));
+  }
+
+  void _onTogglePasswordVisibility(
+      TogglePasswordVisibility event, Emitter<PasswordState> emit) {
+    if (event.isConfirmField) {
+      emit(state.copyWith(
+        isConfirmPasswordVisible: !state.isConfirmPasswordVisible,
+      ));
+    } else {
+      emit(state.copyWith(
+        isPasswordVisible: !state.isPasswordVisible,
+      ));
+    }
   }
 
   void _onPasswordSubmitted(

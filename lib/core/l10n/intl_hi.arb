@@ -49,5 +49,11 @@
   "resendAgain": "फिर से भेजें",
   "verify": "सत्यापित करें",
   "verificationSuccessful": "सत्यापन सफल!",
-  "otpResent": "ओटीपी कोड सफलतापूर्वक फिर से भेजा गया!"
+  "otpResent": "ओटीपी कोड सफलतापूर्वक फिर से भेजा गया!",
+  "registrationSuccessful": "पंजीकरण सफल रहा!",
+  "setPassword": "पासवर्ड सेट करें",
+  "setYourPassword": "अपना पासवर्ड सेट करें",
+  "passwordDescription": "कम से कम 1 संख्या या विशेष वर्ण होना चाहिए",
+  "register": "पंजीकरण करें"
+
 }

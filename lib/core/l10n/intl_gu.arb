@@ -48,5 +48,10 @@
   "resendAgain": "ફરી મોકલો",
   "verify": "ચકાસો",
   "verificationSuccessful": "ચકાસણી સફળ થઈ!",
-  "otpResent": "ઓટીપી કોડ સફળતાપૂર્વક ફરી મોકલાયો!"
+  "otpResent": "ઓટીપી કોડ સફળતાપૂર્વક ફરી મોકલાયો!",
+  "registrationSuccessful": "નોંધણી સફળ રહી!",
+  "setPassword": "પાસવર્ડ સેટ કરો",
+  "setYourPassword": "તમારો પાસવર્ડ સેટ કરો",
+  "passwordDescription": "ઓછામાં ઓછો 1 નંબર અથવા વિશેષ અક્ષર હોવો જોઈએ",
+  "register": "નોંધણી કરો"
 }

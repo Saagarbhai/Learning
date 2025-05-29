@@ -1,5 +1,4 @@
 import '../../core/utils/app_export.dart';
-import '../profile/create_profile_screen.dart';
 
 class PasswordScreen extends StatelessWidget {
   const PasswordScreen({super.key});
@@ -9,14 +8,15 @@ class PasswordScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
           child: const Icon(Icons.arrow_back, color: Colors.black),
         ),
-        title: const Text("Back",
-            style: TextStyle(color: Colors.black, fontSize: 16)),
+        title: Text(Lang.of(context).back,
+            style: const TextStyle(color: Colors.black, fontSize: 16)),
         titleSpacing: 0,
       ),
       body: SafeArea(

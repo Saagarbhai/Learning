@@ -62,10 +62,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpResent": MessageLookupByLibrary.simpleMessage(
       "ओटीपी कोड सफलतापूर्वक फिर से भेजा गया!",
     ),
+    "passwordDescription": MessageLookupByLibrary.simpleMessage(
+      "कम से कम 1 संख्या या विशेष वर्ण होना चाहिए",
+    ),
     "phoneVerification": MessageLookupByLibrary.simpleMessage("फ़ोन सत्यापन"),
     "previous": MessageLookupByLibrary.simpleMessage("पिछला"),
+    "register": MessageLookupByLibrary.simpleMessage("पंजीकरण करें"),
+    "registrationSuccessful": MessageLookupByLibrary.simpleMessage(
+      "पंजीकरण सफल रहा!",
+    ),
     "resendAgain": MessageLookupByLibrary.simpleMessage("फिर से भेजें"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("भाषा चुनें"),
+    "setPassword": MessageLookupByLibrary.simpleMessage("पासवर्ड सेट करें"),
+    "setYourPassword": MessageLookupByLibrary.simpleMessage(
+      "अपना पासवर्ड सेट करें",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("सेटिंग्स"),
     "signIn": MessageLookupByLibrary.simpleMessage("साइन इन करें"),
     "signTextSpan1": MessageLookupByLibrary.simpleMessage(

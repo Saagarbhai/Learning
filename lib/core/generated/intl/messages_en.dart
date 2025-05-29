@@ -64,12 +64,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpResent": MessageLookupByLibrary.simpleMessage(
       "OTP code resent successfully!",
     ),
+    "passwordDescription": MessageLookupByLibrary.simpleMessage(
+      "Atleast 1 number or a special character",
+    ),
     "phoneVerification": MessageLookupByLibrary.simpleMessage(
       "Phone verification",
     ),
     "previous": MessageLookupByLibrary.simpleMessage("Previous"),
+    "register": MessageLookupByLibrary.simpleMessage("Register"),
+    "registrationSuccessful": MessageLookupByLibrary.simpleMessage(
+      "Registration successful!",
+    ),
     "resendAgain": MessageLookupByLibrary.simpleMessage("Resend again"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("Select Language"),
+    "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
+    "setYourPassword": MessageLookupByLibrary.simpleMessage(
+      "Set Your Password",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
     "signTextSpan1": MessageLookupByLibrary.simpleMessage(

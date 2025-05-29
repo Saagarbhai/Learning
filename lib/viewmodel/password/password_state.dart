@@ -8,6 +8,8 @@ class PasswordState extends Equatable {
   final bool isSubmitting;
   final bool isSuccess;
   final String? errorMessage;
+  final bool isPasswordVisible;
+  final bool isConfirmPasswordVisible;
 
   const PasswordState({
     this.password = '',
@@ -17,6 +19,8 @@ class PasswordState extends Equatable {
     this.isSubmitting = false,
     this.isSuccess = false,
     this.errorMessage,
+    this.isPasswordVisible = false,
+    this.isConfirmPasswordVisible = false,
   });
 
   PasswordState copyWith({
@@ -27,6 +31,8 @@ class PasswordState extends Equatable {
     bool? isSubmitting,
     bool? isSuccess,
     String? errorMessage,
+    bool? isPasswordVisible,
+    bool? isConfirmPasswordVisible,
   }) {
     return PasswordState(
       password: password ?? this.password,
@@ -37,6 +43,9 @@ class PasswordState extends Equatable {
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
       errorMessage: errorMessage,
+      isPasswordVisible: isPasswordVisible ?? this.isPasswordVisible,
+      isConfirmPasswordVisible:
+          isConfirmPasswordVisible ?? this.isConfirmPasswordVisible,
     );
   }
 
@@ -49,5 +58,7 @@ class PasswordState extends Equatable {
         isSubmitting,
         isSuccess,
         errorMessage,
+        isPasswordVisible,
+        isConfirmPasswordVisible,
       ];
 }
