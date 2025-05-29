@@ -1,0 +1,106 @@
+// DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
+// This is a library that provides messages for a hi locale. All the
+// messages from the main program should be duplicated here with the same
+// function name.
+
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
+// ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
+
+import 'package:intl/intl.dart';
+import 'package:intl/message_lookup_by_library.dart';
+
+final messages = new MessageLookup();
+
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
+
+class MessageLookup extends MessageLookupByLibrary {
+  String get localeName => 'hi';
+
+  final messages = _notInlinedMessages(_notInlinedMessages);
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "alreadyAccount": MessageLookupByLibrary.simpleMessage(
+      "पहले से ही एक खाता है? ",
+    ),
+    "apptitle": MessageLookupByLibrary.simpleMessage("कार ऐप"),
+    "back": MessageLookupByLibrary.simpleMessage("वापस"),
+    "completed": MessageLookupByLibrary.simpleMessage("ऑनबोर्डिंग पूरा हुआ!"),
+    "didntReceiveCode": MessageLookupByLibrary.simpleMessage("कोड नहीं मिला?"),
+    "enterOtpCode": MessageLookupByLibrary.simpleMessage(
+      "अपना ओटीपी कोड दर्ज करें",
+    ),
+    "female": MessageLookupByLibrary.simpleMessage("महिला"),
+    "getStarted": MessageLookupByLibrary.simpleMessage("शुरू करें"),
+    "hintEmail": MessageLookupByLibrary.simpleMessage("ईमेल"),
+    "hintGender": MessageLookupByLibrary.simpleMessage("लिंग"),
+    "hintPhone": MessageLookupByLibrary.simpleMessage("आपका मोबाइल नंबर"),
+    "male": MessageLookupByLibrary.simpleMessage("पुरुष"),
+    "name": MessageLookupByLibrary.simpleMessage("नाम"),
+    "next": MessageLookupByLibrary.simpleMessage("आगे"),
+    "onboardingData1Description": MessageLookupByLibrary.simpleMessage(
+      "कुछ ही टैप में अपने पास की कार ढूंढें और बुक करें",
+    ),
+    "onboardingData1Title": MessageLookupByLibrary.simpleMessage(
+      "कार ऐप में आपका स्वागत है",
+    ),
+    "onboardingData2Description": MessageLookupByLibrary.simpleMessage(
+      "हमारे सरल इंटरफ़ेस से कभी भी, कहीं भी अपनी सवारी बुक करें",
+    ),
+    "onboardingData2Title": MessageLookupByLibrary.simpleMessage("आसान बुकिंग"),
+    "onboardingData3Description": MessageLookupByLibrary.simpleMessage(
+      "हमारे भरोसेमंद ड्राइवरों के साथ तेजी से अपने गंतव्य पर पहुँचें",
+    ),
+    "onboardingData3Title": MessageLookupByLibrary.simpleMessage(
+      "तेज़ और भरोसेमंद",
+    ),
+    "onboardingScreenTitle": MessageLookupByLibrary.simpleMessage("ऑनबोर्डिंग"),
+    "or": MessageLookupByLibrary.simpleMessage("या"),
+    "other": MessageLookupByLibrary.simpleMessage("अन्य"),
+    "otpResent": MessageLookupByLibrary.simpleMessage(
+      "ओटीपी कोड सफलतापूर्वक फिर से भेजा गया!",
+    ),
+    "phoneVerification": MessageLookupByLibrary.simpleMessage("फ़ोन सत्यापन"),
+    "previous": MessageLookupByLibrary.simpleMessage("पिछला"),
+    "resendAgain": MessageLookupByLibrary.simpleMessage("फिर से भेजें"),
+    "selectLanguage": MessageLookupByLibrary.simpleMessage("भाषा चुनें"),
+    "settings": MessageLookupByLibrary.simpleMessage("सेटिंग्स"),
+    "signIn": MessageLookupByLibrary.simpleMessage("साइन इन करें"),
+    "signTextSpan1": MessageLookupByLibrary.simpleMessage(
+      "साइन अप करके, आप सहमत होते हैं ",
+    ),
+    "signTextSpan2": MessageLookupByLibrary.simpleMessage("सेवा की शर्तें"),
+    "signTextSpan3": MessageLookupByLibrary.simpleMessage(" और "),
+    "signTextSpan4": MessageLookupByLibrary.simpleMessage("गोपनीयता नीति"),
+    "signupButton": MessageLookupByLibrary.simpleMessage("साइन अप करें"),
+    "signupFail": MessageLookupByLibrary.simpleMessage("साइन अप विफल"),
+    "signupInfo": MessageLookupByLibrary.simpleMessage(
+      "अपने ईमेल या फ़ोन नंबर से साइन अप करें",
+    ),
+    "signupSuccessful": MessageLookupByLibrary.simpleMessage(
+      "साइन अप सफल हुआ!",
+    ),
+    "signupwithApple": MessageLookupByLibrary.simpleMessage(
+      "Apple से साइन अप करें",
+    ),
+    "signupwithFaceBook": MessageLookupByLibrary.simpleMessage(
+      "Facebook से साइन अप करें",
+    ),
+    "signupwithGmail": MessageLookupByLibrary.simpleMessage(
+      "Gmail से साइन अप करें",
+    ),
+    "skip": MessageLookupByLibrary.simpleMessage("स्किप करें"),
+    "verificationSuccessful": MessageLookupByLibrary.simpleMessage(
+      "सत्यापन सफल!",
+    ),
+    "verify": MessageLookupByLibrary.simpleMessage("सत्यापित करें"),
+    "welcome": MessageLookupByLibrary.simpleMessage("स्वागत है"),
+    "welcomeDescription": MessageLookupByLibrary.simpleMessage(
+      "बेहतर शेयरिंग अनुभव प्राप्त करें",
+    ),
+    "welcomebutton1": MessageLookupByLibrary.simpleMessage("खाता बनाएं"),
+    "welcomebutton2": MessageLookupByLibrary.simpleMessage("लॉग इन करें"),
+  };
+}

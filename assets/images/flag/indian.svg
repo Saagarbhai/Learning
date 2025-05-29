@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 60 60">
+  <rect width="60" height="20" y="0" fill="#FF9933"/> <!-- Saffron -->
+  <rect width="60" height="20" y="20" fill="#FFFFFF"/> <!-- White -->
+  <rect width="60" height="20" y="40" fill="#138808"/> <!-- Green -->
+  <circle cx="30" cy="30" r="6" stroke="#000080" stroke-width="1" fill="none"/>
+  <g transform="translate(30,30)" stroke="#000080">
+    <!-- Ashoka Chakra spokes -->
+    <line x1="0" y1="-6" x2="0" y2="6"/>
+    <line x1="-6" y1="0" x2="6" y2="0"/>
+    <line x1="-4.24" y1="-4.24" x2="4.24" y2="4.24"/>
+    <line x1="-4.24" y1="4.24" x2="4.24" y2="-4.24"/>
+    <line x1="-5.66" y1="-2.83" x2="5.66" y2="2.83"/>
+    <line x1="-5.66" y1="2.83" x2="5.66" y2="-2.83"/>
+    <line x1="-2.83" y1="-5.66" x2="2.83" y2="5.66"/>
+    <line x1="-2.83" y1="5.66" x2="2.83" y2="-5.66"/>
+  </g>
+</svg>
