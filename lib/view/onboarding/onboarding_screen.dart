@@ -97,28 +97,28 @@ class OnboardingScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  children: [
-                    CircularProgressButton(
-                      size: 80.r,
-                      onPressed: () {
-                        if (currentPage < OnboardingBloc.totalPages - 1) {
-                          // Simply add the NextPageEvent to handle page transition
-                          context.read<OnboardingBloc>().add(NextPageEvent());
-                        } else {
-                          // This is the last page, complete onboarding
-                          context
-                              .read<OnboardingBloc>()
-                              .add(const OnboardingCompleted());
-                        }
-                      },
-                      showGoText: currentPage == 2 ? true : false,
-                      pageIndex: currentPage,
-                      navigateDirectlyToWelcome: true,
-                    ),
-                  ],
+              Padding(
+                padding: EdgeInsets.only(bottom: 100.h),
+                child: Container(
+                  height: 100.h,
+                  alignment: Alignment.center,
+                  child: CircularProgressButton(
+                    size: 80,
+                    onPressed: () {
+                      if (currentPage < OnboardingBloc.totalPages - 1) {
+                        // Simply add the NextPageEvent to handle page transition
+                        context.read<OnboardingBloc>().add(NextPageEvent());
+                      } else {
+                        // This is the last page, complete onboarding
+                        context
+                            .read<OnboardingBloc>()
+                            .add(const OnboardingCompleted());
+                      }
+                    },
+                    showGoText: currentPage == 2 ? true : false,
+                    pageIndex: currentPage,
+                    navigateDirectlyToWelcome: true,
+                  ),
                 ),
               ),
             ],
