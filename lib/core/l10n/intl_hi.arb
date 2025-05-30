@@ -57,5 +57,7 @@
   "register": "पंजीकरण करें",
   "passwordsetsuccessfully": "पासवर्ड सफलतापूर्वक सेट हो गया!",
   "hintPassword": "अपना पासवर्ड दर्ज करें",
-  "confirmPassword": "पासवर्ड की पुष्टि करें"
+  "confirmPassword": "पासवर्ड की पुष्टि करें",
+  "fullName": "पूरा नाम",
+  "street": "सड़क"
 }

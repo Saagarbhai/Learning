@@ -3,10 +3,6 @@ import '../../core/utils/app_export.dart';
 class CreateProfileScreen extends StatelessWidget {
   const CreateProfileScreen({Key? key}) : super(key: key);
 
-  void _navigateToHome(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(AppConstants.homeRoute);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +35,8 @@ class CreateProfileScreen extends StatelessWidget {
             );
             // Navigate to home screen
             Future.delayed(const Duration(milliseconds: 500), () {
-              _navigateToHome(context);
+              Navigator.of(context)
+                  .pushReplacementNamed(AppConstants.homeRoute);
             });
           }
           if (state.errorMessage != null) {
@@ -49,16 +46,6 @@ class CreateProfileScreen extends StatelessWidget {
           }
         },
         child: Builder(builder: (context) {
-          // Create controllers for each field
-          final nameController = TextEditingController();
-          final phoneController = TextEditingController();
-          final emailController = TextEditingController();
-          final streetController = TextEditingController();
-
-          // City and district fields will use the dropdown
-          final cities = ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi'];
-          final districts = ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi'];
-
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -115,10 +102,13 @@ class CreateProfileScreen extends StatelessWidget {
                             buildWhen: (previous, current) =>
                                 previous.name != current.name,
                             builder: (context, state) {
-                              nameController.text = state.name;
+                              final nameController =
+                                  TextEditingController(text: state.name);
                               nameController.selection =
-                                  TextSelection.fromPosition(TextPosition(
-                                      offset: nameController.text.length));
+                                  TextSelection.fromPosition(
+                                TextPosition(
+                                    offset: nameController.text.length),
+                              );
                               return CustomTextField(
                                 hintText: 'Full Name',
                                 controller: nameController,
@@ -144,10 +134,13 @@ class CreateProfileScreen extends StatelessWidget {
                             buildWhen: (previous, current) =>
                                 previous.phone != current.phone,
                             builder: (context, state) {
-                              phoneController.text = state.phone;
+                              final phoneController =
+                                  TextEditingController(text: state.phone);
                               phoneController.selection =
-                                  TextSelection.fromPosition(TextPosition(
-                                      offset: phoneController.text.length));
+                                  TextSelection.fromPosition(
+                                TextPosition(
+                                    offset: phoneController.text.length),
+                              );
                               return CustomPhoneField(
                                 controller: phoneController,
                                 hintText: 'Your mobile number',
@@ -168,10 +161,13 @@ class CreateProfileScreen extends StatelessWidget {
                             buildWhen: (previous, current) =>
                                 previous.email != current.email,
                             builder: (context, state) {
-                              emailController.text = state.email;
+                              final emailController =
+                                  TextEditingController(text: state.email);
                               emailController.selection =
-                                  TextSelection.fromPosition(TextPosition(
-                                      offset: emailController.text.length));
+                                  TextSelection.fromPosition(
+                                TextPosition(
+                                    offset: emailController.text.length),
+                              );
                               return CustomTextField(
                                 hintText: 'Email',
                                 controller: emailController,
@@ -192,10 +188,13 @@ class CreateProfileScreen extends StatelessWidget {
                             buildWhen: (previous, current) =>
                                 previous.street != current.street,
                             builder: (context, state) {
-                              streetController.text = state.street;
+                              final streetController =
+                                  TextEditingController(text: state.street);
                               streetController.selection =
-                                  TextSelection.fromPosition(TextPosition(
-                                      offset: streetController.text.length));
+                                  TextSelection.fromPosition(
+                                TextPosition(
+                                    offset: streetController.text.length),
+                              );
                               return CustomTextField(
                                 hintText: 'Street',
                                 controller: streetController,
@@ -213,11 +212,12 @@ class CreateProfileScreen extends StatelessWidget {
                           // City dropdown
                           BlocBuilder<ProfileBloc, ProfileState>(
                             buildWhen: (previous, current) =>
-                                previous.city != current.city,
+                                previous.city != current.city ||
+                                previous.cities != current.cities,
                             builder: (context, state) {
                               return CustomDropdownField(
                                 hintText: 'City',
-                                items: cities,
+                                items: state.cities,
                                 value: state.city.isEmpty ? null : state.city,
                                 onChanged: (value) {
                                   if (value != null) {
@@ -234,11 +234,12 @@ class CreateProfileScreen extends StatelessWidget {
                           // District dropdown
                           BlocBuilder<ProfileBloc, ProfileState>(
                             buildWhen: (previous, current) =>
-                                previous.district != current.district,
+                                previous.district != current.district ||
+                                previous.districts != current.districts,
                             builder: (context, state) {
                               return CustomDropdownField(
                                 hintText: 'District',
-                                items: districts,
+                                items: state.districts,
                                 value: state.district.isEmpty
                                     ? null
                                     : state.district,

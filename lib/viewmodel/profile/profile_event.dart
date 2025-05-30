@@ -71,3 +71,5 @@ class ProfileImageChanged extends ProfileEvent {
 }
 
 class ProfileSubmitted extends ProfileEvent {}
+
+class NavigateToHome extends ProfileEvent {}

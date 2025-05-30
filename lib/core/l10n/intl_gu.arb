@@ -56,5 +56,7 @@
   "register": "નોંધણી કરો",
   "passwordsetsuccessfully": "પાસવર્ડ સફળતાપૂર્વક સેટ થયો!",
   "hintPassword": "તમારો પાસવર્ડ દાખલ કરો",
-  "confirmPassword": "પાસવર્ડની પુષ્ટિ કરો"
+  "confirmPassword": "પાસવર્ડની પુષ્ટિ કરો",
+    "fullName": "પૂર્ણ નામ",
+  "street": "શેરી"
   }

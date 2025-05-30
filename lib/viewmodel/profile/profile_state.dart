@@ -11,6 +11,8 @@ class ProfileState extends Equatable {
   final bool isSubmitting;
   final bool isSuccess;
   final String? errorMessage;
+  final List<String> cities;
+  final List<String> districts;
 
   const ProfileState({
     this.name = '',
@@ -23,6 +25,8 @@ class ProfileState extends Equatable {
     this.isSubmitting = false,
     this.isSuccess = false,
     this.errorMessage,
+    this.cities = const ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi'],
+    this.districts = const ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi'],
   });
 
   ProfileState copyWith({
@@ -36,6 +40,8 @@ class ProfileState extends Equatable {
     bool? isSubmitting,
     bool? isSuccess,
     String? errorMessage,
+    List<String>? cities,
+    List<String>? districts,
   }) {
     return ProfileState(
       name: name ?? this.name,
@@ -48,6 +54,8 @@ class ProfileState extends Equatable {
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
       errorMessage: errorMessage,
+      cities: cities ?? this.cities,
+      districts: districts ?? this.districts,
     );
   }
 
@@ -63,5 +71,7 @@ class ProfileState extends Equatable {
         isSubmitting,
         isSuccess,
         errorMessage,
+        cities,
+        districts,
       ];
 }

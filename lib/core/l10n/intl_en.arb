@@ -58,5 +58,7 @@
   "register": "Register",
   "passwordsetsuccessfully": "Password set successfully!",
   "hintPassword": "Enter Your Password",
-  "confirmPassword": "COnfirm Password"
+  "confirmPassword": "Confirm Password",
+  "fullName": "Full Name",
+  "street": "Street"
 }

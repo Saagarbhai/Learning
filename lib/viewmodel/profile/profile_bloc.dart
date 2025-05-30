@@ -10,6 +10,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<DistrictChanged>(_onDistrictChanged);
     on<ProfileImageChanged>(_onProfileImageChanged);
     on<ProfileSubmitted>(_onProfileSubmitted);
+    on<NavigateToHome>(_onNavigateToHome);
   }
 
   void _onNameChanged(NameChanged event, Emitter<ProfileState> emit) {
@@ -90,5 +91,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         errorMessage: 'An error occurred during submission',
       ));
     }
+  }
+
+  void _onNavigateToHome(NavigateToHome event, Emitter<ProfileState> emit) {
+    // This event will be handled by the BlocListener in the UI
+    // No state changes needed here, just trigger the event
   }
 }
