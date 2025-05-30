@@ -54,14 +54,15 @@ class OtpVerificationBloc
 
     try {
       // Here you would typically make an API call to verify the OTP
-      // For now, we'll just simulate a successful verification
+      // For now, we'll just simulate a verification process
       await Future.delayed(const Duration(seconds: 2));
 
-      // Allow any number as valid OTP as long as it's 5 digits
-      if (event.otp.length == 5) {
+      // Check if OTP is correct (12345)
+      if (event.otp == '12345') {
         emit(OtpVerificationSuccess());
       } else {
-        emit(const OtpVerificationFailure(error: 'Please enter all 5 digits'));
+        emit(const OtpVerificationFailure(
+            error: 'Invalid OTP. Please try again.'));
       }
     } catch (e) {
       emit(OtpVerificationFailure(error: e.toString()));

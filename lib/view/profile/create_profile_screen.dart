@@ -274,7 +274,7 @@ class CreateProfileScreen extends StatelessWidget {
                             isPrimary: false,
                             backgroundColor: Colors.white,
                             textColor: Colors.black,
-                            borderColor: Colors.grey[300],
+                            borderColor: const Color(0xFF039855),
                             height: 50,
                             borderRadius: 8,
                           ),

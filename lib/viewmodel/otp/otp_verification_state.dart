@@ -29,7 +29,7 @@ class OtpFormValidationState extends OtpVerificationState {
   final bool isFormValid;
 
   const OtpFormValidationState({
-    this.otp = '12345',
+    this.otp = '',
     this.isFormValid = false,
   });
 
@@ -41,6 +41,10 @@ class OtpFormValidationState extends OtpVerificationState {
       otp: otp ?? this.otp,
       isFormValid: isFormValid ?? this.isFormValid,
     );
+  }
+
+  bool isOtpCorrect() {
+    return otp == '12345';
   }
 
   @override
