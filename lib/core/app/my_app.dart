@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OtpVerificationBloc()),
         BlocProvider(create: (context) => PasswordBloc()),
         BlocProvider(create: (context) => WelcomeBloc()),
+        BlocProvider(create: (context) => ProfileBloc()),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {

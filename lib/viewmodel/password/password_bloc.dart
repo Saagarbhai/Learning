@@ -29,7 +29,8 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
     final confirmPassword = event.confirmPassword;
     final isConfirmPasswordValid = confirmPassword == state.password;
 
-    print('Confirm Password: $confirmPassword, Match: $isConfirmPasswordValid');
+    log('Confirm Password: $confirmPassword, Match: $isConfirmPasswordValid'
+        as num);
 
     emit(state.copyWith(
       confirmPassword: confirmPassword,
