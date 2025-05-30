@@ -14,6 +14,9 @@ class CreateProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0),
           child: CustomBackButton(),
         ),
+        actions: [
+          LanguageButton(),
+        ],
         leadingWidth: 100,
         title: const Text("Profile",
             style: TextStyle(
@@ -144,7 +147,7 @@ class CreateProfileScreen extends StatelessWidget {
                               return CustomPhoneField(
                                 controller: phoneController,
                                 hintText: 'Your mobile number',
-                                countryCode: '+880',
+                                countryCode: '+91',
                                 textInputAction: TextInputAction.next,
                                 onChanged: (value) {
                                   context

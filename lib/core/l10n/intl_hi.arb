@@ -2,9 +2,7 @@
   "@@locale": "hi",
   "apptitle": "कार ऐप",
   "settings": "सेटिंग्स",
-    "selectLanguage": "भाषा चुनें",
-
-  
+  "selectLanguage": "भाषा चुनें",
   "onboardingScreenTitle": "ऑनबोर्डिंग",
   "previous": "पिछला",
   "getStarted": "शुरू करें",
@@ -59,5 +57,11 @@
   "hintPassword": "अपना पासवर्ड दर्ज करें",
   "confirmPassword": "पासवर्ड की पुष्टि करें",
   "fullName": "पूरा नाम",
-  "street": "सड़क"
+  "street": "सड़क",
+  "profile": "प्रोफ़ाइल",
+  "profilecreatedsuccesfully": "प्रोफ़ाइल सफलतापूर्वक बनाई गई!",
+  "city": "शहर",
+  "district": "जिला",
+  "Cancel": "रद्द करें",
+  "save": "सहेजें"
 }

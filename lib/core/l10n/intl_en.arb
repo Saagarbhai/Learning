@@ -60,5 +60,11 @@
   "hintPassword": "Enter Your Password",
   "confirmPassword": "Confirm Password",
   "fullName": "Full Name",
-  "street": "Street"
+  "street": "Street",
+  "profile": "Profile",
+  "profilecreatedsuccesfully": "Profile created successfully!",
+  "city": "City",
+  "district": "District",
+  "Cancel": "Cancel",
+  "save": "Save"
 }

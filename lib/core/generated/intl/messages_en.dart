@@ -22,18 +22,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "Cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "alreadyAccount": MessageLookupByLibrary.simpleMessage(
       "Already have an account? ",
     ),
     "apptitle": MessageLookupByLibrary.simpleMessage("Car App"),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
+    "city": MessageLookupByLibrary.simpleMessage("City"),
     "completed": MessageLookupByLibrary.simpleMessage("Onboarding Completed!"),
-    "confirmPassword": MessageLookupByLibrary.simpleMessage("COnfirm Password"),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "didntReceiveCode": MessageLookupByLibrary.simpleMessage(
       "Didn\'t receive code? ",
     ),
+    "district": MessageLookupByLibrary.simpleMessage("District"),
     "enterOtpCode": MessageLookupByLibrary.simpleMessage("Enter your OTP code"),
     "female": MessageLookupByLibrary.simpleMessage("Female"),
+    "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("Email"),
     "hintGender": MessageLookupByLibrary.simpleMessage("Gender"),
@@ -76,11 +80,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Phone verification",
     ),
     "previous": MessageLookupByLibrary.simpleMessage("Previous"),
+    "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "profilecreatedsuccesfully": MessageLookupByLibrary.simpleMessage(
+      "Profile created successfully!",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "registrationSuccessful": MessageLookupByLibrary.simpleMessage(
       "Registration successful!",
     ),
     "resendAgain": MessageLookupByLibrary.simpleMessage("Resend again"),
+    "save": MessageLookupByLibrary.simpleMessage("Save"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("Select Language"),
     "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
     "setYourPassword": MessageLookupByLibrary.simpleMessage(
@@ -112,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sign up with Gmail",
     ),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "street": MessageLookupByLibrary.simpleMessage("Street"),
     "verificationSuccessful": MessageLookupByLibrary.simpleMessage(
       "Verification successful!",
     ),

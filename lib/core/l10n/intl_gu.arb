@@ -57,6 +57,12 @@
   "passwordsetsuccessfully": "પાસવર્ડ સફળતાપૂર્વક સેટ થયો!",
   "hintPassword": "તમારો પાસવર્ડ દાખલ કરો",
   "confirmPassword": "પાસવર્ડની પુષ્ટિ કરો",
-    "fullName": "પૂર્ણ નામ",
-  "street": "શેરી"
+  "fullName": "પૂર્ણ નામ",
+  "street": "શેરી",
+  "profile": "પ્રોફાઇલ",
+  "profilecreatedsuccesfully": "પ્રોફાઇલ સફળતાપૂર્વક બનાવાઈ!",
+  "city": "શહેર",
+  "district": "જિલ્લો",
+  "Cancel": "રદ કરો",
+  "save": "સાચવો"
   }

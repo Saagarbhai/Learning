@@ -500,14 +500,59 @@ class Lang {
     );
   }
 
-  /// `COnfirm Password`
+  /// `Confirm Password`
   String get confirmPassword {
     return Intl.message(
-      'COnfirm Password',
+      'Confirm Password',
       name: 'confirmPassword',
       desc: '',
       args: [],
     );
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message('Full Name', name: 'fullName', desc: '', args: []);
+  }
+
+  /// `Street`
+  String get street {
+    return Intl.message('Street', name: 'street', desc: '', args: []);
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message('Profile', name: 'profile', desc: '', args: []);
+  }
+
+  /// `Profile created successfully!`
+  String get profilecreatedsuccesfully {
+    return Intl.message(
+      'Profile created successfully!',
+      name: 'profilecreatedsuccesfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message('City', name: 'city', desc: '', args: []);
+  }
+
+  /// `District`
+  String get district {
+    return Intl.message('District', name: 'district', desc: '', args: []);
+  }
+
+  /// `Cancel`
+  String get Cancel {
+    return Intl.message('Cancel', name: 'Cancel', desc: '', args: []);
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
   }
 }
 

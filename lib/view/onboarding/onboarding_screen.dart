@@ -70,7 +70,7 @@ class OnboardingScreen extends StatelessWidget {
           body: Column(
             children: [
               Expanded(
-                flex: 2,
+                flex: 5,
                 child: PageView(
                   controller: pageController,
                   onPageChanged: (index) {
@@ -98,7 +98,7 @@ class OnboardingScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: Column(
                   children: [
                     CircularProgressButton(
