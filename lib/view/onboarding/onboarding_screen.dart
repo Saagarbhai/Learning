@@ -45,8 +45,8 @@ class OnboardingScreen extends StatelessWidget {
             centerTitle: true,
             title: Text(
               Lang.of(context).apptitle,
-              style: const TextStyle(
-                fontSize: 20,
+              style: TextStyle(
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -59,7 +59,7 @@ class OnboardingScreen extends StatelessWidget {
                   Lang.of(context).skip,
                   style: TextStyle(
                     color: Colors.grey.shade600,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                   ),
                 ),
               )
@@ -102,7 +102,7 @@ class OnboardingScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     CircularProgressButton(
-                      size: 80,
+                      size: 80.r,
                       onPressed: () {
                         if (currentPage < OnboardingBloc.totalPages - 1) {
                           // Simply add the NextPageEvent to handle page transition
@@ -134,44 +134,44 @@ class OnboardingScreen extends StatelessWidget {
     required String description,
   }) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(20.0.r),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
             image,
-            height: 220,
+            height: 220.h,
             errorBuilder: (context, error, stackTrace) {
               return Container(
-                height: 220,
+                height: 220.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                 ),
                 child: Icon(
                   Icons.directions_car,
-                  size: 100,
+                  size: 100.sp,
                   color: Colors.green[400],
                 ),
               );
             },
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40.h),
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 24,
+            style: TextStyle(
+              fontSize: 24.sp,
               fontWeight: FontWeight.bold,
               color: Color(0xFF333333),
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           Text(
             description,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 16.sp,
               color: Colors.grey[600],
               height: 1.5,
             ),

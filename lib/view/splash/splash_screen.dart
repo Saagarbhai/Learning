@@ -25,22 +25,22 @@ class SplashScreen extends StatelessWidget {
             // App logo
             Center(
               child: Container(
-                width: 120,
-                height: 120,
+                width: 120.w,
+                height: 120.h,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.5),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
+                      blurRadius: 20.r,
+                      offset: Offset(0, 10.h),
                     ),
                   ],
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.directions_car,
-                  size: 70,
+                  size: 70.sp,
                   color: Color(0xFF08B783),
                 ),
               ),

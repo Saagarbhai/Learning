@@ -48,29 +48,29 @@ class CircularProgressButton extends StatelessWidget {
           onPressed();
         }
       },
-      child: Container(
+      child: SizedBox(
         width: size,
         height: size,
         child: Stack(
           children: [
             CircularPercentIndicator(
               radius: size / 2,
-              lineWidth: 4,
+              lineWidth: 4.w,
               percent: _getProgressPercent(),
               progressColor: Color(0xFF08B783),
             ),
             Center(
               child: Container(
-                width: size - 15,
-                height: size - 15,
+                width: size - 15.w,
+                height: size - 15.h,
                 decoration: BoxDecoration(
                   color: Color(0xFF08B783),
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
-                      blurRadius: 4,
-                      offset: Offset(0, 2),
+                      blurRadius: 4.r,
+                      offset: Offset(0, 2.h),
                     ),
                   ],
                 ),
@@ -80,14 +80,14 @@ class CircularProgressButton extends StatelessWidget {
                           'Go',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: size * 0.25,
+                            fontSize: (size * 0.25).sp,
                             fontWeight: FontWeight.w600,
                           ),
                         )
                       : Icon(
                           Icons.arrow_forward,
                           color: Colors.white,
-                          size: size * 0.4,
+                          size: (size * 0.4).sp,
                         ),
                 ),
               ),

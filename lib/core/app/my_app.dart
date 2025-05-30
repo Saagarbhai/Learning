@@ -24,20 +24,27 @@ class MyApp extends StatelessWidget {
           final locale =
               state is LanguageLoaded ? state.locale : const Locale('en');
 
-          return MaterialApp(
-            title: AppConstants.appName,
-            themeMode: ThemeMode.system,
-            locale: locale,
-            supportedLocales: const [
-              Locale('en'), // English
-              Locale('hi'), // Hindi
-              Locale('gu'), // Gujarati
-            ],
-            localizationsDelegates: localizationDelegates,
-            onGenerateRoute: AppRouter.generateRoute,
-            initialRoute: AppConstants.splashRoute,
-            debugShowCheckedModeBanner: false,
-            home: const SplashScreen(),
+          return ScreenUtilInit(
+            designSize: const Size(393, 852),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (_, child) {
+              return MaterialApp(
+                title: AppConstants.appName,
+                themeMode: ThemeMode.system,
+                locale: locale,
+                supportedLocales: const [
+                  Locale('en'), // English
+                  Locale('hi'), // Hindi
+                  Locale('gu'), // Gujarati
+                ],
+                localizationsDelegates: localizationDelegates,
+                onGenerateRoute: AppRouter.generateRoute,
+                initialRoute: AppConstants.splashRoute,
+                debugShowCheckedModeBanner: false,
+                home: const SplashScreen(),
+              );
+            },
           );
         },
       ),

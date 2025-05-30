@@ -51,24 +51,24 @@ class CustomButton extends StatelessWidget {
     final border = borderColor ?? (isPrimary ? null : const Color(0xFF00A86B));
 
     return Container(
-      width: width,
-      height: height,
+      width: width?.w,
+      height: height.h,
       margin: margin,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: BorderRadius.circular(borderRadius.r),
         border: isPrimary && border == null
             ? null
             : Border.all(
                 color: border ?? const Color(0xFF00A86B),
-                width: borderWidth,
+                width: borderWidth.w,
               ),
         boxShadow: showShadow
             ? [
                 BoxShadow(
                   color: bgColor
                       .withOpacity(isLoading || onPressed == null ? 0.1 : 0.25),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
+                  blurRadius: 8.r,
+                  offset: Offset(0, 4.h),
                 ),
               ]
             : null,
@@ -82,17 +82,17 @@ class CustomButton extends StatelessWidget {
           elevation: 0,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
+            borderRadius: BorderRadius.circular(borderRadius.r),
           ),
           padding: padding,
         ),
         child: isLoading
             ? SizedBox(
-                width: 24,
-                height: 24,
+                width: 24.w,
+                height: 24.h,
                 child: CircularProgressIndicator(
                   color: txtColor,
-                  strokeWidth: 2,
+                  strokeWidth: 2.w,
                 ),
               )
             : Row(
@@ -101,18 +101,18 @@ class CustomButton extends StatelessWidget {
                 children: [
                   if (prefixIcon != null) ...[
                     prefixIcon!,
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                   ],
                   Text(
                     text,
                     style: TextStyle(
-                      fontSize: fontSize,
+                      fontSize: fontSize.sp,
                       fontWeight: fontWeight,
                       color: txtColor,
                     ),
                   ),
                   if (suffixIcon != null) ...[
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     suffixIcon!,
                   ],
                 ],
