@@ -65,6 +65,6 @@
   "profilecreatedsuccesfully": "Profile created successfully!",
   "city": "City",
   "district": "District",
-  "Cancel": "Cancel",
+  "cancel": "Cancel",
   "save": "Save"
 }

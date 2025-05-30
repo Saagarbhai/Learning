@@ -29,7 +29,7 @@ class OtpFormValidationState extends OtpVerificationState {
   final bool isFormValid;
 
   const OtpFormValidationState({
-    this.otp = '',
+    this.otp = '12345',
     this.isFormValid = false,
   });
 

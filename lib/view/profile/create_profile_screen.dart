@@ -269,7 +269,7 @@ class CreateProfileScreen extends StatelessWidget {
                         // Cancel button
                         Expanded(
                           child: CustomButton(
-                            text: Lang.of(context).Cancel,
+                            text: Lang.of(context).cancel,
                             onPressed: () => Navigator.pop(context),
                             isPrimary: false,
                             backgroundColor: Colors.white,

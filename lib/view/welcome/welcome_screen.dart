@@ -19,9 +19,14 @@ class WelcomeScreen extends StatelessWidget {
           });
         } else if (state is NavigateToLogin) {
           // Navigate to login screen
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Navigate to Login')),
-          );
+          Navigator.of(context)
+              .pushNamed(
+            AppConstants.signInRoute,
+          )
+              .then((_) {
+            // Reset the bloc state when returning from sign-in screen
+            context.read<WelcomeBloc>().add(ResetWelcomeState());
+          });
         }
       },
       child: Scaffold(

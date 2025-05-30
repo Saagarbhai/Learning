@@ -5,6 +5,7 @@ class AppConstants {
   static const String splashRoute = '/splash';
   static const String homeRoute = '/home';
   static const String loginRoute = '/login';
+  static const String signInRoute = '/signin';
   static const String profileRoute = '/profile';
   static const String settingsRoute = '/settings';
   static const String onboardingRoute = '/onboarding';

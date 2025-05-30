@@ -546,8 +546,8 @@ class Lang {
   }
 
   /// `Cancel`
-  String get Cancel {
-    return Intl.message('Cancel', name: 'Cancel', desc: '', args: []);
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
   }
 
   /// `Save`
