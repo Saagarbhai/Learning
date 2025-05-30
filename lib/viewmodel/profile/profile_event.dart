@@ -16,22 +16,49 @@ class NameChanged extends ProfileEvent {
   List<Object> get props => [name];
 }
 
-class BioChanged extends ProfileEvent {
-  final String bio;
+class PhoneChanged extends ProfileEvent {
+  final String phone;
 
-  const BioChanged(this.bio);
+  const PhoneChanged(this.phone);
 
   @override
-  List<Object> get props => [bio];
+  List<Object> get props => [phone];
 }
 
-class LocationChanged extends ProfileEvent {
-  final String location;
+class EmailChanged extends ProfileEvent {
+  final String email;
 
-  const LocationChanged(this.location);
+  const EmailChanged(this.email);
 
   @override
-  List<Object> get props => [location];
+  List<Object> get props => [email];
+}
+
+class StreetChanged extends ProfileEvent {
+  final String street;
+
+  const StreetChanged(this.street);
+
+  @override
+  List<Object> get props => [street];
+}
+
+class CityChanged extends ProfileEvent {
+  final String city;
+
+  const CityChanged(this.city);
+
+  @override
+  List<Object> get props => [city];
+}
+
+class DistrictChanged extends ProfileEvent {
+  final String district;
+
+  const DistrictChanged(this.district);
+
+  @override
+  List<Object> get props => [district];
 }
 
 class ProfileImageChanged extends ProfileEvent {

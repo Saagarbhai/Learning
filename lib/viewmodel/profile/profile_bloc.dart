@@ -3,8 +3,11 @@ import '../../core/utils/app_export.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(const ProfileState()) {
     on<NameChanged>(_onNameChanged);
-    on<BioChanged>(_onBioChanged);
-    on<LocationChanged>(_onLocationChanged);
+    on<PhoneChanged>(_onPhoneChanged);
+    on<EmailChanged>(_onEmailChanged);
+    on<StreetChanged>(_onStreetChanged);
+    on<CityChanged>(_onCityChanged);
+    on<DistrictChanged>(_onDistrictChanged);
     on<ProfileImageChanged>(_onProfileImageChanged);
     on<ProfileSubmitted>(_onProfileSubmitted);
   }
@@ -16,17 +19,38 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     ));
   }
 
-  void _onBioChanged(BioChanged event, Emitter<ProfileState> emit) {
+  void _onPhoneChanged(PhoneChanged event, Emitter<ProfileState> emit) {
     emit(state.copyWith(
-      bio: event.bio,
-      errorMessage: null, // Clear previous error messages
+      phone: event.phone,
+      errorMessage: null,
     ));
   }
 
-  void _onLocationChanged(LocationChanged event, Emitter<ProfileState> emit) {
+  void _onEmailChanged(EmailChanged event, Emitter<ProfileState> emit) {
     emit(state.copyWith(
-      location: event.location,
-      errorMessage: null, // Clear previous error messages
+      email: event.email,
+      errorMessage: null,
+    ));
+  }
+
+  void _onStreetChanged(StreetChanged event, Emitter<ProfileState> emit) {
+    emit(state.copyWith(
+      street: event.street,
+      errorMessage: null,
+    ));
+  }
+
+  void _onCityChanged(CityChanged event, Emitter<ProfileState> emit) {
+    emit(state.copyWith(
+      city: event.city,
+      errorMessage: null,
+    ));
+  }
+
+  void _onDistrictChanged(DistrictChanged event, Emitter<ProfileState> emit) {
+    emit(state.copyWith(
+      district: event.district,
+      errorMessage: null,
     ));
   }
 

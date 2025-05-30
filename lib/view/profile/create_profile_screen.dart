@@ -14,13 +14,18 @@ class CreateProfileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: const Icon(Icons.arrow_back, color: Colors.black),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: CustomBackButton(),
         ),
-        title: const Text("Back",
-            style: TextStyle(color: Colors.black, fontSize: 16)),
-        titleSpacing: 0,
+        leadingWidth: 100,
+        title: const Text("Profile",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
+        centerTitle: true,
       ),
       body: BlocListener<ProfileBloc, ProfileState>(
         listener: (context, state) {
@@ -46,200 +51,260 @@ class CreateProfileScreen extends StatelessWidget {
         child: Builder(builder: (context) {
           // Create controllers for each field
           final nameController = TextEditingController();
-          final bioController = TextEditingController();
-          final locationController = TextEditingController();
+          final phoneController = TextEditingController();
+          final emailController = TextEditingController();
+          final streetController = TextEditingController();
+
+          // City and district fields will use the dropdown
+          final cities = ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi'];
+          final districts = ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi'];
 
           return SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 24),
-                  // Header text
-                  const Text(
-                    'Create Profile',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Complete your profile details',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  // Profile form
-                  Expanded(
-                    child: Form(
-                      key: GlobalKey<FormState>(),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Profile picture
-                            Center(
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    width: 100,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[200],
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: const Icon(
-                                      Icons.person,
-                                      size: 60,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child: Container(
-                                      width: 36,
-                                      height: 36,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFF039855),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.white,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      child: const Icon(
-                                        Icons.camera_alt,
-                                        color: Colors.white,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+
+                  // Profile picture
+                  Center(
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF039855),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 2,
                               ),
                             ),
-                            const SizedBox(height: 32),
-
-                            // Name field
-                            BlocBuilder<ProfileBloc, ProfileState>(
-                              buildWhen: (previous, current) =>
-                                  previous.name != current.name,
-                              builder: (context, state) {
-                                nameController.text = state.name;
-                                nameController.selection =
-                                    TextSelection.fromPosition(TextPosition(
-                                        offset: nameController.text.length));
-                                return CustomTextField(
-                                  hintText: 'Full Name',
-                                  controller: nameController,
-                                  textInputAction: TextInputAction.next,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your name';
-                                    }
-                                    return null;
-                                  },
-                                  onChanged: (value) {
-                                    context
-                                        .read<ProfileBloc>()
-                                        .add(NameChanged(value));
-                                  },
-                                );
-                              },
+                            child: const Icon(
+                              Icons.camera_alt,
+                              color: Colors.white,
+                              size: 18,
                             ),
-                            const SizedBox(height: 16),
-
-                            // Bio field
-                            BlocBuilder<ProfileBloc, ProfileState>(
-                              buildWhen: (previous, current) =>
-                                  previous.bio != current.bio,
-                              builder: (context, state) {
-                                bioController.text = state.bio;
-                                bioController.selection =
-                                    TextSelection.fromPosition(TextPosition(
-                                        offset: bioController.text.length));
-                                return CustomTextField(
-                                  hintText: 'Bio',
-                                  controller: bioController,
-                                  textInputAction: TextInputAction.next,
-                                  maxLines: 3,
-                                  onChanged: (value) {
-                                    context
-                                        .read<ProfileBloc>()
-                                        .add(BioChanged(value));
-                                  },
-                                );
-                              },
-                            ),
-                            const SizedBox(height: 16),
-
-                            // Location field
-                            BlocBuilder<ProfileBloc, ProfileState>(
-                              buildWhen: (previous, current) =>
-                                  previous.location != current.location,
-                              builder: (context, state) {
-                                locationController.text = state.location;
-                                locationController.selection =
-                                    TextSelection.fromPosition(TextPosition(
-                                        offset:
-                                            locationController.text.length));
-                                return CustomTextField(
-                                  hintText: 'Location',
-                                  controller: locationController,
-                                  textInputAction: TextInputAction.done,
-                                  prefixIcon: const Icon(
-                                      Icons.location_on_outlined,
-                                      color: Colors.grey),
-                                  onChanged: (value) {
-                                    context
-                                        .read<ProfileBloc>()
-                                        .add(LocationChanged(value));
-                                  },
-                                );
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Form fields
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          // Full Name field
+                          BlocBuilder<ProfileBloc, ProfileState>(
+                            buildWhen: (previous, current) =>
+                                previous.name != current.name,
+                            builder: (context, state) {
+                              nameController.text = state.name;
+                              nameController.selection =
+                                  TextSelection.fromPosition(TextPosition(
+                                      offset: nameController.text.length));
+                              return CustomTextField(
+                                hintText: 'Full Name',
+                                controller: nameController,
+                                textInputAction: TextInputAction.next,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your name';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (value) {
+                                  context
+                                      .read<ProfileBloc>()
+                                      .add(NameChanged(value));
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+
+                          // Phone field
+                          BlocBuilder<ProfileBloc, ProfileState>(
+                            buildWhen: (previous, current) =>
+                                previous.phone != current.phone,
+                            builder: (context, state) {
+                              phoneController.text = state.phone;
+                              phoneController.selection =
+                                  TextSelection.fromPosition(TextPosition(
+                                      offset: phoneController.text.length));
+                              return CustomPhoneField(
+                                controller: phoneController,
+                                hintText: 'Your mobile number',
+                                countryCode: '+880',
+                                textInputAction: TextInputAction.next,
+                                onChanged: (value) {
+                                  context
+                                      .read<ProfileBloc>()
+                                      .add(PhoneChanged(value));
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+
+                          // Email field
+                          BlocBuilder<ProfileBloc, ProfileState>(
+                            buildWhen: (previous, current) =>
+                                previous.email != current.email,
+                            builder: (context, state) {
+                              emailController.text = state.email;
+                              emailController.selection =
+                                  TextSelection.fromPosition(TextPosition(
+                                      offset: emailController.text.length));
+                              return CustomTextField(
+                                hintText: 'Email',
+                                controller: emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
+                                onChanged: (value) {
+                                  context
+                                      .read<ProfileBloc>()
+                                      .add(EmailChanged(value));
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+
+                          // Street field
+                          BlocBuilder<ProfileBloc, ProfileState>(
+                            buildWhen: (previous, current) =>
+                                previous.street != current.street,
+                            builder: (context, state) {
+                              streetController.text = state.street;
+                              streetController.selection =
+                                  TextSelection.fromPosition(TextPosition(
+                                      offset: streetController.text.length));
+                              return CustomTextField(
+                                hintText: 'Street',
+                                controller: streetController,
+                                textInputAction: TextInputAction.next,
+                                onChanged: (value) {
+                                  context
+                                      .read<ProfileBloc>()
+                                      .add(StreetChanged(value));
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+
+                          // City dropdown
+                          BlocBuilder<ProfileBloc, ProfileState>(
+                            buildWhen: (previous, current) =>
+                                previous.city != current.city,
+                            builder: (context, state) {
+                              return CustomDropdownField(
+                                hintText: 'City',
+                                items: cities,
+                                value: state.city.isEmpty ? null : state.city,
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    context
+                                        .read<ProfileBloc>()
+                                        .add(CityChanged(value));
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+
+                          // District dropdown
+                          BlocBuilder<ProfileBloc, ProfileState>(
+                            buildWhen: (previous, current) =>
+                                previous.district != current.district,
+                            builder: (context, state) {
+                              return CustomDropdownField(
+                                hintText: 'District',
+                                items: districts,
+                                value: state.district.isEmpty
+                                    ? null
+                                    : state.district,
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    context
+                                        .read<ProfileBloc>()
+                                        .add(DistrictChanged(value));
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ),
 
-                  // Save button at the bottom of the screen
+                  // Buttons at the bottom
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 24.0, top: 12.0),
-                    child: BlocBuilder<ProfileBloc, ProfileState>(
-                      buildWhen: (previous, current) =>
-                          previous.isSubmitting != current.isSubmitting ||
-                          previous.name != current.name,
-                      builder: (context, state) {
-                        return CustomButton(
-                          text: 'Save Profile',
-                          onPressed:
-                              state.isSubmitting || state.name.trim().isEmpty
-                                  ? null
-                                  : () {
-                                      context
-                                          .read<ProfileBloc>()
-                                          .add(ProfileSubmitted());
-                                    },
-                          width: double.infinity,
-                          height: 50,
-                          isLoading: state.isSubmitting,
-                          showShadow: true,
-                          backgroundColor: state.name.trim().isNotEmpty
-                              ? const Color(0xFF039855)
-                              : Colors.grey,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          borderRadius: 8,
-                        );
-                      },
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Row(
+                      children: [
+                        // Cancel button
+                        Expanded(
+                          child: CustomButton(
+                            text: 'Cancel',
+                            onPressed: () => Navigator.pop(context),
+                            isPrimary: false,
+                            backgroundColor: Colors.white,
+                            textColor: Colors.black,
+                            borderColor: Colors.grey[300],
+                            height: 50,
+                            borderRadius: 8,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+
+                        // Save button
+                        Expanded(
+                          child: BlocBuilder<ProfileBloc, ProfileState>(
+                            buildWhen: (previous, current) =>
+                                previous.isSubmitting != current.isSubmitting ||
+                                previous.name != current.name,
+                            builder: (context, state) {
+                              return CustomButton(
+                                text: 'Save',
+                                onPressed: state.isSubmitting ||
+                                        state.name.trim().isEmpty
+                                    ? null
+                                    : () {
+                                        context
+                                            .read<ProfileBloc>()
+                                            .add(ProfileSubmitted());
+                                      },
+                                height: 50,
+                                isLoading: state.isSubmitting,
+                                backgroundColor: const Color(0xFF039855),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                borderRadius: 8,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

@@ -2,8 +2,11 @@ import '../../core/utils/app_export.dart';
 
 class ProfileState extends Equatable {
   final String name;
-  final String bio;
-  final String location;
+  final String phone;
+  final String email;
+  final String street;
+  final String city;
+  final String district;
   final String? profileImagePath;
   final bool isSubmitting;
   final bool isSuccess;
@@ -11,8 +14,11 @@ class ProfileState extends Equatable {
 
   const ProfileState({
     this.name = '',
-    this.bio = '',
-    this.location = '',
+    this.phone = '',
+    this.email = '',
+    this.street = '',
+    this.city = '',
+    this.district = '',
     this.profileImagePath,
     this.isSubmitting = false,
     this.isSuccess = false,
@@ -21,8 +27,11 @@ class ProfileState extends Equatable {
 
   ProfileState copyWith({
     String? name,
-    String? bio,
-    String? location,
+    String? phone,
+    String? email,
+    String? street,
+    String? city,
+    String? district,
     String? profileImagePath,
     bool? isSubmitting,
     bool? isSuccess,
@@ -30,8 +39,11 @@ class ProfileState extends Equatable {
   }) {
     return ProfileState(
       name: name ?? this.name,
-      bio: bio ?? this.bio,
-      location: location ?? this.location,
+      phone: phone ?? this.phone,
+      email: email ?? this.email,
+      street: street ?? this.street,
+      city: city ?? this.city,
+      district: district ?? this.district,
       profileImagePath: profileImagePath ?? this.profileImagePath,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
@@ -42,8 +54,11 @@ class ProfileState extends Equatable {
   @override
   List<Object?> get props => [
         name,
-        bio,
-        location,
+        phone,
+        email,
+        street,
+        city,
+        district,
         profileImagePath,
         isSubmitting,
         isSuccess,
