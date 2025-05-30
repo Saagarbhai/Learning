@@ -18,8 +18,8 @@ class CreateProfileScreen extends StatelessWidget {
           LanguageButton(),
         ],
         leadingWidth: 100,
-        title: const Text("Profile",
-            style: TextStyle(
+        title: Text(Lang.of(context).profile,
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -31,9 +31,9 @@ class CreateProfileScreen extends StatelessWidget {
           if (state.isSuccess) {
             // Show success message and navigate to home
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Profile created successfully!'),
-                duration: Duration(seconds: 1),
+              SnackBar(
+                content: Text(Lang.of(context).profilecreatedsuccesfully),
+                duration: const Duration(seconds: 1),
               ),
             );
             // Navigate to home screen
@@ -113,12 +113,12 @@ class CreateProfileScreen extends StatelessWidget {
                                     offset: nameController.text.length),
                               );
                               return CustomTextField(
-                                hintText: 'Full Name',
+                                hintText: Lang.of(context).fullName,
                                 controller: nameController,
                                 textInputAction: TextInputAction.next,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter your name';
+                                    return "Please enter your name";
                                   }
                                   return null;
                                 },
@@ -146,7 +146,7 @@ class CreateProfileScreen extends StatelessWidget {
                               );
                               return CustomPhoneField(
                                 controller: phoneController,
-                                hintText: 'Your mobile number',
+                                hintText: Lang.of(context).hintPhone,
                                 countryCode: '+91',
                                 textInputAction: TextInputAction.next,
                                 onChanged: (value) {
@@ -172,7 +172,7 @@ class CreateProfileScreen extends StatelessWidget {
                                     offset: emailController.text.length),
                               );
                               return CustomTextField(
-                                hintText: 'Email',
+                                hintText: Lang.of(context).hintEmail,
                                 controller: emailController,
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
@@ -199,7 +199,7 @@ class CreateProfileScreen extends StatelessWidget {
                                     offset: streetController.text.length),
                               );
                               return CustomTextField(
-                                hintText: 'Street',
+                                hintText: Lang.of(context).street,
                                 controller: streetController,
                                 textInputAction: TextInputAction.next,
                                 onChanged: (value) {
@@ -219,7 +219,7 @@ class CreateProfileScreen extends StatelessWidget {
                                 previous.cities != current.cities,
                             builder: (context, state) {
                               return CustomDropdownField(
-                                hintText: 'City',
+                                hintText: Lang.of(context).city,
                                 items: state.cities,
                                 value: state.city.isEmpty ? null : state.city,
                                 onChanged: (value) {
@@ -241,7 +241,7 @@ class CreateProfileScreen extends StatelessWidget {
                                 previous.districts != current.districts,
                             builder: (context, state) {
                               return CustomDropdownField(
-                                hintText: 'District',
+                                hintText: Lang.of(context).district,
                                 items: state.districts,
                                 value: state.district.isEmpty
                                     ? null
@@ -269,7 +269,7 @@ class CreateProfileScreen extends StatelessWidget {
                         // Cancel button
                         Expanded(
                           child: CustomButton(
-                            text: 'Cancel',
+                            text: Lang.of(context).Cancel,
                             onPressed: () => Navigator.pop(context),
                             isPrimary: false,
                             backgroundColor: Colors.white,
@@ -289,7 +289,7 @@ class CreateProfileScreen extends StatelessWidget {
                                 previous.name != current.name,
                             builder: (context, state) {
                               return CustomButton(
-                                text: 'Save',
+                                text: Lang.of(context).save,
                                 onPressed: state.isSubmitting ||
                                         state.name.trim().isEmpty
                                     ? null

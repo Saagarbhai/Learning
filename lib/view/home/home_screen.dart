@@ -12,6 +12,9 @@ class HomeScreen extends StatelessWidget {
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: Text(Lang.of(context).apptitle),
+            actions: [
+              LanguageButton(),
+            ],
           ),
           body: Center(
             child: Text(Lang.of(context).onboardingData1Title),
