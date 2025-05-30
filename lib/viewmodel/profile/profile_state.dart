@@ -25,8 +25,35 @@ class ProfileState extends Equatable {
     this.isSubmitting = false,
     this.isSuccess = false,
     this.errorMessage,
-    this.cities = const ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi'],
-    this.districts = const ['Dhaka', 'Chittagong', 'Khulna', 'Rajshahi'],
+    this.cities = const [
+      'Ahmedabad',
+      'Surat',
+      'Vadodara',
+      'Rajkot',
+      'Bhavnagar',
+      'Jamnagar',
+      'Junagadh',
+      'Gandhinagar',
+      'Anand',
+      'Nadiad'
+    ],
+    this.districts = const [
+      'Ahmedabad',
+      'Surat',
+      'Vadodara',
+      'Rajkot',
+      'Bhavnagar',
+      'Jamnagar',
+      'Junagadh',
+      'Gandhinagar',
+      'Anand',
+      'Kheda',
+      'Mehsana',
+      'Patan',
+      'Banaskantha',
+      'Sabarkantha',
+      'Kutch'
+    ],
   });
 
   ProfileState copyWith({
