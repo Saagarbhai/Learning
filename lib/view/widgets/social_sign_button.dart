@@ -20,12 +20,12 @@ class SocialSignButton extends StatelessWidget {
       isPrimary: false,
       prefixIcon: icon,
       width: double.infinity,
-      height: 56,
+      height: 56.h,
       backgroundColor: Colors.white,
       textColor: const Color(0xFF1A1A1A),
       borderColor: const Color(0xFFE0E0E0),
-      borderWidth: 1,
-      margin: const EdgeInsets.only(bottom: 12),
+      borderWidth: 1.w,
+      margin: EdgeInsets.only(bottom: 12.h),
     );
   }
 
@@ -39,8 +39,8 @@ class SocialSignButton extends StatelessWidget {
       onPressed: onPressed,
       icon: SvgPicture.asset(
         Assets.images.socialSignImage.gmail.path,
-        width: 24,
-        height: 24,
+        width: 24.w,
+        height: 24.h,
       ),
     );
   }
@@ -54,8 +54,8 @@ class SocialSignButton extends StatelessWidget {
       onPressed: onPressed,
       icon: SvgPicture.asset(
         Assets.images.socialSignImage.facebook.path,
-        width: 24,
-        height: 24,
+        width: 24.w,
+        height: 24.h,
       ),
     );
   }
@@ -69,8 +69,8 @@ class SocialSignButton extends StatelessWidget {
       onPressed: onPressed,
       icon: SvgPicture.asset(
         Assets.images.socialSignImage.apple.path,
-        width: 24,
-        height: 24,
+        width: 24.w,
+        height: 24.h,
       ),
     );
   }

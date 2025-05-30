@@ -60,7 +60,7 @@ class PasswordScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h),
                 // Header text
                 Text(
                   Lang.of(context).setPassword,
@@ -70,7 +70,7 @@ class PasswordScreen extends StatelessWidget {
                     fontFamily: 'Poppins',
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 Text(
                   Lang.of(context).setYourPassword,
                   style: const TextStyle(
@@ -79,7 +79,7 @@ class PasswordScreen extends StatelessWidget {
                     fontFamily: 'Poppins',
                   ),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
                 // Password fields
                 Expanded(
                   child: SingleChildScrollView(
@@ -102,7 +102,7 @@ class PasswordScreen extends StatelessWidget {
                             );
                           },
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         // Confirm password field
                         BlocBuilder<PasswordBloc, PasswordState>(
                           buildWhen: (previous, current) =>
@@ -123,7 +123,7 @@ class PasswordScreen extends StatelessWidget {
                             );
                           },
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.h),
                         // Password requirements text
                         Text(
                           Lang.of(context).passwordDescription,
@@ -163,14 +163,14 @@ class PasswordScreen extends StatelessWidget {
                               }
                             : null,
                         width: double.infinity,
-                        height: 50,
+                        height: 50.h,
                         isLoading: state.isSubmitting,
                         showShadow: true,
                         backgroundColor:
                             canSubmit ? const Color(0xFF039855) : Colors.grey,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
-                        borderRadius: 8,
+                        borderRadius: 8.r,
                       );
                     },
                   ),

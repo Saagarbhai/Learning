@@ -21,42 +21,39 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignInBloc(),
-      child: BlocListener<SignInBloc, SignInState>(
-        listener: (context, state) {
-          if (state.errorMessage != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorMessage!)),
-            );
-          }
+    return BlocListener<SignInBloc, SignInState>(
+      listener: (context, state) {
+        if (state.errorMessage != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.errorMessage!)),
+          );
+        }
 
-          if (state.isSignInSuccess) {
-            // Navigate to home screen or dashboard
-            Navigator.of(context).pushReplacementNamed(AppConstants.homeRoute);
-          }
+        if (state.isSignInSuccess) {
+          // Navigate to home screen or dashboard
+          Navigator.of(context).pushReplacementNamed(AppConstants.homeRoute);
+        }
 
-          if (state.navigateToSignUp) {
-            Navigator.of(context).pushNamed(AppConstants.signUpRoute);
-          }
+        if (state.navigateToSignUp) {
+          Navigator.of(context).pushNamed(AppConstants.signUpRoute);
+        }
 
-          if (state.navigateToForgotPassword) {
-            // Navigate to forgot password screen
-            // This would be implemented when you create the forgot password screen
-          }
-        },
-        child: Scaffold(
+        if (state.navigateToForgotPassword) {
+          // Navigate to forgot password screen
+          // This would be implemented when you create the forgot password screen
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            leading: CustomBackButton(
-              onPressed: () => Navigator.of(context).pop(),
-            ),
+          elevation: 0,
+          title: CustomBackButton(
+            onPressed: () => Navigator.of(context).pop(),
           ),
-          body: SafeArea(
-            child: _buildBody(context),
-          ),
+        ),
+        body: SafeArea(
+          child: _buildBody(context),
         ),
       ),
     );
@@ -67,23 +64,23 @@ class _SignInScreenState extends State<SignInScreen> {
       builder: (context, state) {
         return SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: EdgeInsets.symmetric(horizontal: 24.0.w),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   // Title
-                  const Text(
+                  Text(
                     'Sign in with your email or\nphone number',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w600,
                       color: Color(0xFF1A1A1A),
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32.h),
 
                   // Email/Phone Field
                   CustomTextField(
@@ -100,7 +97,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
 
                   // Password Field
                   CustomSignInPasswordField(
@@ -139,7 +136,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
 
                   // Sign In Button
                   CustomButton(
@@ -161,9 +158,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
 
                   // OR Divider
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
                   _buildOrDivider(),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
 
                   // Social Sign In Buttons
                   SocialSignButton.gmail(
@@ -188,16 +185,16 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
 
                   // Don't have an account
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'Don\'t have an account? ',
                           style: TextStyle(
                             color: Color(0xFF666666),
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                         GestureDetector(
@@ -206,11 +203,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                 .read<SignInBloc>()
                                 .add(NavigateToSignUpPressed());
                           },
-                          child: const Text(
+                          child: Text(
                             'Sign Up',
                             style: TextStyle(
                               color: Color(0xFF00A86B),
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -218,7 +215,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
                 ],
               ),
             ),
@@ -230,27 +227,27 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Widget _buildOrDivider() {
     return Row(
-      children: const [
+      children: [
         Expanded(
           child: Divider(
             color: Color(0xFFE0E0E0),
-            thickness: 1,
+            thickness: 1.w,
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
           child: Text(
             'or',
             style: TextStyle(
               color: Color(0xFF9E9E9E),
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
         ),
         Expanded(
           child: Divider(
             color: Color(0xFFE0E0E0),
-            thickness: 1,
+            thickness: 1.w,
           ),
         ),
       ],

@@ -54,7 +54,7 @@ class CircularProgressButton extends StatelessWidget {
         child: Stack(
           children: [
             CircularPercentIndicator(
-              radius: size / 2,
+              radius: (size / 2).r,
               lineWidth: 4.w,
               percent: _getProgressPercent(),
               progressColor: Color(0xFF08B783),

@@ -24,39 +24,38 @@ class CustomSignInPasswordField extends StatelessWidget {
         return TextFormField(
           controller: controller,
           obscureText: !state.isPasswordVisible,
-          style: const TextStyle(
-            fontSize: 16,
+          style: TextStyle(
+            fontSize: 16.sp,
             fontFamily: 'Poppins',
             color: Color(0xFF333333),
           ),
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: const TextStyle(
+            hintStyle: TextStyle(
               color: Color(0xFF9E9E9E),
               fontFamily: 'Poppins',
-              fontSize: 16,
+              fontSize: 16.sp,
             ),
             filled: true,
             fillColor: Colors.white,
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFFE0E0E0), width: 1),
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: Color(0xFFE0E0E0), width: 1.w),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide:
-                  const BorderSide(color: Color(0xFF00A86B), width: 1.5),
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: Color(0xFF00A86B), width: 1.5.w),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.red, width: 1),
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: Colors.red, width: 1.w),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.red, width: 1.5),
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: Colors.red, width: 1.5.w),
             ),
             contentPadding:
-                const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
             suffixIcon:
                 _buildVisibilityToggle(context, state.isPasswordVisible),
           ),
@@ -73,13 +72,13 @@ class CustomSignInPasswordField extends StatelessWidget {
         context.read<SignInBloc>().add(ToggleSignInPasswordVisibility());
       },
       child: Container(
-        width: 50,
-        height: 50,
+        width: 50.w,
+        height: 50.h,
         alignment: Alignment.center,
         child: Icon(
           isVisible ? Icons.visibility_outlined : Icons.visibility_off_outlined,
           color: Colors.grey,
-          size: 22,
+          size: 22.sp,
         ),
       ),
     );

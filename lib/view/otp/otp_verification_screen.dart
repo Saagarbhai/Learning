@@ -122,7 +122,7 @@ class _OtpVerificationFormState extends State<OtpVerificationForm> {
                             fontFamily: 'Poppins',
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.h),
 
                         // Subtitle
                         Text(
@@ -133,7 +133,7 @@ class _OtpVerificationFormState extends State<OtpVerificationForm> {
                             fontFamily: 'Poppins',
                           ),
                         ),
-                        const SizedBox(height: 40),
+                        SizedBox(height: 40.h),
 
                         // OTP fields with CustomPinBox
                         CustomPinBox(
@@ -149,7 +149,7 @@ class _OtpVerificationFormState extends State<OtpVerificationForm> {
                                 );
                           },
                         ),
-                        const SizedBox(height: 20),
+                        SizedBox(height: 20.h),
 
                         // Resend code text
                         Row(
@@ -186,7 +186,7 @@ class _OtpVerificationFormState extends State<OtpVerificationForm> {
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h),
 
                 // Verify button at the bottom
                 BlocBuilder<OtpVerificationBloc, OtpVerificationState>(
@@ -203,13 +203,13 @@ class _OtpVerificationFormState extends State<OtpVerificationForm> {
                                   );
                             },
                       width: double.infinity,
-                      height: 58,
+                      height: 58.h,
                       isLoading: isLoading,
                       showShadow: true,
-                      fontSize: 18,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      fontSize: 18.sp,
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
                       fontWeight: FontWeight.w600,
-                      margin: const EdgeInsets.only(bottom: 16),
+                      margin: EdgeInsets.only(bottom: 16.h),
                     );
                   },
                 ),

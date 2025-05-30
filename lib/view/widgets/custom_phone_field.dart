@@ -32,83 +32,82 @@ class CustomPhoneField extends StatelessWidget {
       onChanged: onChanged,
       focusNode: focusNode,
       textInputAction: textInputAction,
-      style: const TextStyle(
-        fontSize: 16,
+      style: TextStyle(
+        fontSize: 16.sp,
         color: Color(0xFF1A1A1A),
         fontFamily: 'Poppins',
       ),
       decoration: InputDecoration(
         hintText: hintText,
         counterText: '',
-        hintStyle: const TextStyle(
-          fontSize: 16,
+        hintStyle: TextStyle(
+          fontSize: 16.sp,
           color: Color(0xFFAAAAAA),
           fontFamily: 'Poppins',
         ),
         filled: true,
         fillColor: Colors.white,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         prefixIcon: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          margin: const EdgeInsets.only(right: 8),
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          margin: EdgeInsets.only(right: 8.w),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               // Country flag
               Container(
-                width: 24,
-                height: 18,
+                width: 24.w,
+                height: 18.h,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(2.r),
                 ),
                 child: SvgPicture.asset(
                   Assets.images.flag.indian.path,
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               // Dropdown icon
-              const Icon(
+              Icon(
                 Icons.keyboard_arrow_down,
-                size: 16,
+                size: 16.sp,
                 color: Color(0xFF666666),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               // Country code
               Text(
                 countryCode,
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: 16.sp,
                   color: Color(0xFF1A1A1A),
                   fontFamily: 'Poppins',
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               // Vertical divider
               Container(
-                height: 24,
-                width: 1,
+                height: 24.h,
+                width: 1.w,
                 color: const Color(0xFFE0E0E0),
               ),
             ],
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFE0E0E0), width: 1),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: Color(0xFFE0E0E0), width: 1.w),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFF00A86B), width: 1.5),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: Color(0xFF00A86B), width: 1.5.w),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: Colors.red, width: 1.w),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.red, width: 1.5),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: Colors.red, width: 1.5.w),
         ),
       ),
     );

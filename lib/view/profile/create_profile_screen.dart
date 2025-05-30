@@ -11,17 +11,17 @@ class CreateProfileScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: EdgeInsets.only(left: 8.0.w),
           child: CustomBackButton(),
         ),
         actions: [
           LanguageButton(),
         ],
-        leadingWidth: 100,
+        leadingWidth: 100.w,
         title: Text(Lang.of(context).profile,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black,
-              fontSize: 18,
+              fontSize: 18.sp,
               fontWeight: FontWeight.bold,
             )),
         centerTitle: true,
@@ -51,19 +51,19 @@ class CreateProfileScreen extends StatelessWidget {
         child: Builder(builder: (context) {
           return SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
 
                   // Profile picture
                   Center(
                     child: Stack(
                       children: [
                         Container(
-                          width: 100,
-                          height: 100,
+                          width: 100.w,
+                          height: 100.h,
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
                             shape: BoxShape.circle,
@@ -73,27 +73,27 @@ class CreateProfileScreen extends StatelessWidget {
                           bottom: 0,
                           right: 0,
                           child: Container(
-                            width: 32,
-                            height: 32,
+                            width: 32.w,
+                            height: 32.h,
                             decoration: BoxDecoration(
                               color: const Color(0xFF039855),
                               shape: BoxShape.circle,
                               border: Border.all(
                                 color: Colors.white,
-                                width: 2,
+                                width: 2.w,
                               ),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.camera_alt,
                               color: Colors.white,
-                              size: 18,
+                              size: 18.sp,
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
 
                   // Form fields
                   Expanded(
@@ -130,7 +130,7 @@ class CreateProfileScreen extends StatelessWidget {
                               );
                             },
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16.h),
 
                           // Phone field
                           BlocBuilder<ProfileBloc, ProfileState>(
@@ -157,7 +157,7 @@ class CreateProfileScreen extends StatelessWidget {
                               );
                             },
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16.h),
 
                           // Email field
                           BlocBuilder<ProfileBloc, ProfileState>(
@@ -184,7 +184,7 @@ class CreateProfileScreen extends StatelessWidget {
                               );
                             },
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16.h),
 
                           // Street field
                           BlocBuilder<ProfileBloc, ProfileState>(
@@ -210,7 +210,7 @@ class CreateProfileScreen extends StatelessWidget {
                               );
                             },
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16.h),
 
                           // City dropdown
                           BlocBuilder<ProfileBloc, ProfileState>(
@@ -232,7 +232,7 @@ class CreateProfileScreen extends StatelessWidget {
                               );
                             },
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16.h),
 
                           // District dropdown
                           BlocBuilder<ProfileBloc, ProfileState>(
@@ -263,7 +263,7 @@ class CreateProfileScreen extends StatelessWidget {
 
                   // Buttons at the bottom
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    padding: EdgeInsets.symmetric(vertical: 16.0.h),
                     child: Row(
                       children: [
                         // Cancel button
@@ -275,11 +275,11 @@ class CreateProfileScreen extends StatelessWidget {
                             backgroundColor: Colors.white,
                             textColor: Colors.black,
                             borderColor: const Color(0xFF039855),
-                            height: 50,
-                            borderRadius: 8,
+                            height: 50.h,
+                            borderRadius: 8.r,
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        SizedBox(width: 16.w),
 
                         // Save button
                         Expanded(
@@ -298,12 +298,12 @@ class CreateProfileScreen extends StatelessWidget {
                                             .read<ProfileBloc>()
                                             .add(ProfileSubmitted());
                                       },
-                                height: 50,
+                                height: 50.h,
                                 isLoading: state.isSubmitting,
                                 backgroundColor: const Color(0xFF039855),
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
-                                borderRadius: 8,
+                                borderRadius: 8.r,
                               );
                             },
                           ),

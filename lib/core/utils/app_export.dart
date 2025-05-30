@@ -11,6 +11,7 @@ export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export '../l10n/l10n.dart';
 export 'responsive_utils.dart';
+export '../theme/app_theme.dart';
 export '../../view/splash/splash_screen.dart';
 export '../../view/home/home_screen.dart';
 export '../../view/onboarding/onboarding_screen.dart';

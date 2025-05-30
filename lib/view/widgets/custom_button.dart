@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
   final FontWeight fontWeight;
   final EdgeInsetsGeometry? margin;
 
-  const CustomButton({
+  CustomButton({
     Key? key,
     required this.text,
     required this.onPressed,
