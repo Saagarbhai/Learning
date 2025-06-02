@@ -12,6 +12,9 @@ class OtpVerificationBloc
     (_) => FocusNode(),
   );
 
+  // Pin controller for CustomPinBox
+  final TextEditingController pinController = TextEditingController();
+
   // Form key for validation
   final formKey = GlobalKey<FormState>();
 
@@ -59,6 +62,8 @@ class OtpVerificationBloc
 
       // Check if OTP is correct (12345)
       if (event.otp == '12345') {
+        // Clear the pin input on success
+        pinController.clear();
         emit(OtpVerificationSuccess());
       } else {
         emit(const OtpVerificationFailure(
@@ -79,6 +84,9 @@ class OtpVerificationBloc
 
       // Reset form validation state
       add(const OtpChanged(otp: ''));
+
+      // Clear the pin input when resending OTP
+      pinController.clear();
 
       // Show resend OTP success notification
       emit(OtpResendSuccess());
@@ -105,6 +113,7 @@ class OtpVerificationBloc
     for (var node in otpFocusNodes) {
       node.dispose();
     }
+    pinController.dispose();
     return super.close();
   }
 }

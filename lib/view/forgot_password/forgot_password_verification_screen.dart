@@ -63,7 +63,7 @@ class ForgotPasswordVerificationScreen extends StatelessWidget {
                     Lang.of(context).verificationEmailorPhone,
                     style: TextStyle(
                       fontSize: 24.sp,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                       color: const Color(0xFF1A1A1A),
                       fontFamily: 'Poppins',
                     ),
