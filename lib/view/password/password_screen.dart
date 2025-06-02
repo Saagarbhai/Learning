@@ -6,11 +6,7 @@ class PasswordScreen extends StatelessWidget {
   // Method to navigate to profile screen
   void _navigateToProfileScreen(BuildContext context) {
     print('Navigating to CreateProfileScreen');
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const CreateProfileScreen(),
-      ),
-    );
+    Navigator.of(context).pushReplacementNamed(AppConstants.createProfileRoute);
   }
 
   @override
@@ -46,7 +42,7 @@ class PasswordScreen extends StatelessWidget {
                   ),
                 );
                 // Navigate to create profile screen with a small delay to allow the snackbar to be seen
-                Future.delayed(const Duration(milliseconds: 500), () {
+                Future.delayed(const Duration(milliseconds: 200), () {
                   _navigateToProfileScreen(context);
                 });
               }

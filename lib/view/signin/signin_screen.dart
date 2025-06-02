@@ -1,26 +1,15 @@
 import '../../core/utils/app_export.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    // Initialize the bloc when the widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SignInBloc>().add(InitializeSignIn());
+    });
+
     return BlocListener<SignInBloc, SignInState>(
       listener: (context, state) {
         if (state.errorMessage != null) {
@@ -50,7 +39,11 @@ class _SignInScreenState extends State<SignInScreen> {
           backgroundColor: Colors.white,
           elevation: 0,
           title: CustomBackButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              // Dispose the bloc before popping
+              context.read<SignInBloc>().add(DisposeSignIn());
+              Navigator.of(context).pop();
+            },
           ),
         ),
         body: SafeArea(
@@ -67,7 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0.w),
             child: Form(
-              key: _formKey,
+              key: state.formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -86,7 +79,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   // Email/Phone Field
                   CustomTextField(
                     hintText: 'Email or Phone Number',
-                    controller: _emailController,
+                    controller: state.emailController,
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) {
                       context.read<SignInBloc>().add(UpdateEmail(value));
@@ -103,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   // Password Field
                   CustomSignInPasswordField(
                     hintText: 'Enter Your Password',
-                    controller: _passwordController,
+                    controller: state.passwordController,
                     onChanged: (value) {
                       context.read<SignInBloc>().add(UpdatePassword(value));
                     },
@@ -145,11 +138,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     onPressed: state.isLoading
                         ? null
                         : () {
-                            if (_formKey.currentState?.validate() ?? false) {
+                            if (state.formKey.currentState?.validate() ??
+                                false) {
                               context.read<SignInBloc>().add(
                                     SignInWithEmailPasswordPressed(
-                                      email: _emailController.text,
-                                      password: _passwordController.text,
+                                      email: state.emailController.text,
+                                      password: state.passwordController.text,
                                     ),
                                   );
                             }

@@ -51,3 +51,7 @@ class UpdatePassword extends SignInEvent {
 class ToggleSignInPasswordVisibility extends SignInEvent {}
 
 class ResetSignInState extends SignInEvent {}
+
+class InitializeSignIn extends SignInEvent {}
+
+class DisposeSignIn extends SignInEvent {}

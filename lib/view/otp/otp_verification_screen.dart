@@ -20,7 +20,8 @@ class OtpVerificationScreen extends StatelessWidget {
           );
 
           // Navigate to password screen after successful verification
-          Navigator.of(context).pushNamed(AppConstants.passwordRoute);
+          Navigator.of(context)
+              .pushReplacementNamed(AppConstants.passwordRoute);
         } else if (state is OtpVerificationFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

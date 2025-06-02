@@ -9,8 +9,11 @@ class SignInState extends Equatable {
   final bool isSignInSuccess;
   final bool navigateToSignUp;
   final bool navigateToForgotPassword;
+  final GlobalKey<FormState> formKey;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
-  const SignInState({
+  SignInState({
     this.email = '',
     this.password = '',
     this.isPasswordVisible = false,
@@ -19,7 +22,12 @@ class SignInState extends Equatable {
     this.isSignInSuccess = false,
     this.navigateToSignUp = false,
     this.navigateToForgotPassword = false,
-  });
+    GlobalKey<FormState>? formKey,
+    TextEditingController? emailController,
+    TextEditingController? passwordController,
+  })  : formKey = formKey ?? GlobalKey<FormState>(),
+        emailController = emailController ?? TextEditingController(),
+        passwordController = passwordController ?? TextEditingController();
 
   SignInState copyWith({
     String? email,
@@ -41,6 +49,9 @@ class SignInState extends Equatable {
       navigateToSignUp: navigateToSignUp ?? this.navigateToSignUp,
       navigateToForgotPassword:
           navigateToForgotPassword ?? this.navigateToForgotPassword,
+      formKey: formKey,
+      emailController: emailController,
+      passwordController: passwordController,
     );
   }
 
