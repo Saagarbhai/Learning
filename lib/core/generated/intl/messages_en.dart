@@ -40,6 +40,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("Email"),
+    "hintEmailofPhone": MessageLookupByLibrary.simpleMessage(
+      "Email or phone number",
+    ),
     "hintGender": MessageLookupByLibrary.simpleMessage("Gender"),
     "hintPassword": MessageLookupByLibrary.simpleMessage("Enter Your Password"),
     "hintPhone": MessageLookupByLibrary.simpleMessage("Your Mobile Number"),
@@ -91,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "resendAgain": MessageLookupByLibrary.simpleMessage("Resend again"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("Select Language"),
+    "sendOTP": MessageLookupByLibrary.simpleMessage("Send OTP"),
     "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
     "setYourPassword": MessageLookupByLibrary.simpleMessage(
       "Set Your Password",
@@ -122,6 +126,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "street": MessageLookupByLibrary.simpleMessage("Street"),
+    "verificationEmailorPhone": MessageLookupByLibrary.simpleMessage(
+      "Verification email or phone number",
+    ),
     "verificationSuccessful": MessageLookupByLibrary.simpleMessage(
       "Verification successful!",
     ),

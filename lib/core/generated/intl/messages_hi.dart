@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "fullName": MessageLookupByLibrary.simpleMessage("पूरा नाम"),
     "getStarted": MessageLookupByLibrary.simpleMessage("शुरू करें"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("ईमेल"),
+    "hintEmailofPhone": MessageLookupByLibrary.simpleMessage(
+      "ईमेल या फ़ोन नंबर",
+    ),
     "hintGender": MessageLookupByLibrary.simpleMessage("लिंग"),
     "hintPassword": MessageLookupByLibrary.simpleMessage(
       "अपना पासवर्ड दर्ज करें",
@@ -91,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "resendAgain": MessageLookupByLibrary.simpleMessage("फिर से भेजें"),
     "save": MessageLookupByLibrary.simpleMessage("सहेजें"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("भाषा चुनें"),
+    "sendOTP": MessageLookupByLibrary.simpleMessage("ओटीपी भेजें"),
     "setPassword": MessageLookupByLibrary.simpleMessage("पासवर्ड सेट करें"),
     "setYourPassword": MessageLookupByLibrary.simpleMessage(
       "अपना पासवर्ड सेट करें",
@@ -122,6 +126,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "skip": MessageLookupByLibrary.simpleMessage("स्किप करें"),
     "street": MessageLookupByLibrary.simpleMessage("सड़क"),
+    "verificationEmailorPhone": MessageLookupByLibrary.simpleMessage(
+      "सत्यापन ईमेल या फ़ोन नंबर",
+    ),
     "verificationSuccessful": MessageLookupByLibrary.simpleMessage(
       "सत्यापन सफल!",
     ),

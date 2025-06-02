@@ -66,5 +66,8 @@
   "city": "City",
   "district": "District",
   "cancel": "Cancel",
-  "save": "Save"
+  "save": "Save",
+  "verificationEmailorPhone": "Verification email or phone number",
+  "hintEmailofPhone": "Email or phone number",
+  "sendOTP": "Send OTP"
 }

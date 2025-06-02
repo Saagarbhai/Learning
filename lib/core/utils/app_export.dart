@@ -73,3 +73,7 @@ export '../../view/widgets/custom_signin_password_field.dart';
 export 'package:image_picker/image_picker.dart';
 export 'dart:io';
 export 'package:shimmer/shimmer.dart';
+export 'package:learning/viewmodel/forgot_password/forgot_password_bloc.dart';
+export 'package:learning/viewmodel/forgot_password/forgot_password_event.dart';
+export 'package:learning/viewmodel/forgot_password/forgot_password_state.dart';
+export '../../view/forgot_password/forgot_password_verification_screen.dart';

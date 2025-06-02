@@ -64,5 +64,8 @@
   "city": "શહેર",
   "district": "જિલ્લો",
   "cancel": "રદ કરો",
-  "save": "સાચવો"
+  "save": "સાચવો",
+  "verificationEmailorPhone": "ચકાસણી માટે ઇમેલ અથવા ફોન નંબર",
+  "hintEmailofPhone": "ઇમેલ અથવા ફોન નંબર",
+  "sendOTP": "ઓટીપી મોકલો"
   }

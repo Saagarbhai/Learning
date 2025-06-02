@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "fullName": MessageLookupByLibrary.simpleMessage("પૂર્ણ નામ"),
     "getStarted": MessageLookupByLibrary.simpleMessage("શરૂ કરો"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("ઇમેઇલ"),
+    "hintEmailofPhone": MessageLookupByLibrary.simpleMessage(
+      "ઇમેલ અથવા ફોન નંબર",
+    ),
     "hintGender": MessageLookupByLibrary.simpleMessage("લિંગ"),
     "hintPassword": MessageLookupByLibrary.simpleMessage(
       "તમારો પાસવર્ડ દાખલ કરો",
@@ -93,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "resendAgain": MessageLookupByLibrary.simpleMessage("ફરી મોકલો"),
     "save": MessageLookupByLibrary.simpleMessage("સાચવો"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("ભાષા પસંદ કરો"),
+    "sendOTP": MessageLookupByLibrary.simpleMessage("ઓટીપી મોકલો"),
     "setPassword": MessageLookupByLibrary.simpleMessage("પાસવર્ડ સેટ કરો"),
     "setYourPassword": MessageLookupByLibrary.simpleMessage(
       "તમારો પાસવર્ડ સેટ કરો",
@@ -124,6 +128,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "skip": MessageLookupByLibrary.simpleMessage("છોડી દો"),
     "street": MessageLookupByLibrary.simpleMessage("શેરી"),
+    "verificationEmailorPhone": MessageLookupByLibrary.simpleMessage(
+      "ચકાસણી માટે ઇમેલ અથવા ફોન નંબર",
+    ),
     "verificationSuccessful": MessageLookupByLibrary.simpleMessage(
       "ચકાસણી સફળ થઈ!",
     ),

@@ -554,6 +554,31 @@ class Lang {
   String get save {
     return Intl.message('Save', name: 'save', desc: '', args: []);
   }
+
+  /// `Verification email or phone number`
+  String get verificationEmailorPhone {
+    return Intl.message(
+      'Verification email or phone number',
+      name: 'verificationEmailorPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email or phone number`
+  String get hintEmailofPhone {
+    return Intl.message(
+      'Email or phone number',
+      name: 'hintEmailofPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send OTP`
+  String get sendOTP {
+    return Intl.message('Send OTP', name: 'sendOTP', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Lang> {

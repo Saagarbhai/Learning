@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => WelcomeBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => SignInBloc()),
+        BlocProvider(create: (context) => ForgotPasswordBloc()),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {

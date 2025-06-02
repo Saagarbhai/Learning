@@ -21,6 +21,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const PasswordScreen());
       case AppConstants.createProfileRoute:
         return MaterialPageRoute(builder: (_) => const CreateProfileScreen());
+      case AppConstants.forgotPasswordVerificationRoute:
+        return MaterialPageRoute(
+            builder: (_) => const ForgotPasswordVerificationScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

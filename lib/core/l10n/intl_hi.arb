@@ -63,5 +63,8 @@
   "city": "शहर",
   "district": "जिला",
   "cancel": "रद्द करें",
-  "save": "सहेजें"
+  "save": "सहेजें",
+  "verificationEmailorPhone": "सत्यापन ईमेल या फ़ोन नंबर",
+  "hintEmailofPhone": "ईमेल या फ़ोन नंबर",
+  "sendOTP": "ओटीपी भेजें"
 }

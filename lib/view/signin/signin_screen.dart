@@ -28,8 +28,9 @@ class SignInScreen extends StatelessWidget {
         }
 
         if (state.navigateToForgotPassword) {
-          // Navigate to forgot password screen
-          // This would be implemented when you create the forgot password screen
+          // Navigate to forgot password verification screen
+          Navigator.of(context)
+              .pushNamed(AppConstants.forgotPasswordVerificationRoute);
         }
       },
       child: Scaffold(
