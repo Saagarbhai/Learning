@@ -70,3 +70,6 @@ export '../../viewmodel/signin/signin_bloc.dart';
 export '../../viewmodel/signin/signin_event.dart';
 export '../../viewmodel/signin/signin_state.dart';
 export '../../view/widgets/custom_signin_password_field.dart';
+export 'package:image_picker/image_picker.dart';
+export 'dart:io';
+export 'package:shimmer/shimmer.dart';

@@ -10,6 +10,7 @@ class ProfileState extends Equatable {
   final String? profileImagePath;
   final bool isSubmitting;
   final bool isSuccess;
+  final bool isImageLoading;
   final String? errorMessage;
   final List<String> cities;
   final List<String> districts;
@@ -24,6 +25,7 @@ class ProfileState extends Equatable {
     this.profileImagePath,
     this.isSubmitting = false,
     this.isSuccess = false,
+    this.isImageLoading = false,
     this.errorMessage,
     this.cities = const [
       'Ahmedabad',
@@ -66,6 +68,7 @@ class ProfileState extends Equatable {
     String? profileImagePath,
     bool? isSubmitting,
     bool? isSuccess,
+    bool? isImageLoading,
     String? errorMessage,
     List<String>? cities,
     List<String>? districts,
@@ -80,6 +83,7 @@ class ProfileState extends Equatable {
       profileImagePath: profileImagePath ?? this.profileImagePath,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
+      isImageLoading: isImageLoading ?? this.isImageLoading,
       errorMessage: errorMessage,
       cities: cities ?? this.cities,
       districts: districts ?? this.districts,
@@ -97,6 +101,7 @@ class ProfileState extends Equatable {
         profileImagePath,
         isSubmitting,
         isSuccess,
+        isImageLoading,
         errorMessage,
         cities,
         districts,

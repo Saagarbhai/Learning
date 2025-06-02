@@ -56,11 +56,29 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   void _onProfileImageChanged(
-      ProfileImageChanged event, Emitter<ProfileState> emit) {
+      ProfileImageChanged event, Emitter<ProfileState> emit) async {
+    // First set loading state to true
     emit(state.copyWith(
-      profileImagePath: event.imagePath,
+      isImageLoading: true,
       errorMessage: null, // Clear previous error messages
     ));
+
+    try {
+      // Simulate image processing delay (you can remove this in production)
+      await Future.delayed(const Duration(milliseconds: 300));
+
+      // Update state with new image path and set loading to false
+      emit(state.copyWith(
+        profileImagePath: event.imagePath,
+        isImageLoading: false,
+      ));
+    } catch (e) {
+      // Handle any errors
+      emit(state.copyWith(
+        isImageLoading: false,
+        errorMessage: 'Failed to load image',
+      ));
+    }
   }
 
   void _onProfileSubmitted(

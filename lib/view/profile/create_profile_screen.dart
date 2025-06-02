@@ -59,38 +59,99 @@ class CreateProfileScreen extends StatelessWidget {
 
                   // Profile picture
                   Center(
-                    child: Stack(
-                      children: [
-                        Container(
-                          width: 100.w,
-                          height: 100.h,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            width: 32.w,
-                            height: 32.h,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF039855),
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 2.w,
+                    child: BlocBuilder<ProfileBloc, ProfileState>(
+                      buildWhen: (previous, current) =>
+                          previous.profileImagePath != current.profileImagePath,
+                      builder: (context, state) {
+                        return Stack(
+                          children: [
+                            Container(
+                              width: 100.w,
+                              height: 100.h,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                shape: BoxShape.circle,
+                              ),
+                              child: state.isImageLoading
+                                  ? Center(
+                                      child: Shimmer.fromColors(
+                                        baseColor: Colors.grey[300]!,
+                                        highlightColor: Colors.grey[100]!,
+                                        child: Container(
+                                          width: 100.w,
+                                          height: 100.h,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : state.profileImagePath != null
+                                      ? ClipOval(
+                                          child: Image.file(
+                                            File(state.profileImagePath!),
+                                            width: 100.w,
+                                            height: 100.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      : null,
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: InkWell(
+                                onTap: state.isImageLoading
+                                    ? null
+                                    : () async {
+                                        final ImagePicker picker =
+                                            ImagePicker();
+                                        final XFile? image =
+                                            await picker.pickImage(
+                                          source: ImageSource.gallery,
+                                          imageQuality: 80,
+                                        );
+
+                                        if (image != null) {
+                                          context.read<ProfileBloc>().add(
+                                              ProfileImageChanged(image.path));
+                                        }
+                                      },
+                                child: Container(
+                                  width: 32.w,
+                                  height: 32.h,
+                                  decoration: BoxDecoration(
+                                    color: state.isImageLoading
+                                        ? Colors.grey
+                                        : const Color(0xFF039855),
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 2.w,
+                                    ),
+                                  ),
+                                  child: state.isImageLoading
+                                      ? SizedBox(
+                                          width: 10.w,
+                                          height: 10.h,
+                                          child:
+                                              const CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: 2,
+                                          ),
+                                        )
+                                      : Icon(
+                                          Icons.image,
+                                          color: Colors.white,
+                                          size: 18.sp,
+                                        ),
+                                ),
                               ),
                             ),
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: Colors.white,
-                              size: 18.sp,
-                            ),
-                          ),
-                        ),
-                      ],
+                          ],
+                        );
+                      },
                     ),
                   ),
                   SizedBox(height: 24.h),
