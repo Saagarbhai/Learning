@@ -42,9 +42,8 @@ class MyApp extends StatelessWidget {
                 ],
                 localizationsDelegates: localizationDelegates,
                 onGenerateRoute: AppRouter.generateRoute,
-                initialRoute: AppConstants.splashRoute,
+                initialRoute: AppConstants.onboardingRoute,
                 debugShowCheckedModeBanner: false,
-                home: const SplashScreen(),
               );
             },
           );

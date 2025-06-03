@@ -28,6 +28,9 @@ class SignUpScreen extends StatelessWidget {
             ),
           );
         }
+        if (state is NavigateToSignIn) {
+          Navigator.of(context).pushNamed(AppConstants.signInRoute);
+        }
       },
       child: Scaffold(
         appBar: AppBar(
@@ -143,7 +146,6 @@ class SignUpForm extends StatelessWidget {
                   if (state is SignUpFormValidationState) {
                     signUpBloc.selectedGender = state.gender;
                   }
-
                   return CustomDropdownField(
                     hintText: Lang.of(context).hintGender,
                     items: signUpBloc.genders,
