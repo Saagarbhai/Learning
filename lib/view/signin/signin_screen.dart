@@ -18,6 +18,11 @@ class SignInScreen extends StatelessWidget {
           );
         }
 
+        if (state.shouldDisposeControllers) {
+          // If controllers should be disposed, actually dispose them
+          context.read<SignInBloc>().add(DisposeSignIn());
+        }
+
         if (state.isSignInSuccess) {
           // Navigate to home screen or dashboard
           Navigator.of(context).pushReplacementNamed(AppConstants.homeRoute);
@@ -164,6 +169,7 @@ class SignInScreen extends StatelessWidget {
                     onPressed: () {
                       context.read<SignInBloc>().add(SignInWithGmailPressed());
                     },
+                    isDisabled: true,
                   ),
                   SocialSignButton.facebook(
                     text: 'Sign in with Facebook',
@@ -172,12 +178,14 @@ class SignInScreen extends StatelessWidget {
                           .read<SignInBloc>()
                           .add(SignInWithFacebookPressed());
                     },
+                    isDisabled: true,
                   ),
                   SocialSignButton.apple(
                     text: 'Sign in with Apple',
                     onPressed: () {
                       context.read<SignInBloc>().add(SignInWithApplePressed());
                     },
+                    isDisabled: true,
                   ),
 
                   // Don't have an account

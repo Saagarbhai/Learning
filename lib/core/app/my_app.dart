@@ -7,7 +7,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SplashBloc()),
         BlocProvider(
           create: (context) => LanguageBloc()..add(const LoadLanguage()),
         ),

@@ -33,15 +33,26 @@ class ApiService {
   // Login with email and password
   Future<User?> login(String email, String password) async {
     try {
+      // First try to fetch a specific user by email
       final usersResponse = await fetchUsers();
 
-      final user = usersResponse.users.firstWhere(
-        (user) => user.email == email && user.password == password,
-        orElse: () => throw Exception('Invalid credentials'),
-      );
+      // Print the first user for debugging
+      if (usersResponse.users.isNotEmpty) {
+        print(
+            'First user: ${usersResponse.users[0].email}, ${usersResponse.users[0].password}');
+      }
 
-      return user;
+      // Check if any user matches the provided email and password
+      for (var user in usersResponse.users) {
+        if (user.email == email && user.password == password) {
+          return user;
+        }
+      }
+
+      // If no match is found, throw an exception
+      throw Exception('Invalid credentials');
     } catch (e) {
+      print('Login error: $e');
       throw Exception('Login failed: $e');
     }
   }

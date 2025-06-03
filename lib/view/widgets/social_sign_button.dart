@@ -2,21 +2,24 @@ import 'package:learning/core/utils/app_export.dart';
 
 class SocialSignButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget icon;
+  final bool isDisabled;
 
   const SocialSignButton({
     Key? key,
     required this.text,
-    required this.onPressed,
+    this.onPressed,
     required this.icon,
+    this.isDisabled = true, // Default to disabled
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomButton(
       text: text,
-      onPressed: onPressed,
+      onPressed:
+          isDisabled ? null : onPressed, // Disable button if isDisabled is true
       isPrimary: false,
       prefixIcon: icon,
       width: double.infinity,
@@ -33,10 +36,12 @@ class SocialSignButton extends StatelessWidget {
   factory SocialSignButton.gmail({
     required VoidCallback onPressed,
     required String text,
+    bool isDisabled = true, // Default to disabled
   }) {
     return SocialSignButton(
       text: text,
       onPressed: onPressed,
+      isDisabled: isDisabled,
       icon: SvgPicture.asset(
         Assets.images.socialSignImage.gmail.path,
         width: 24.w,
@@ -48,10 +53,12 @@ class SocialSignButton extends StatelessWidget {
   factory SocialSignButton.facebook({
     required VoidCallback onPressed,
     required String text,
+    bool isDisabled = true, // Default to disabled
   }) {
     return SocialSignButton(
       text: text,
       onPressed: onPressed,
+      isDisabled: isDisabled,
       icon: SvgPicture.asset(
         Assets.images.socialSignImage.facebook.path,
         width: 24.w,
@@ -63,10 +70,12 @@ class SocialSignButton extends StatelessWidget {
   factory SocialSignButton.apple({
     required VoidCallback onPressed,
     required String text,
+    bool isDisabled = true, // Default to disabled
   }) {
     return SocialSignButton(
       text: text,
       onPressed: onPressed,
+      isDisabled: isDisabled,
       icon: SvgPicture.asset(
         Assets.images.socialSignImage.apple.path,
         width: 24.w,

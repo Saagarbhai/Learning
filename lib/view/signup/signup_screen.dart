@@ -282,6 +282,7 @@ class SignUpForm extends StatelessWidget {
                 onPressed: () {
                   context.read<SignUpBloc>().add(SignUpWithGmail());
                 },
+                isDisabled: true,
               ),
 
               SocialSignButton.facebook(
@@ -289,6 +290,7 @@ class SignUpForm extends StatelessWidget {
                 onPressed: () {
                   context.read<SignUpBloc>().add(SignUpWithFacebook());
                 },
+                isDisabled: true,
               ),
 
               SocialSignButton.apple(
@@ -296,6 +298,7 @@ class SignUpForm extends StatelessWidget {
                 onPressed: () {
                   context.read<SignUpBloc>().add(SignUpWithApple());
                 },
+                isDisabled: true,
               ),
 
               // Already have an account

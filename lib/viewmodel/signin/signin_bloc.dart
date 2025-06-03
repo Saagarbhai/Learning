@@ -1,6 +1,8 @@
 import '../../core/utils/app_export.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
+  final ApiService _apiService = ApiService();
+
   SignInBloc() : super(SignInState()) {
     on<UpdateEmail>(_onUpdateEmail);
     on<UpdatePassword>(_onUpdatePassword);
@@ -33,10 +35,19 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   void _onDisposeSignIn(DisposeSignIn event, Emitter<SignInState> emit) {
-    state.emailController.removeListener(_emailControllerListener);
-    state.passwordController.removeListener(_passwordControllerListener);
-    state.emailController.dispose();
-    state.passwordController.dispose();
+    // Only remove listeners and dispose if controllers are not already disposed
+    if (!state.shouldDisposeControllers) {
+      state.emailController.removeListener(_emailControllerListener);
+      state.passwordController.removeListener(_passwordControllerListener);
+
+      // Only dispose if they haven't been disposed already
+      if (state.emailController.hasListeners) {
+        state.emailController.dispose();
+      }
+      if (state.passwordController.hasListeners) {
+        state.passwordController.dispose();
+      }
+    }
   }
 
   void _onUpdateEmail(UpdateEmail event, Emitter<SignInState> emit) {
@@ -57,13 +68,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
-      // Simulate API call with delay
-      await Future.delayed(const Duration(seconds: 2));
+      // For other users, try the API
+      final user = await _apiService.login(event.email, event.password);
 
-      // For demo purposes, just check if email contains @ and password is not empty
-      if (event.email.contains('@') && event.password.isNotEmpty) {
-        emit(state.copyWith(isLoading: false, isSignInSuccess: true));
+      // If login is successful, the login method will return a user
+      if (user != null) {
+        // Mark controllers as ready to dispose
+        emit(state.copyWith(
+            isLoading: false,
+            isSignInSuccess: true,
+            shouldDisposeControllers: true));
       } else {
+        // This shouldn't happen as the login method throws an exception on failure
         emit(state.copyWith(
           isLoading: false,
           errorMessage: 'Invalid email or password',
@@ -72,7 +88,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     } catch (e) {
       emit(state.copyWith(
         isLoading: false,
-        errorMessage: e.toString(),
+        errorMessage: 'Login failed: Invalid email or password',
       ));
     }
   }
@@ -84,7 +100,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       // Simulate API call with delay
       await Future.delayed(const Duration(seconds: 2));
-      emit(state.copyWith(isLoading: false, isSignInSuccess: true));
+      // Mark controllers as ready to dispose
+      emit(state.copyWith(
+          isLoading: false,
+          isSignInSuccess: true,
+          shouldDisposeControllers: true));
     } catch (e) {
       emit(state.copyWith(
         isLoading: false,
@@ -100,7 +120,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       // Simulate API call with delay
       await Future.delayed(const Duration(seconds: 2));
-      emit(state.copyWith(isLoading: false, isSignInSuccess: true));
+      // Mark controllers as ready to dispose
+      emit(state.copyWith(
+          isLoading: false,
+          isSignInSuccess: true,
+          shouldDisposeControllers: true));
     } catch (e) {
       emit(state.copyWith(
         isLoading: false,
@@ -116,7 +140,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       // Simulate API call with delay
       await Future.delayed(const Duration(seconds: 2));
-      emit(state.copyWith(isLoading: false, isSignInSuccess: true));
+      // Mark controllers as ready to dispose
+      emit(state.copyWith(
+          isLoading: false,
+          isSignInSuccess: true,
+          shouldDisposeControllers: true));
     } catch (e) {
       emit(state.copyWith(
         isLoading: false,
@@ -127,12 +155,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   void _onForgotPasswordPressed(
       ForgotPasswordPressed event, Emitter<SignInState> emit) {
-    emit(state.copyWith(navigateToForgotPassword: true));
+    // Mark controllers as ready to dispose
+    emit(state.copyWith(
+        navigateToForgotPassword: true, shouldDisposeControllers: true));
   }
 
   void _onNavigateToSignUpPressed(
       NavigateToSignUpPressed event, Emitter<SignInState> emit) {
-    emit(state.copyWith(navigateToSignUp: true));
+    // Mark controllers as ready to dispose
+    emit(
+        state.copyWith(navigateToSignUp: true, shouldDisposeControllers: true));
   }
 
   void _onResetSignInState(ResetSignInState event, Emitter<SignInState> emit) {
@@ -141,10 +173,22 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   @override
   Future<void> close() {
-    state.emailController.removeListener(_emailControllerListener);
-    state.passwordController.removeListener(_passwordControllerListener);
-    state.emailController.dispose();
-    state.passwordController.dispose();
+    // Only remove listeners and dispose if not already disposed
+    if (!state.shouldDisposeControllers) {
+      try {
+        // Check if controllers are still valid before disposing
+        if (state.emailController.hasListeners) {
+          state.emailController.removeListener(_emailControllerListener);
+          state.emailController.dispose();
+        }
+        if (state.passwordController.hasListeners) {
+          state.passwordController.removeListener(_passwordControllerListener);
+          state.passwordController.dispose();
+        }
+      } catch (e) {
+        // Ignore errors if controllers are already disposed
+      }
+    }
     return super.close();
   }
 }

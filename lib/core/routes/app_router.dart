@@ -3,8 +3,6 @@ import '../utils/app_export.dart';
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppConstants.splashRoute:
-        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case AppConstants.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case AppConstants.onboardingRoute:
@@ -25,13 +23,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => const ForgotPasswordVerificationScreen());
       default:
-        return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => const WelcomeScreen());
     }
   }
 }
