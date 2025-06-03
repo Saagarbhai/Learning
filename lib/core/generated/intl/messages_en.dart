@@ -35,8 +35,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Didn\'t receive code? ",
     ),
     "district": MessageLookupByLibrary.simpleMessage("District"),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Do not have an account?",
+    ),
     "enterOtpCode": MessageLookupByLibrary.simpleMessage("Enter your OTP code"),
     "female": MessageLookupByLibrary.simpleMessage("Female"),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password?"),
     "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("Email"),

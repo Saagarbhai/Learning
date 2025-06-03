@@ -18,11 +18,6 @@ class SignInScreen extends StatelessWidget {
           );
         }
 
-        if (state.shouldDisposeControllers) {
-          // If controllers should be disposed, actually dispose them
-          context.read<SignInBloc>().add(DisposeSignIn());
-        }
-
         if (state.isSignInSuccess) {
           // Navigate to home screen or dashboard
           Navigator.of(context).pushReplacementNamed(AppConstants.homeRoute);
@@ -44,6 +39,9 @@ class SignInScreen extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0,
+          actions: [
+            LanguageButton(),
+          ],
           title: CustomBackButton(
             onPressed: () {
               // Dispose the bloc before popping
@@ -66,14 +64,14 @@ class SignInScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0.w),
             child: Form(
-              key: state.formKey,
+              key: context.read<SignInBloc>().formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 16.h),
                   // Title
                   Text(
-                    'Sign in with your email or\nphone number',
+                    Lang.of(context).verificationEmailorPhone,
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w600,
@@ -84,7 +82,7 @@ class SignInScreen extends StatelessWidget {
 
                   // Email/Phone Field
                   CustomTextField(
-                    hintText: 'Email or Phone Number',
+                    hintText: Lang.of(context).hintEmailofPhone,
                     controller: state.emailController,
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) {
@@ -101,7 +99,7 @@ class SignInScreen extends StatelessWidget {
 
                   // Password Field
                   CustomSignInPasswordField(
-                    hintText: 'Enter Your Password',
+                    hintText: Lang.of(context).hintPassword,
                     controller: state.passwordController,
                     onChanged: (value) {
                       context.read<SignInBloc>().add(UpdatePassword(value));
@@ -126,8 +124,8 @@ class SignInScreen extends StatelessWidget {
                         minimumSize: const Size(0, 36),
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
-                      child: const Text(
-                        'Forgot password?',
+                      child: Text(
+                        Lang.of(context).forgotPassword,
                         style: TextStyle(
                           color: Color(0xFFFF3B30),
                           fontSize: 14,
@@ -140,11 +138,15 @@ class SignInScreen extends StatelessWidget {
 
                   // Sign In Button
                   CustomButton(
-                    text: 'Sign In',
+                    text: Lang.of(context).signIn,
                     onPressed: state.isLoading
                         ? null
                         : () {
-                            if (state.formKey.currentState?.validate() ??
+                            if (context
+                                    .read<SignInBloc>()
+                                    .formKey
+                                    .currentState
+                                    ?.validate() ??
                                 false) {
                               context.read<SignInBloc>().add(
                                     SignInWithEmailPasswordPressed(
@@ -165,14 +167,14 @@ class SignInScreen extends StatelessWidget {
 
                   // Social Sign In Buttons
                   SocialSignButton.gmail(
-                    text: 'Sign in with Gmail',
+                    text: Lang.of(context).signupwithGmail,
                     onPressed: () {
                       context.read<SignInBloc>().add(SignInWithGmailPressed());
                     },
                     isDisabled: true,
                   ),
                   SocialSignButton.facebook(
-                    text: 'Sign in with Facebook',
+                    text: Lang.of(context).signupwithFaceBook,
                     onPressed: () {
                       context
                           .read<SignInBloc>()
@@ -181,7 +183,7 @@ class SignInScreen extends StatelessWidget {
                     isDisabled: true,
                   ),
                   SocialSignButton.apple(
-                    text: 'Sign in with Apple',
+                    text: Lang.of(context).signupwithApple,
                     onPressed: () {
                       context.read<SignInBloc>().add(SignInWithApplePressed());
                     },
@@ -195,7 +197,7 @@ class SignInScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Don\'t have an account? ',
+                          Lang.of(context).dontHaveAccount,
                           style: TextStyle(
                             color: Color(0xFF666666),
                             fontSize: 14.sp,
@@ -208,7 +210,7 @@ class SignInScreen extends StatelessWidget {
                                 .add(NavigateToSignUpPressed());
                           },
                           child: Text(
-                            'Sign Up',
+                            Lang.of(context).signupButton,
                             style: TextStyle(
                               color: Color(0xFF00A86B),
                               fontSize: 14.sp,

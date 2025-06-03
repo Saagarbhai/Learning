@@ -2,8 +2,13 @@ import '../../core/utils/app_export.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final ApiService _apiService = ApiService();
+  final formKey = KeysManager.signInFormKey;
 
-  SignInBloc() : super(SignInState()) {
+  // Move controllers to bloc level
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  SignInBloc() : super(SignInState.initial()) {
     on<UpdateEmail>(_onUpdateEmail);
     on<UpdatePassword>(_onUpdatePassword);
     on<ToggleSignInPasswordVisibility>(_onTogglePasswordVisibility);
@@ -18,36 +23,31 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<DisposeSignIn>(_onDisposeSignIn);
 
     // Initialize controllers
-    state.emailController.addListener(_emailControllerListener);
-    state.passwordController.addListener(_passwordControllerListener);
+    emailController.addListener(_emailControllerListener);
+    passwordController.addListener(_passwordControllerListener);
   }
 
   void _emailControllerListener() {
-    add(UpdateEmail(state.emailController.text));
+    add(UpdateEmail(emailController.text));
   }
 
   void _passwordControllerListener() {
-    add(UpdatePassword(state.passwordController.text));
+    add(UpdatePassword(passwordController.text));
   }
 
   void _onInitializeSignIn(InitializeSignIn event, Emitter<SignInState> emit) {
-    // No need to do anything as controllers are already initialized in constructor
+    emit(SignInState(
+      emailController: emailController,
+      passwordController: passwordController,
+    ));
   }
 
   void _onDisposeSignIn(DisposeSignIn event, Emitter<SignInState> emit) {
-    // Only remove listeners and dispose if controllers are not already disposed
-    if (!state.shouldDisposeControllers) {
-      state.emailController.removeListener(_emailControllerListener);
-      state.passwordController.removeListener(_passwordControllerListener);
-
-      // Only dispose if they haven't been disposed already
-      if (state.emailController.hasListeners) {
-        state.emailController.dispose();
-      }
-      if (state.passwordController.hasListeners) {
-        state.passwordController.dispose();
-      }
-    }
+    // Don't dispose controllers here, they will be disposed in close()
+    emit(SignInState(
+      emailController: emailController,
+      passwordController: passwordController,
+    ));
   }
 
   void _onUpdateEmail(UpdateEmail event, Emitter<SignInState> emit) {
@@ -73,11 +73,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
       // If login is successful, the login method will return a user
       if (user != null) {
-        // Mark controllers as ready to dispose
-        emit(state.copyWith(
-            isLoading: false,
-            isSignInSuccess: true,
-            shouldDisposeControllers: true));
+        emit(state.copyWith(isLoading: false, isSignInSuccess: true));
       } else {
         // This shouldn't happen as the login method throws an exception on failure
         emit(state.copyWith(
@@ -100,11 +96,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       // Simulate API call with delay
       await Future.delayed(const Duration(seconds: 2));
-      // Mark controllers as ready to dispose
-      emit(state.copyWith(
-          isLoading: false,
-          isSignInSuccess: true,
-          shouldDisposeControllers: true));
+      emit(state.copyWith(isLoading: false, isSignInSuccess: true));
     } catch (e) {
       emit(state.copyWith(
         isLoading: false,
@@ -120,11 +112,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       // Simulate API call with delay
       await Future.delayed(const Duration(seconds: 2));
-      // Mark controllers as ready to dispose
-      emit(state.copyWith(
-          isLoading: false,
-          isSignInSuccess: true,
-          shouldDisposeControllers: true));
+      emit(state.copyWith(isLoading: false, isSignInSuccess: true));
     } catch (e) {
       emit(state.copyWith(
         isLoading: false,
@@ -140,11 +128,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       // Simulate API call with delay
       await Future.delayed(const Duration(seconds: 2));
-      // Mark controllers as ready to dispose
-      emit(state.copyWith(
-          isLoading: false,
-          isSignInSuccess: true,
-          shouldDisposeControllers: true));
+      emit(state.copyWith(isLoading: false, isSignInSuccess: true));
     } catch (e) {
       emit(state.copyWith(
         isLoading: false,
@@ -155,40 +139,28 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   void _onForgotPasswordPressed(
       ForgotPasswordPressed event, Emitter<SignInState> emit) {
-    // Mark controllers as ready to dispose
-    emit(state.copyWith(
-        navigateToForgotPassword: true, shouldDisposeControllers: true));
+    emit(state.copyWith(navigateToForgotPassword: true));
   }
 
   void _onNavigateToSignUpPressed(
       NavigateToSignUpPressed event, Emitter<SignInState> emit) {
-    // Mark controllers as ready to dispose
-    emit(
-        state.copyWith(navigateToSignUp: true, shouldDisposeControllers: true));
+    emit(state.copyWith(navigateToSignUp: true));
   }
 
   void _onResetSignInState(ResetSignInState event, Emitter<SignInState> emit) {
-    emit(SignInState());
+    emit(SignInState.initial());
   }
 
   @override
   Future<void> close() {
-    // Only remove listeners and dispose if not already disposed
-    if (!state.shouldDisposeControllers) {
-      try {
-        // Check if controllers are still valid before disposing
-        if (state.emailController.hasListeners) {
-          state.emailController.removeListener(_emailControllerListener);
-          state.emailController.dispose();
-        }
-        if (state.passwordController.hasListeners) {
-          state.passwordController.removeListener(_passwordControllerListener);
-          state.passwordController.dispose();
-        }
-      } catch (e) {
-        // Ignore errors if controllers are already disposed
-      }
-    }
+    // Remove listeners
+    emailController.removeListener(_emailControllerListener);
+    passwordController.removeListener(_passwordControllerListener);
+
+    // Dispose controllers
+    emailController.dispose();
+    passwordController.dispose();
+
     return super.close();
   }
 }

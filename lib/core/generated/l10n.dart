@@ -579,6 +579,26 @@ class Lang {
   String get sendOTP {
     return Intl.message('Send OTP', name: 'sendOTP', desc: '', args: []);
   }
+
+  /// `Forgot password?`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password?',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do not have an account?`
+  String get dontHaveAccount {
+    return Intl.message(
+      'Do not have an account?',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Lang> {

@@ -6,29 +6,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<WelcomeBloc, WelcomeState>(
-      listener: (context, state) {
-        if (state is NavigateToCreateAccount) {
-          // Always navigate to a fresh instance of SignUpScreen
-          Navigator.of(context)
-              .pushNamed(
-            AppConstants.signUpRoute,
-          )
-              .then((_) {
-            // Reset the bloc state when returning from sign-up screen
-            context.read<WelcomeBloc>().add(ResetWelcomeState());
-          });
-        } else if (state is NavigateToLogin) {
-          // Navigate to login screen
-          Navigator.of(context)
-              .pushNamed(
-            AppConstants.signInRoute,
-          )
-              .then((_) {
-            // Reset the bloc state when returning from sign-in screen
-            context.read<WelcomeBloc>().add(ResetWelcomeState());
-          });
-        }
-      },
+      listener: (context, state) {},
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -89,9 +67,9 @@ class WelcomeScreen extends StatelessWidget {
                         text: Lang.of(context).welcomebutton1,
                         width: double.infinity,
                         onPressed: () {
-                          context
-                              .read<WelcomeBloc>()
-                              .add(CreateAccountPressed());
+                          Navigator.of(context).pushNamed(
+                            AppConstants.signUpRoute,
+                          );
                         },
                       ),
                       SizedBox(height: 16.h),
@@ -102,7 +80,10 @@ class WelcomeScreen extends StatelessWidget {
                         width: double.infinity,
                         isPrimary: false,
                         onPressed: () {
-                          context.read<WelcomeBloc>().add(LogInPressed());
+                          Navigator.of(context).pushNamed(
+                            AppConstants.signInRoute,
+                          );
+                          // context.read<WelcomeBloc>().add(LogInPressed());
                         },
                       ),
                       SizedBox(height: 16.h),

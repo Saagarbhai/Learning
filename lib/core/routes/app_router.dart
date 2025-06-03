@@ -23,7 +23,13 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => const ForgotPasswordVerificationScreen());
       default:
-        return MaterialPageRoute(builder: (_) => const WelcomeScreen());
+        return MaterialPageRoute(
+          builder: (_) => Scaffold(
+            body: Center(
+              child: Text('No route defined for ${settings.name}'),
+            ),
+          ),
+        );
     }
   }
 }

@@ -2,6 +2,9 @@ import 'package:learning/core/utils/app_export.dart';
 
 class ForgotPasswordBloc
     extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
+  // Use the key from KeysManager
+  final formKey = KeysManager.forgotPasswordFormKey;
+
   ForgotPasswordBloc() : super(ForgotPasswordState()) {
     on<VerificationInputChanged>(_onVerificationInputChanged);
     on<SendOtpPressed>(_onSendOtpPressed);

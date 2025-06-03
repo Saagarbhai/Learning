@@ -67,5 +67,7 @@
   "save": "સાચવો",
   "verificationEmailorPhone": "ચકાસણી માટે ઇમેલ અથવા ફોન નંબર",
   "hintEmailofPhone": "ઇમેલ અથવા ફોન નંબર",
-  "sendOTP": "ઓટીપી મોકલો"
+  "sendOTP": "ઓટીપી મોકલો",
+  "forgotPassword": "પાસવર્ડ ભૂલી ગયા?",
+  "dontHaveAccount": "શું તમારું એકાઉન્ટ નથી?"  
   }

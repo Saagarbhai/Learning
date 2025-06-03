@@ -1,7 +1,10 @@
 import '../../core/utils/app_export.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc() : super(const ProfileState()) {
+  // Use the key from KeysManager
+  final formKey = KeysManager.profileFormKey;
+
+  ProfileBloc() : super(ProfileState()) {
     on<NameChanged>(_onNameChanged);
     on<PhoneChanged>(_onPhoneChanged);
     on<EmailChanged>(_onEmailChanged);

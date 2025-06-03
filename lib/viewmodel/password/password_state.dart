@@ -11,7 +11,7 @@ class PasswordState extends Equatable {
   final bool isPasswordVisible;
   final bool isConfirmPasswordVisible;
 
-  const PasswordState({
+  PasswordState({
     this.password = '',
     this.confirmPassword = '',
     this.isPasswordValid = false,

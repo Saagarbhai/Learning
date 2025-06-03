@@ -9,7 +9,6 @@ class SignInState extends Equatable {
   final bool isSignInSuccess;
   final bool navigateToSignUp;
   final bool navigateToForgotPassword;
-  final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
 
@@ -22,12 +21,16 @@ class SignInState extends Equatable {
     this.isSignInSuccess = false,
     this.navigateToSignUp = false,
     this.navigateToForgotPassword = false,
-    GlobalKey<FormState>? formKey,
-    TextEditingController? emailController,
-    TextEditingController? passwordController,
-  })  : formKey = formKey ?? GlobalKey<FormState>(),
-        emailController = emailController ?? TextEditingController(),
-        passwordController = passwordController ?? TextEditingController();
+    required this.emailController,
+    required this.passwordController,
+  });
+
+  factory SignInState.initial() {
+    return SignInState(
+      emailController: TextEditingController(),
+      passwordController: TextEditingController(),
+    );
+  }
 
   SignInState copyWith({
     String? email,
@@ -49,7 +52,6 @@ class SignInState extends Equatable {
       navigateToSignUp: navigateToSignUp ?? this.navigateToSignUp,
       navigateToForgotPassword:
           navigateToForgotPassword ?? this.navigateToForgotPassword,
-      formKey: formKey,
       emailController: emailController,
       passwordController: passwordController,
     );

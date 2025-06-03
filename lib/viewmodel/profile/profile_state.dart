@@ -15,7 +15,7 @@ class ProfileState extends Equatable {
   final List<String> cities;
   final List<String> districts;
 
-  const ProfileState({
+  ProfileState({
     this.name = '',
     this.phone = '',
     this.email = '',

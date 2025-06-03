@@ -17,11 +17,6 @@ class ForgotPasswordVerificationScreen extends StatelessWidget {
             SnackBar(content: Text(state.errorMessage!)),
           );
         }
-
-        if (state.isOtpSent) {
-          // Navigate to OTP verification screen
-          Navigator.of(context).pushNamed(AppConstants.otpVerificationRoute);
-        }
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -31,8 +26,6 @@ class ForgotPasswordVerificationScreen extends StatelessWidget {
           elevation: 0,
           title: CustomBackButton(
             onPressed: () {
-              // Dispose the bloc before popping
-              context.read<ForgotPasswordBloc>().add(DisposeForgotPassword());
               Navigator.of(context).pop();
             },
           ),
@@ -52,7 +45,7 @@ class ForgotPasswordVerificationScreen extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Form(
-              key: state.formKey,
+              key: context.read<ForgotPasswordBloc>().formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -95,9 +88,8 @@ class ForgotPasswordVerificationScreen extends StatelessWidget {
                     text: Lang.of(context).sendOTP,
                     onPressed: state.isInputValid
                         ? () {
-                            context
-                                .read<ForgotPasswordBloc>()
-                                .add(SendOtpPressed());
+                            Navigator.of(context)
+                                .pushNamed(AppConstants.otpVerificationRoute);
                           }
                         : null,
                     width: double.infinity,

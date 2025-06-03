@@ -158,167 +158,179 @@ class CreateProfileScreen extends StatelessWidget {
 
                   // Form fields
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          // Full Name field
-                          BlocBuilder<ProfileBloc, ProfileState>(
-                            buildWhen: (previous, current) =>
-                                previous.name != current.name,
-                            builder: (context, state) {
-                              final nameController =
-                                  TextEditingController(text: state.name);
-                              nameController.selection =
-                                  TextSelection.fromPosition(
-                                TextPosition(
-                                    offset: nameController.text.length),
-                              );
-                              return CustomTextField(
-                                hintText: Lang.of(context).fullName,
-                                controller: nameController,
-                                textInputAction: TextInputAction.next,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Please enter your name";
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) {
-                                  context
-                                      .read<ProfileBloc>()
-                                      .add(NameChanged(value));
-                                },
-                              );
-                            },
-                          ),
-                          SizedBox(height: 16.h),
+                    child: BlocBuilder<ProfileBloc, ProfileState>(
+                      builder: (context, state) {
+                        return Form(
+                          key: context.read<ProfileBloc>().formKey,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                // Full Name field
+                                BlocBuilder<ProfileBloc, ProfileState>(
+                                  buildWhen: (previous, current) =>
+                                      previous.name != current.name,
+                                  builder: (context, state) {
+                                    final nameController =
+                                        TextEditingController(text: state.name);
+                                    nameController.selection =
+                                        TextSelection.fromPosition(
+                                      TextPosition(
+                                          offset: nameController.text.length),
+                                    );
+                                    return CustomTextField(
+                                      hintText: Lang.of(context).fullName,
+                                      controller: nameController,
+                                      textInputAction: TextInputAction.next,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Please enter your name";
+                                        }
+                                        return null;
+                                      },
+                                      onChanged: (value) {
+                                        context
+                                            .read<ProfileBloc>()
+                                            .add(NameChanged(value));
+                                      },
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 16.h),
 
-                          // Phone field
-                          BlocBuilder<ProfileBloc, ProfileState>(
-                            buildWhen: (previous, current) =>
-                                previous.phone != current.phone,
-                            builder: (context, state) {
-                              final phoneController =
-                                  TextEditingController(text: state.phone);
-                              phoneController.selection =
-                                  TextSelection.fromPosition(
-                                TextPosition(
-                                    offset: phoneController.text.length),
-                              );
-                              return CustomPhoneField(
-                                controller: phoneController,
-                                hintText: Lang.of(context).hintPhone,
-                                countryCode: '+91',
-                                textInputAction: TextInputAction.next,
-                                onChanged: (value) {
-                                  context
-                                      .read<ProfileBloc>()
-                                      .add(PhoneChanged(value));
-                                },
-                              );
-                            },
-                          ),
-                          SizedBox(height: 16.h),
+                                // Phone field
+                                BlocBuilder<ProfileBloc, ProfileState>(
+                                  buildWhen: (previous, current) =>
+                                      previous.phone != current.phone,
+                                  builder: (context, state) {
+                                    final phoneController =
+                                        TextEditingController(
+                                            text: state.phone);
+                                    phoneController.selection =
+                                        TextSelection.fromPosition(
+                                      TextPosition(
+                                          offset: phoneController.text.length),
+                                    );
+                                    return CustomPhoneField(
+                                      controller: phoneController,
+                                      hintText: Lang.of(context).hintPhone,
+                                      countryCode: '+91',
+                                      textInputAction: TextInputAction.next,
+                                      onChanged: (value) {
+                                        context
+                                            .read<ProfileBloc>()
+                                            .add(PhoneChanged(value));
+                                      },
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 16.h),
 
-                          // Email field
-                          BlocBuilder<ProfileBloc, ProfileState>(
-                            buildWhen: (previous, current) =>
-                                previous.email != current.email,
-                            builder: (context, state) {
-                              final emailController =
-                                  TextEditingController(text: state.email);
-                              emailController.selection =
-                                  TextSelection.fromPosition(
-                                TextPosition(
-                                    offset: emailController.text.length),
-                              );
-                              return CustomTextField(
-                                hintText: Lang.of(context).hintEmail,
-                                controller: emailController,
-                                keyboardType: TextInputType.emailAddress,
-                                textInputAction: TextInputAction.next,
-                                onChanged: (value) {
-                                  context
-                                      .read<ProfileBloc>()
-                                      .add(EmailChanged(value));
-                                },
-                              );
-                            },
-                          ),
-                          SizedBox(height: 16.h),
+                                // Email field
+                                BlocBuilder<ProfileBloc, ProfileState>(
+                                  buildWhen: (previous, current) =>
+                                      previous.email != current.email,
+                                  builder: (context, state) {
+                                    final emailController =
+                                        TextEditingController(
+                                            text: state.email);
+                                    emailController.selection =
+                                        TextSelection.fromPosition(
+                                      TextPosition(
+                                          offset: emailController.text.length),
+                                    );
+                                    return CustomTextField(
+                                      hintText: Lang.of(context).hintEmail,
+                                      controller: emailController,
+                                      keyboardType: TextInputType.emailAddress,
+                                      textInputAction: TextInputAction.next,
+                                      onChanged: (value) {
+                                        context
+                                            .read<ProfileBloc>()
+                                            .add(EmailChanged(value));
+                                      },
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 16.h),
 
-                          // Street field
-                          BlocBuilder<ProfileBloc, ProfileState>(
-                            buildWhen: (previous, current) =>
-                                previous.street != current.street,
-                            builder: (context, state) {
-                              final streetController =
-                                  TextEditingController(text: state.street);
-                              streetController.selection =
-                                  TextSelection.fromPosition(
-                                TextPosition(
-                                    offset: streetController.text.length),
-                              );
-                              return CustomTextField(
-                                hintText: Lang.of(context).street,
-                                controller: streetController,
-                                textInputAction: TextInputAction.next,
-                                onChanged: (value) {
-                                  context
-                                      .read<ProfileBloc>()
-                                      .add(StreetChanged(value));
-                                },
-                              );
-                            },
-                          ),
-                          SizedBox(height: 16.h),
+                                // Street field
+                                BlocBuilder<ProfileBloc, ProfileState>(
+                                  buildWhen: (previous, current) =>
+                                      previous.street != current.street,
+                                  builder: (context, state) {
+                                    final streetController =
+                                        TextEditingController(
+                                            text: state.street);
+                                    streetController.selection =
+                                        TextSelection.fromPosition(
+                                      TextPosition(
+                                          offset: streetController.text.length),
+                                    );
+                                    return CustomTextField(
+                                      hintText: Lang.of(context).street,
+                                      controller: streetController,
+                                      textInputAction: TextInputAction.next,
+                                      onChanged: (value) {
+                                        context
+                                            .read<ProfileBloc>()
+                                            .add(StreetChanged(value));
+                                      },
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 16.h),
 
-                          // City dropdown
-                          BlocBuilder<ProfileBloc, ProfileState>(
-                            buildWhen: (previous, current) =>
-                                previous.city != current.city ||
-                                previous.cities != current.cities,
-                            builder: (context, state) {
-                              return CustomDropdownField(
-                                hintText: Lang.of(context).city,
-                                items: state.cities,
-                                value: state.city.isEmpty ? null : state.city,
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    context
-                                        .read<ProfileBloc>()
-                                        .add(CityChanged(value));
-                                  }
-                                },
-                              );
-                            },
-                          ),
-                          SizedBox(height: 16.h),
+                                // City dropdown
+                                BlocBuilder<ProfileBloc, ProfileState>(
+                                  buildWhen: (previous, current) =>
+                                      previous.city != current.city ||
+                                      previous.cities != current.cities,
+                                  builder: (context, state) {
+                                    return CustomDropdownField(
+                                      hintText: Lang.of(context).city,
+                                      items: state.cities,
+                                      value: state.city.isEmpty
+                                          ? null
+                                          : state.city,
+                                      onChanged: (value) {
+                                        if (value != null) {
+                                          context
+                                              .read<ProfileBloc>()
+                                              .add(CityChanged(value));
+                                        }
+                                      },
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 16.h),
 
-                          // District dropdown
-                          BlocBuilder<ProfileBloc, ProfileState>(
-                            buildWhen: (previous, current) =>
-                                previous.district != current.district ||
-                                previous.districts != current.districts,
-                            builder: (context, state) {
-                              return CustomDropdownField(
-                                hintText: Lang.of(context).district,
-                                items: state.districts,
-                                value: state.district.isEmpty
-                                    ? null
-                                    : state.district,
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    context
-                                        .read<ProfileBloc>()
-                                        .add(DistrictChanged(value));
-                                  }
-                                },
-                              );
-                            },
+                                // District dropdown
+                                BlocBuilder<ProfileBloc, ProfileState>(
+                                  buildWhen: (previous, current) =>
+                                      previous.district != current.district ||
+                                      previous.districts != current.districts,
+                                  builder: (context, state) {
+                                    return CustomDropdownField(
+                                      hintText: Lang.of(context).district,
+                                      items: state.districts,
+                                      value: state.district.isEmpty
+                                          ? null
+                                          : state.district,
+                                      onChanged: (value) {
+                                        if (value != null) {
+                                          context
+                                              .read<ProfileBloc>()
+                                              .add(DistrictChanged(value));
+                                        }
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
                   ),
 

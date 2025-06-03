@@ -35,10 +35,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "didntReceiveCode": MessageLookupByLibrary.simpleMessage("કોડ મળ્યો નથી?"),
     "district": MessageLookupByLibrary.simpleMessage("જિલ્લો"),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "શું તમારું એકાઉન્ટ નથી?",
+    ),
     "enterOtpCode": MessageLookupByLibrary.simpleMessage(
       "તમારો ઓટીપી કોડ દાખલ કરો",
     ),
     "female": MessageLookupByLibrary.simpleMessage("મહિલા"),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("પાસવર્ડ ભૂલી ગયા?"),
     "fullName": MessageLookupByLibrary.simpleMessage("પૂર્ણ નામ"),
     "getStarted": MessageLookupByLibrary.simpleMessage("શરૂ કરો"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("ઇમેઇલ"),

@@ -1,7 +1,10 @@
 import '../../core/utils/app_export.dart';
 
 class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
-  PasswordBloc() : super(const PasswordState()) {
+  // Use the key from KeysManager
+  final formKey = KeysManager.passwordFormKey;
+
+  PasswordBloc() : super(PasswordState()) {
     on<PasswordChanged>(_onPasswordChanged);
     on<ConfirmPasswordChanged>(_onConfirmPasswordChanged);
     on<PasswordSubmitted>(_onPasswordSubmitted);

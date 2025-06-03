@@ -316,7 +316,8 @@ class SignUpForm extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.read<SignUpBloc>().add(NavigateToSignIn());
+                        Navigator.of(context)
+                            .pushNamed(AppConstants.signInRoute);
                       },
                       child: Text(
                         Lang.of(context).signIn,
