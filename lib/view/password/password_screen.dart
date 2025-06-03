@@ -26,9 +26,9 @@ class PasswordScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: BlocListener<PasswordBloc, PasswordState>(
-            listenWhen: (previous, current) =>
-                previous.isSuccess != current.isSuccess ||
-                previous.errorMessage != current.errorMessage,
+            // listenWhen: (previous, current) =>
+            //     previous.isSuccess != current.isSuccess ||
+            //     previous.errorMessage != current.errorMessage,
             listener: (context, state) {
               print(
                   'BlocListener: isSuccess: ${state.isSuccess}, errorMessage: ${state.errorMessage}');
@@ -64,8 +64,8 @@ class PasswordScreen extends StatelessWidget {
                       // Header text
                       Text(
                         Lang.of(context).setPassword,
-                        style: const TextStyle(
-                          fontSize: 24,
+                        style: TextStyle(
+                          fontSize: 24.sp,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Poppins',
                         ),
@@ -73,8 +73,8 @@ class PasswordScreen extends StatelessWidget {
                       SizedBox(height: 8.h),
                       Text(
                         Lang.of(context).setYourPassword,
-                        style: const TextStyle(
-                          fontSize: 14,
+                        style: TextStyle(
+                          fontSize: 14.sp,
                           color: Colors.grey,
                           fontFamily: 'Poppins',
                         ),
@@ -128,8 +128,8 @@ class PasswordScreen extends StatelessWidget {
                               // Password requirements text
                               Text(
                                 Lang.of(context).passwordDescription,
-                                style: const TextStyle(
-                                  fontSize: 12,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
                                   color: Colors.grey,
                                   fontFamily: 'Poppins',
                                 ),
