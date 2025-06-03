@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => SignInBloc()),
         BlocProvider(create: (context) => ForgotPasswordBloc()),
+        BlocProvider(create: (context) => UsersBloc(apiService: ApiService())),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
