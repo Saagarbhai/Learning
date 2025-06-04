@@ -1,7 +1,10 @@
 import '../../core/utils/app_export.dart';
 
 class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
-  PasswordBloc() : super(const PasswordState()) {
+  // Use the key from KeysManager
+  final formKey = KeysManager.passwordFormKey;
+
+  PasswordBloc() : super(PasswordState()) {
     on<PasswordChanged>(_onPasswordChanged);
     on<ConfirmPasswordChanged>(_onConfirmPasswordChanged);
     on<PasswordSubmitted>(_onPasswordSubmitted);
@@ -15,6 +18,8 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
         (RegExp(r'[0-9]').hasMatch(password) ||
             RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password));
 
+    debugPrint('Password: $password, Valid: $isPasswordValid');
+
     emit(state.copyWith(
       password: password,
       isPasswordValid: isPasswordValid,
@@ -26,6 +31,9 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       ConfirmPasswordChanged event, Emitter<PasswordState> emit) {
     final confirmPassword = event.confirmPassword;
     final isConfirmPasswordValid = confirmPassword == state.password;
+
+    debugPrint(
+        'Confirm Password: $confirmPassword, Match: $isConfirmPasswordValid');
 
     emit(state.copyWith(
       confirmPassword: confirmPassword,
@@ -48,13 +56,17 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
   }
 
   void _onPasswordSubmitted(
-      PasswordSubmitted event, Emitter<PasswordState> emit) {
+      PasswordSubmitted event, Emitter<PasswordState> emit) async {
+    debugPrint(
+        'Password Submission: Password valid: ${state.isPasswordValid}, Confirm valid: ${state.isConfirmPasswordValid}');
+
     // Validate the password first
     if (!state.isPasswordValid) {
       emit(state.copyWith(
         errorMessage:
             'Password must contain at least one number or special character',
       ));
+      debugPrint('Password validation failed: ${state.errorMessage}');
       return;
     }
 
@@ -63,18 +75,31 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       emit(state.copyWith(
         errorMessage: 'Passwords do not match',
       ));
+      debugPrint('Confirm password validation failed: ${state.errorMessage}');
       return;
     }
 
     // If both validations pass, proceed with submission
     emit(state.copyWith(isSubmitting: true, errorMessage: null));
+    debugPrint('Password submission in progress...');
 
-    // Simulate API call
-    Future.delayed(const Duration(seconds: 1), () {
+    // Simulate API call with async/await pattern
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+
+      // This emit will now properly update the state
       emit(state.copyWith(
         isSubmitting: false,
         isSuccess: true,
       ));
-    });
+
+      debugPrint('Password submission successful, isSuccess: true');
+    } catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        errorMessage: 'An error occurred during submission',
+      ));
+      debugPrint('Password submission failed: $e');
+    }
   }
 }

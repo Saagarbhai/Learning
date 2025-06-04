@@ -23,40 +23,40 @@ class CustomDropdownField extends StatelessWidget {
     return DropdownButtonFormField<String>(
       value: value,
       isExpanded: isExpanded,
-      icon: const Icon(
+      icon: Icon(
         Icons.keyboard_arrow_down,
         color: Color(0xFF666666),
+        size: 24.sp,
       ),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: const TextStyle(
-          fontSize: 16,
+        hintStyle: TextStyle(
+          fontSize: 16.sp,
           color: Color(0xFFAAAAAA),
           fontFamily: 'Poppins',
         ),
         filled: true,
         fillColor: Colors.white,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFE0E0E0), width: 1),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: Color(0xFFE0E0E0), width: 1.w),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFF00A86B), width: 1.5),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: Color(0xFF00A86B), width: 1.5.w),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: Colors.red, width: 1.w),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.red, width: 1.5),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: Colors.red, width: 1.5.w),
         ),
       ),
-      style: const TextStyle(
-        fontSize: 16,
+      style: TextStyle(
+        fontSize: 16.sp,
         color: Color(0xFF1A1A1A),
         fontFamily: 'Poppins',
       ),
@@ -67,8 +67,8 @@ class CustomDropdownField extends StatelessWidget {
           value: value,
           child: Text(
             value,
-            style: const TextStyle(
-              fontSize: 16,
+            style: TextStyle(
+              fontSize: 16.sp,
               color: Color(0xFF1A1A1A),
               fontFamily: 'Poppins',
             ),

@@ -14,7 +14,7 @@ class SignUpScreen extends StatelessWidget {
               content: Text(Lang.of(context).signupSuccessful),
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
               ),
             ),
           );
@@ -27,6 +27,9 @@ class SignUpScreen extends StatelessWidget {
               content: Text(Lang.of(context).signupFail + ': ${state.error}'),
             ),
           );
+        }
+        if (state is NavigateToSignIn) {
+          Navigator.of(context).pushNamed(AppConstants.signInRoute);
         }
       },
       child: Scaffold(
@@ -61,7 +64,7 @@ class SignUpForm extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(24.0.r),
         child: Form(
           key: bloc.formKey,
           child: Column(
@@ -69,13 +72,13 @@ class SignUpForm extends StatelessWidget {
             children: [
               Text(
                 Lang.of(context).signupInfo,
-                style: const TextStyle(
-                  fontSize: 24,
+                style: TextStyle(
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFF1A1A1A),
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.h),
 
               // Name field
               CustomTextField(
@@ -94,7 +97,7 @@ class SignUpForm extends StatelessWidget {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
 
               // Email field
               CustomTextField(
@@ -117,7 +120,7 @@ class SignUpForm extends StatelessWidget {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
 
               // Phone field
               CustomPhoneField(
@@ -133,7 +136,7 @@ class SignUpForm extends StatelessWidget {
                   return null; // Either email or phone is required, handled in the bloc
                 },
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
 
               // Gender dropdown
               BlocBuilder<SignUpBloc, SignUpState>(
@@ -143,7 +146,6 @@ class SignUpForm extends StatelessWidget {
                   if (state is SignUpFormValidationState) {
                     signUpBloc.selectedGender = state.gender;
                   }
-
                   return CustomDropdownField(
                     hintText: Lang.of(context).hintGender,
                     items: signUpBloc.genders,
@@ -164,30 +166,30 @@ class SignUpForm extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.h),
 
               // Terms and conditions
               Row(
                 children: [
                   Container(
-                    width: 24,
-                    height: 24,
+                    width: 24.w,
+                    height: 24.h,
                     decoration: BoxDecoration(
                       color: const Color(0xFF00A86B).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(50.r),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.check,
                       color: Color(0xFF00A86B),
-                      size: 16,
+                      size: 16.sp,
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8.w),
                   Expanded(
                     child: RichText(
                       text: TextSpan(
-                        style: const TextStyle(
-                          fontSize: 14,
+                        style: TextStyle(
+                          fontSize: 14.sp,
                           color: Color(0xFF666666),
                           fontFamily: 'Poppins',
                         ),
@@ -195,7 +197,7 @@ class SignUpForm extends StatelessWidget {
                           TextSpan(text: Lang.of(context).signTextSpan1),
                           TextSpan(
                             text: Lang.of(context).signTextSpan2,
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Color(0xFF00A86B),
                               fontWeight: FontWeight.w500,
                             ),
@@ -203,7 +205,7 @@ class SignUpForm extends StatelessWidget {
                           TextSpan(text: Lang.of(context).signTextSpan3),
                           TextSpan(
                             text: Lang.of(context).signTextSpan4,
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Color(0xFF00A86B),
                               fontWeight: FontWeight.w500,
                             ),
@@ -215,7 +217,7 @@ class SignUpForm extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.h),
 
               // Sign Up button
               BlocBuilder<SignUpBloc, SignUpState>(
@@ -251,24 +253,24 @@ class SignUpForm extends StatelessWidget {
 
               // OR divider
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24),
+                padding: EdgeInsets.symmetric(vertical: 24.h),
                 child: Row(
                   children: [
                     Expanded(
-                      child: Divider(color: Color(0xFFE0E0E0), thickness: 1),
+                      child: Divider(color: Color(0xFFE0E0E0), thickness: 1.w),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Text(
                         Lang.of(context).or,
-                        style: const TextStyle(
-                          fontSize: 14,
+                        style: TextStyle(
+                          fontSize: 14.sp,
                           color: Color(0xFF666666),
                         ),
                       ),
                     ),
                     Expanded(
-                      child: Divider(color: Color(0xFFE0E0E0), thickness: 1),
+                      child: Divider(color: Color(0xFFE0E0E0), thickness: 1.w),
                     ),
                   ],
                 ),
@@ -280,6 +282,7 @@ class SignUpForm extends StatelessWidget {
                 onPressed: () {
                   context.read<SignUpBloc>().add(SignUpWithGmail());
                 },
+                isDisabled: true,
               ),
 
               SocialSignButton.facebook(
@@ -287,6 +290,7 @@ class SignUpForm extends StatelessWidget {
                 onPressed: () {
                   context.read<SignUpBloc>().add(SignUpWithFacebook());
                 },
+                isDisabled: true,
               ),
 
               SocialSignButton.apple(
@@ -294,29 +298,31 @@ class SignUpForm extends StatelessWidget {
                 onPressed: () {
                   context.read<SignUpBloc>().add(SignUpWithApple());
                 },
+                isDisabled: true,
               ),
 
               // Already have an account
               Padding(
-                padding: const EdgeInsets.only(top: 24),
+                padding: EdgeInsets.only(top: 24.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       Lang.of(context).alreadyAccount,
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: 14.sp,
                         color: Color(0xFF666666),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.read<SignUpBloc>().add(NavigateToSignIn());
+                        Navigator.of(context)
+                            .pushNamed(AppConstants.signInRoute);
                       },
                       child: Text(
                         Lang.of(context).signIn,
-                        style: const TextStyle(
-                          fontSize: 14,
+                        style: TextStyle(
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           color: Color(0xFF00A86B),
                         ),

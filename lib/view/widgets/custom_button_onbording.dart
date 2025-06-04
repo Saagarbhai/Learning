@@ -36,6 +36,10 @@ class CircularProgressButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Calculate the actual size in pixels based on screen size
+    final actualSize = size.r;
+    final radius = actualSize / 2;
+
     return GestureDetector(
       onTap: () {
         if (navigateDirectlyToWelcome && showGoText) {
@@ -49,50 +53,45 @@ class CircularProgressButton extends StatelessWidget {
         }
       },
       child: Container(
-        width: size,
-        height: size,
-        child: Stack(
-          children: [
-            CircularPercentIndicator(
-              radius: size / 2,
-              lineWidth: 4,
-              percent: _getProgressPercent(),
-              progressColor: Color(0xFF08B783),
+        width: actualSize,
+        height: actualSize,
+        child: CircularPercentIndicator(
+          radius: radius,
+          lineWidth: 4.w,
+          percent: _getProgressPercent(),
+          progressColor: Color(0xFF08B783),
+          backgroundColor: Colors.grey.shade200,
+          center: Container(
+            width: actualSize - 15.w,
+            height: actualSize - 15.w,
+            decoration: BoxDecoration(
+              color: Color(0xFF08B783),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 4.r,
+                  offset: Offset(0, 2.h),
+                ),
+              ],
             ),
-            Center(
-              child: Container(
-                width: size - 15,
-                height: size - 15,
-                decoration: BoxDecoration(
-                  color: Color(0xFF08B783),
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 4,
-                      offset: Offset(0, 2),
+            child: Center(
+              child: showGoText
+                  ? Text(
+                      'Go',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: (actualSize * 0.25).sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  : Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                      size: (actualSize * 0.4).sp,
                     ),
-                  ],
-                ),
-                child: Center(
-                  child: showGoText
-                      ? Text(
-                          'Go',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: size * 0.25,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )
-                      : Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                          size: size * 0.4,
-                        ),
-                ),
-              ),
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );

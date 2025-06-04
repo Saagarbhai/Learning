@@ -2,9 +2,7 @@
   "@@locale": "hi",
   "apptitle": "कार ऐप",
   "settings": "सेटिंग्स",
-    "selectLanguage": "भाषा चुनें",
-
-  
+  "selectLanguage": "भाषा चुनें",
   "onboardingScreenTitle": "ऑनबोर्डिंग",
   "previous": "पिछला",
   "getStarted": "शुरू करें",
@@ -54,6 +52,22 @@
   "setPassword": "पासवर्ड सेट करें",
   "setYourPassword": "अपना पासवर्ड सेट करें",
   "passwordDescription": "कम से कम 1 संख्या या विशेष वर्ण होना चाहिए",
-  "register": "पंजीकरण करें"
-
+  "register": "पंजीकरण करें",
+  "passwordsetsuccessfully": "पासवर्ड सफलतापूर्वक सेट हो गया!",
+  "hintPassword": "अपना पासवर्ड दर्ज करें",
+  "confirmPassword": "पासवर्ड की पुष्टि करें",
+  "fullName": "पूरा नाम",
+  "street": "सड़क",
+  "profile": "प्रोफ़ाइल",
+  "profilecreatedsuccesfully": "प्रोफ़ाइल सफलतापूर्वक बनाई गई!",
+  "city": "शहर",
+  "district": "जिला",
+  "cancel": "रद्द करें",
+  "save": "सहेजें",
+  "verificationEmailorPhone": "सत्यापन ईमेल या फ़ोन नंबर",
+  "hintEmailofPhone": "ईमेल या फ़ोन नंबर",
+  "sendOTP": "ओटीपी भेजें",
+  "forgotPassword": "पासवर्ड भूल गए?",
+  "dontHaveAccount": "क्या आपके पास खाता नहीं है?",
+  "logout": "लॉगआउट"
 }

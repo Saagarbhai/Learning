@@ -27,16 +27,30 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "apptitle": MessageLookupByLibrary.simpleMessage("Car App"),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "city": MessageLookupByLibrary.simpleMessage("City"),
     "completed": MessageLookupByLibrary.simpleMessage("Onboarding Completed!"),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "didntReceiveCode": MessageLookupByLibrary.simpleMessage(
       "Didn\'t receive code? ",
     ),
+    "district": MessageLookupByLibrary.simpleMessage("District"),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Do not have an account?",
+    ),
     "enterOtpCode": MessageLookupByLibrary.simpleMessage("Enter your OTP code"),
     "female": MessageLookupByLibrary.simpleMessage("Female"),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot password?"),
+    "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "hintEmail": MessageLookupByLibrary.simpleMessage("Email"),
+    "hintEmailofPhone": MessageLookupByLibrary.simpleMessage(
+      "Email or phone number",
+    ),
     "hintGender": MessageLookupByLibrary.simpleMessage("Gender"),
+    "hintPassword": MessageLookupByLibrary.simpleMessage("Enter Your Password"),
     "hintPhone": MessageLookupByLibrary.simpleMessage("Your Mobile Number"),
+    "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -67,16 +81,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordDescription": MessageLookupByLibrary.simpleMessage(
       "Atleast 1 number or a special character",
     ),
+    "passwordsetsuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Password set successfully!",
+    ),
     "phoneVerification": MessageLookupByLibrary.simpleMessage(
       "Phone verification",
     ),
     "previous": MessageLookupByLibrary.simpleMessage("Previous"),
+    "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "profilecreatedsuccesfully": MessageLookupByLibrary.simpleMessage(
+      "Profile created successfully!",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "registrationSuccessful": MessageLookupByLibrary.simpleMessage(
       "Registration successful!",
     ),
     "resendAgain": MessageLookupByLibrary.simpleMessage("Resend again"),
+    "save": MessageLookupByLibrary.simpleMessage("Save"),
     "selectLanguage": MessageLookupByLibrary.simpleMessage("Select Language"),
+    "sendOTP": MessageLookupByLibrary.simpleMessage("Send OTP"),
     "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
     "setYourPassword": MessageLookupByLibrary.simpleMessage(
       "Set Your Password",
@@ -107,6 +130,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sign up with Gmail",
     ),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "street": MessageLookupByLibrary.simpleMessage("Street"),
+    "verificationEmailorPhone": MessageLookupByLibrary.simpleMessage(
+      "Verification email or phone number",
+    ),
     "verificationSuccessful": MessageLookupByLibrary.simpleMessage(
       "Verification successful!",
     ),

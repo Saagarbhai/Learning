@@ -11,22 +11,22 @@ class CustomBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 85,
+      width: 85.w,
       child: GestureDetector(
         onTap: onPressed ?? () => Navigator.of(context).pop(),
         child: Row(
           children: [
-            const Icon(
+            Icon(
               Icons.arrow_back_ios,
               color: Color(0xFF1A1A1A),
-              size: 18,
+              size: 18.sp,
             ),
-            const SizedBox(width: 3),
+            SizedBox(width: 3.w),
             Text(
               Lang.of(context).back,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Color(0xFF1A1A1A),
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),

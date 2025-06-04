@@ -20,81 +20,81 @@ class CustomPinBox extends StatelessWidget {
       controller: controller,
       length: length,
       defaultPinTheme: PinTheme(
-        width: 56,
-        height: 56,
-        textStyle: const TextStyle(
-          fontSize: 22,
+        width: 56.w,
+        height: 56.h,
+        textStyle: TextStyle(
+          fontSize: 22.sp,
           fontWeight: FontWeight.w600,
           color: Color(0xFF1A1A1A),
           fontFamily: 'Poppins',
         ),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: const Color(0xFFE0E0E0),
-            width: 1,
+            width: 1.w,
           ),
         ),
       ),
       focusedPinTheme: PinTheme(
-        width: 56,
-        height: 56,
-        textStyle: const TextStyle(
-          fontSize: 22,
+        width: 56.w,
+        height: 56.h,
+        textStyle: TextStyle(
+          fontSize: 22.sp,
           fontWeight: FontWeight.w600,
           color: Color(0xFF1A1A1A),
           fontFamily: 'Poppins',
         ),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: const Color(0xFF00A86B),
-            width: 2,
+            width: 2.w,
           ),
           boxShadow: [
             BoxShadow(
               color: const Color(0xFF00A86B).withOpacity(0.2),
-              blurRadius: 8,
-              spreadRadius: 1,
+              blurRadius: 8.r,
+              spreadRadius: 1.r,
             ),
           ],
         ),
       ),
       submittedPinTheme: PinTheme(
-        width: 56,
-        height: 56,
-        textStyle: const TextStyle(
-          fontSize: 22,
+        width: 56.w,
+        height: 56.h,
+        textStyle: TextStyle(
+          fontSize: 22.sp,
           fontWeight: FontWeight.w600,
           color: Color(0xFF00A86B),
           fontFamily: 'Poppins',
         ),
         decoration: BoxDecoration(
           color: const Color(0xFFF5FFF9),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: const Color(0xFF00A86B),
-            width: 1.5,
+            width: 1.5.w,
           ),
         ),
       ),
       errorPinTheme: PinTheme(
-        width: 56,
-        height: 56,
-        textStyle: const TextStyle(
-          fontSize: 22,
+        width: 56.w,
+        height: 56.h,
+        textStyle: TextStyle(
+          fontSize: 22.sp,
           fontWeight: FontWeight.w600,
           color: Colors.red,
           fontFamily: 'Poppins',
         ),
         decoration: BoxDecoration(
           color: Colors.red.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: Colors.red,
-            width: 1.5,
+            width: 1.5.w,
           ),
         ),
       ),
@@ -104,9 +104,9 @@ class CustomPinBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            margin: const EdgeInsets.only(bottom: 9),
-            width: 22,
-            height: 2,
+            margin: EdgeInsets.only(bottom: 9.h),
+            width: 22.w,
+            height: 2.h,
             color: const Color(0xFF00A86B),
           ),
         ],

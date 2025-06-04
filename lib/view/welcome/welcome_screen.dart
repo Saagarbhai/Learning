@@ -6,24 +6,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<WelcomeBloc, WelcomeState>(
-      listener: (context, state) {
-        if (state is NavigateToCreateAccount) {
-          // Always navigate to a fresh instance of SignUpScreen
-          Navigator.of(context)
-              .pushNamed(
-            AppConstants.signUpRoute,
-          )
-              .then((_) {
-            // Reset the bloc state when returning from sign-up screen
-            context.read<WelcomeBloc>().add(ResetWelcomeState());
-          });
-        } else if (state is NavigateToLogin) {
-          // Navigate to login screen
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Navigate to Login')),
-          );
-        }
-      },
+      listener: (context, state) {},
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -33,11 +16,11 @@ class WelcomeScreen extends StatelessWidget {
         backgroundColor: const Color(0xFFF8F9FA),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: EdgeInsets.symmetric(horizontal: 24.0.w),
             child: Column(
               children: [
                 // Status bar spacing
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
 
                 Expanded(
                   flex: 2,
@@ -50,20 +33,20 @@ class WelcomeScreen extends StatelessWidget {
                           child: SvgPicture.asset(
                               Assets.images.welcomeScreenImage.welcome1.path),
                         ),
-                        const SizedBox(height: 30),
+                        SizedBox(height: 30.h),
                         Text(
                           Lang.of(context).welcome,
-                          style: const TextStyle(
-                            fontSize: 28,
+                          style: TextStyle(
+                            fontSize: 28.sp,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF1A1A1A),
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.h),
                         Text(
                           Lang.of(context).welcomeDescription,
-                          style: const TextStyle(
-                            fontSize: 16,
+                          style: TextStyle(
+                            fontSize: 16.sp,
                             color: Color(0xFF666666),
                             fontWeight: FontWeight.w400,
                           ),
@@ -84,12 +67,12 @@ class WelcomeScreen extends StatelessWidget {
                         text: Lang.of(context).welcomebutton1,
                         width: double.infinity,
                         onPressed: () {
-                          context
-                              .read<WelcomeBloc>()
-                              .add(CreateAccountPressed());
+                          Navigator.of(context).pushNamed(
+                            AppConstants.signUpRoute,
+                          );
                         },
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
 
                       // Log in button
                       CustomButton(
@@ -97,10 +80,13 @@ class WelcomeScreen extends StatelessWidget {
                         width: double.infinity,
                         isPrimary: false,
                         onPressed: () {
-                          context.read<WelcomeBloc>().add(LogInPressed());
+                          Navigator.of(context).pushNamed(
+                            AppConstants.signInRoute,
+                          );
+                          // context.read<WelcomeBloc>().add(LogInPressed());
                         },
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
                     ],
                   ),
                 ),

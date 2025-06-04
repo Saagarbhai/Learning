@@ -7,7 +7,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SplashBloc()),
         BlocProvider(
           create: (context) => LanguageBloc()..add(const LoadLanguage()),
         ),
@@ -17,26 +16,37 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OtpVerificationBloc()),
         BlocProvider(create: (context) => PasswordBloc()),
         BlocProvider(create: (context) => WelcomeBloc()),
+        BlocProvider(create: (context) => ProfileBloc()),
+        BlocProvider(create: (context) => SignInBloc()),
+        BlocProvider(create: (context) => ForgotPasswordBloc()),
+        // BlocProvider(create: (context) => UsersBloc(apiService: ApiClient())),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           final locale =
               state is LanguageLoaded ? state.locale : const Locale('en');
 
-          return MaterialApp(
-            title: AppConstants.appName,
-            themeMode: ThemeMode.system,
-            locale: locale,
-            supportedLocales: const [
-              Locale('en'), // English
-              Locale('hi'), // Hindi
-              Locale('gu'), // Gujarati
-            ],
-            localizationsDelegates: localizationDelegates,
-            onGenerateRoute: AppRouter.generateRoute,
-            initialRoute: AppConstants.splashRoute,
-            debugShowCheckedModeBanner: false,
-            home: const SplashScreen(),
+          return ScreenUtilInit(
+            designSize: const Size(393, 852),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (_, child) {
+              return MaterialApp(
+                navigatorKey: navigatorKey,
+                title: AppConstants.appName,
+                themeMode: ThemeMode.system,
+                locale: locale,
+                supportedLocales: const [
+                  Locale('en'), // English
+                  Locale('hi'), // Hindi
+                  Locale('gu'), // Gujarati
+                ],
+                localizationsDelegates: localizationDelegates,
+                onGenerateRoute: AppRouter.generateRoute,
+                initialRoute: AppConstants.onboardingRoute,
+                debugShowCheckedModeBanner: false,
+              );
+            },
           );
         },
       ),

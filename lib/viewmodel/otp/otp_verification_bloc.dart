@@ -12,8 +12,11 @@ class OtpVerificationBloc
     (_) => FocusNode(),
   );
 
-  // Form key for validation
-  final formKey = GlobalKey<FormState>();
+  // Pin controller for CustomPinBox
+  final TextEditingController pinController = TextEditingController();
+
+  // Use the key from KeysManager instead of creating a new one
+  final formKey = KeysManager.otpVerificationFormKey;
 
   OtpVerificationBloc() : super(OtpVerificationInitial()) {
     on<OtpChanged>(_onOtpChanged);
@@ -54,14 +57,17 @@ class OtpVerificationBloc
 
     try {
       // Here you would typically make an API call to verify the OTP
-      // For now, we'll just simulate a successful verification
+      // For now, we'll just simulate a verification process
       await Future.delayed(const Duration(seconds: 2));
 
-      // Allow any number as valid OTP as long as it's 5 digits
-      if (event.otp.length == 5) {
+      // Check if OTP is correct (12345)
+      if (event.otp == '12345') {
+        // Clear the pin input on success
+        pinController.clear();
         emit(OtpVerificationSuccess());
       } else {
-        emit(const OtpVerificationFailure(error: 'Please enter all 5 digits'));
+        emit(const OtpVerificationFailure(
+            error: 'Invalid OTP. Please try again.'));
       }
     } catch (e) {
       emit(OtpVerificationFailure(error: e.toString()));
@@ -78,6 +84,9 @@ class OtpVerificationBloc
 
       // Reset form validation state
       add(const OtpChanged(otp: ''));
+
+      // Clear the pin input when resending OTP
+      pinController.clear();
 
       // Show resend OTP success notification
       emit(OtpResendSuccess());
@@ -104,6 +113,7 @@ class OtpVerificationBloc
     for (var node in otpFocusNodes) {
       node.dispose();
     }
+    pinController.dispose();
     return super.close();
   }
 }

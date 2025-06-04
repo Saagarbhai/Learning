@@ -14,8 +14,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ];
   String? selectedGender;
 
-  // Form key for validation
-  final formKey = GlobalKey<FormState>();
+  // Use the key from KeysManager instead of creating a new one
+  final formKey = KeysManager.signUpFormKey;
 
   SignUpBloc() : super(SignUpInitial()) {
     on<SignUpFormChanged>(_onSignUpFormChanged);

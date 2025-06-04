@@ -55,7 +55,22 @@
   "setPassword": "Set Password",
   "setYourPassword": "Set Your Password",
   "passwordDescription": "Atleast 1 number or a special character",
-  "register": "Register"
-
-
+  "register": "Register",
+  "passwordsetsuccessfully": "Password set successfully!",
+  "hintPassword": "Enter Your Password",
+  "confirmPassword": "Confirm Password",
+  "fullName": "Full Name",
+  "street": "Street",
+  "profile": "Profile",
+  "profilecreatedsuccesfully": "Profile created successfully!",
+  "city": "City",
+  "district": "District",
+  "cancel": "Cancel",
+  "save": "Save",
+  "verificationEmailorPhone": "Verification email or phone number",
+  "hintEmailofPhone": "Email or phone number",
+  "sendOTP": "Send OTP",
+  "forgotPassword": "Forgot password?",
+  "dontHaveAccount": "Do not have an account?",
+  "logout": "Logout"
 }

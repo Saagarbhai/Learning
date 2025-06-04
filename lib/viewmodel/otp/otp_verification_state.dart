@@ -43,6 +43,10 @@ class OtpFormValidationState extends OtpVerificationState {
     );
   }
 
+  bool isOtpCorrect() {
+    return otp == '12345';
+  }
+
   @override
   List<Object?> get props => [otp, isFormValid];
 }

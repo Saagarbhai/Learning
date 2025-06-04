@@ -5,6 +5,7 @@ class AppConstants {
   static const String splashRoute = '/splash';
   static const String homeRoute = '/home';
   static const String loginRoute = '/login';
+  static const String signInRoute = '/signin';
   static const String profileRoute = '/profile';
   static const String settingsRoute = '/settings';
   static const String onboardingRoute = '/onboarding';
@@ -13,4 +14,6 @@ class AppConstants {
   static const String otpVerificationRoute = '/otp-verification';
   static const String passwordRoute = '/password';
   static const String createProfileRoute = '/create-profile';
+  static const String forgotPasswordVerificationRoute =
+      '/forgot-password-verification';
 }

@@ -479,6 +479,131 @@ class Lang {
   String get register {
     return Intl.message('Register', name: 'register', desc: '', args: []);
   }
+
+  /// `Password set successfully!`
+  String get passwordsetsuccessfully {
+    return Intl.message(
+      'Password set successfully!',
+      name: 'passwordsetsuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Your Password`
+  String get hintPassword {
+    return Intl.message(
+      'Enter Your Password',
+      name: 'hintPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message('Full Name', name: 'fullName', desc: '', args: []);
+  }
+
+  /// `Street`
+  String get street {
+    return Intl.message('Street', name: 'street', desc: '', args: []);
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message('Profile', name: 'profile', desc: '', args: []);
+  }
+
+  /// `Profile created successfully!`
+  String get profilecreatedsuccesfully {
+    return Intl.message(
+      'Profile created successfully!',
+      name: 'profilecreatedsuccesfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message('City', name: 'city', desc: '', args: []);
+  }
+
+  /// `District`
+  String get district {
+    return Intl.message('District', name: 'district', desc: '', args: []);
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
+  }
+
+  /// `Verification email or phone number`
+  String get verificationEmailorPhone {
+    return Intl.message(
+      'Verification email or phone number',
+      name: 'verificationEmailorPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email or phone number`
+  String get hintEmailofPhone {
+    return Intl.message(
+      'Email or phone number',
+      name: 'hintEmailofPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send OTP`
+  String get sendOTP {
+    return Intl.message('Send OTP', name: 'sendOTP', desc: '', args: []);
+  }
+
+  /// `Forgot password?`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password?',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do not have an account?`
+  String get dontHaveAccount {
+    return Intl.message(
+      'Do not have an account?',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message('Logout', name: 'logout', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Lang> {

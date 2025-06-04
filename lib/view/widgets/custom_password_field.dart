@@ -40,30 +40,38 @@ class CustomPasswordField extends StatelessWidget {
       return TextFormField(
         controller: controller,
         obscureText: !isVisible,
-        style: const TextStyle(
-          fontSize: 16,
+        style: TextStyle(
+          fontSize: 16.sp,
           fontFamily: 'Poppins',
           color: Color(0xFF333333),
         ),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: const TextStyle(
+          hintStyle: TextStyle(
             color: Color(0xFF9E9E9E),
             fontFamily: 'Poppins',
-            fontSize: 16,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(color: Colors.grey.shade200, width: 1),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
+            fontSize: 16.sp,
           ),
           filled: true,
           fillColor: Colors.white,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: Color(0xFFE0E0E0), width: 1.w),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: Color(0xFF00A86B), width: 1.5.w),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: Colors.red, width: 1.w),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: Colors.red, width: 1.5.w),
+          ),
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
           suffixIcon: showValidIndicator
               ? _buildSuffixIcon(context, isVisible)
               : _buildVisibilityToggle(context, isVisible),
@@ -94,51 +102,51 @@ class CustomPasswordField extends StatelessWidget {
             .add(TogglePasswordVisibility(isConfirmField: confirmField));
       },
       child: Container(
-        width: 48,
-        height: 48,
+        width: 48.w,
+        height: 48.h,
         alignment: Alignment.center,
         child: Icon(
           isVisible ? Icons.visibility_outlined : Icons.visibility_off_outlined,
           color: Colors.grey,
-          size: 22,
+          size: 22.sp,
         ),
       ),
     );
   }
 
   Widget _buildValidationIcon() {
-    // For empty fields in non-confirm mode, show nothing
-    if (!confirmField && !isValid && controller?.text.isEmpty != false) {
+    // For primary password field
+    if (!confirmField) {
+      // Only show check icon if the field is valid and not empty
+      if (isValid) {
+        return Container(
+          width: 24.w,
+          alignment: Alignment.center,
+          child: Icon(
+            Icons.check,
+            color: Colors.green,
+            size: 18.sp,
+          ),
+        );
+      }
       return const SizedBox.shrink();
     }
 
-    // For confirm field
-    if (confirmField) {
-      if (controller?.text.isEmpty != false) {
-        return const SizedBox.shrink();
+    // For confirm password field
+    else {
+      // Only show check icon if the confirmation matches and is not empty
+      if (isConfirmMatch && controller?.text.isNotEmpty == true) {
+        return Container(
+          width: 24.w,
+          alignment: Alignment.center,
+          child: Icon(
+            Icons.check,
+            color: Colors.green,
+            size: 18.sp,
+          ),
+        );
       }
-      return Container(
-        width: 24,
-        alignment: Alignment.center,
-        child: Icon(
-          Icons.check,
-          color: Colors.green,
-          size: 18,
-        ),
-      );
+      return const SizedBox.shrink();
     }
-
-    // For primary password field
-    return isValid
-        ? Container(
-            width: 24,
-            alignment: Alignment.center,
-            child: const Icon(
-              Icons.check,
-              color: Colors.green,
-              size: 18,
-            ),
-          )
-        : const SizedBox.shrink();
   }
 }
