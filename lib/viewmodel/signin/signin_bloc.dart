@@ -37,8 +37,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   void _onInitializeSignIn(InitializeSignIn event, Emitter<SignInState> emit) {
     emit(SignInState(
-      emailController: emailController,
-      passwordController: passwordController,
+      emailController: TextEditingController(),
+      passwordController: TextEditingController(),
     ));
   }
 

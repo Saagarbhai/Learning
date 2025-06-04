@@ -1,5 +1,4 @@
 import '../../core/utils/app_export.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeInitial()) {
