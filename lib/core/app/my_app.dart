@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => SignInBloc()),
         BlocProvider(create: (context) => ForgotPasswordBloc()),
-        BlocProvider(create: (context) => UsersBloc(apiService: ApiService())),
+        // BlocProvider(create: (context) => UsersBloc(apiService: ApiClient())),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
             splitScreenMode: true,
             builder: (_, child) {
               return MaterialApp(
+                navigatorKey: navigatorKey,
                 title: AppConstants.appName,
                 themeMode: ThemeMode.system,
                 locale: locale,

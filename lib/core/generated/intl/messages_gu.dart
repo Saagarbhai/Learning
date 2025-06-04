@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "તમારો પાસવર્ડ દાખલ કરો",
     ),
     "hintPhone": MessageLookupByLibrary.simpleMessage("તમારો મોબાઇલ નંબર"),
+    "logout": MessageLookupByLibrary.simpleMessage("લૉગઆઉટ"),
     "male": MessageLookupByLibrary.simpleMessage("પુરુષ"),
     "name": MessageLookupByLibrary.simpleMessage("નામ"),
     "next": MessageLookupByLibrary.simpleMessage("આગળ"),

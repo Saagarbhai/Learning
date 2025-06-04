@@ -18,7 +18,7 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
         (RegExp(r'[0-9]').hasMatch(password) ||
             RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password));
 
-    print('Password: $password, Valid: $isPasswordValid');
+    debugPrint('Password: $password, Valid: $isPasswordValid');
 
     emit(state.copyWith(
       password: password,
@@ -32,7 +32,8 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
     final confirmPassword = event.confirmPassword;
     final isConfirmPasswordValid = confirmPassword == state.password;
 
-    print('Confirm Password: $confirmPassword, Match: $isConfirmPasswordValid');
+    debugPrint(
+        'Confirm Password: $confirmPassword, Match: $isConfirmPasswordValid');
 
     emit(state.copyWith(
       confirmPassword: confirmPassword,
@@ -56,7 +57,7 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
 
   void _onPasswordSubmitted(
       PasswordSubmitted event, Emitter<PasswordState> emit) async {
-    print(
+    debugPrint(
         'Password Submission: Password valid: ${state.isPasswordValid}, Confirm valid: ${state.isConfirmPasswordValid}');
 
     // Validate the password first
@@ -65,7 +66,7 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
         errorMessage:
             'Password must contain at least one number or special character',
       ));
-      print('Password validation failed: ${state.errorMessage}');
+      debugPrint('Password validation failed: ${state.errorMessage}');
       return;
     }
 
@@ -74,13 +75,13 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       emit(state.copyWith(
         errorMessage: 'Passwords do not match',
       ));
-      print('Confirm password validation failed: ${state.errorMessage}');
+      debugPrint('Confirm password validation failed: ${state.errorMessage}');
       return;
     }
 
     // If both validations pass, proceed with submission
     emit(state.copyWith(isSubmitting: true, errorMessage: null));
-    print('Password submission in progress...');
+    debugPrint('Password submission in progress...');
 
     // Simulate API call with async/await pattern
     try {
@@ -92,13 +93,13 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
         isSuccess: true,
       ));
 
-      print('Password submission successful, isSuccess: true');
+      debugPrint('Password submission successful, isSuccess: true');
     } catch (e) {
       emit(state.copyWith(
         isSubmitting: false,
         errorMessage: 'An error occurred during submission',
       ));
-      print('Password submission failed: $e');
+      debugPrint('Password submission failed: $e');
     }
   }
 }

@@ -68,5 +68,6 @@
   "hintEmailofPhone": "ईमेल या फ़ोन नंबर",
   "sendOTP": "ओटीपी भेजें",
   "forgotPassword": "पासवर्ड भूल गए?",
-  "dontHaveAccount": "क्या आपके पास खाता नहीं है?"
+  "dontHaveAccount": "क्या आपके पास खाता नहीं है?",
+  "logout": "लॉगआउट"
 }

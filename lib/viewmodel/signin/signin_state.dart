@@ -11,6 +11,8 @@ class SignInState extends Equatable {
   final bool navigateToForgotPassword;
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final UserData? userData;
+  final String? token;
 
   SignInState({
     this.email = '',
@@ -23,6 +25,8 @@ class SignInState extends Equatable {
     this.navigateToForgotPassword = false,
     required this.emailController,
     required this.passwordController,
+    this.userData,
+    this.token,
   });
 
   factory SignInState.initial() {
@@ -41,6 +45,8 @@ class SignInState extends Equatable {
     bool? isSignInSuccess,
     bool? navigateToSignUp,
     bool? navigateToForgotPassword,
+    UserData? userData,
+    String? token,
   }) {
     return SignInState(
       email: email ?? this.email,
@@ -54,6 +60,8 @@ class SignInState extends Equatable {
           navigateToForgotPassword ?? this.navigateToForgotPassword,
       emailController: emailController,
       passwordController: passwordController,
+      userData: userData ?? this.userData,
+      token: token ?? this.token,
     );
   }
 
@@ -67,5 +75,7 @@ class SignInState extends Equatable {
         isSignInSuccess,
         navigateToSignUp,
         navigateToForgotPassword,
+        userData,
+        token,
       ];
 }

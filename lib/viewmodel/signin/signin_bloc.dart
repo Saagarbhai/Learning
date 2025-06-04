@@ -1,7 +1,7 @@
 import '../../core/utils/app_export.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  final ApiService _apiService = ApiService();
+  final AuthRepository authRepository = AuthRepository(apiClient: ApiClient());
   final formKey = KeysManager.signInFormKey;
 
   // Move controllers to bloc level
@@ -66,25 +66,54 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   Future<void> _onSignInWithEmailPasswordPressed(
       SignInWithEmailPasswordPressed event, Emitter<SignInState> emit) async {
     emit(state.copyWith(isLoading: true, errorMessage: null));
-
     try {
-      // For other users, try the API
-      final user = await _apiService.login(event.email, event.password);
+      final loginModel = await authRepository.loginWithEmailPassword(
+        email: event.email,
+        password: event.password,
+      );
 
-      // If login is successful, the login method will return a user
-      if (user != null) {
-        emit(state.copyWith(isLoading: false, isSignInSuccess: true));
-      } else {
-        // This shouldn't happen as the login method throws an exception on failure
+      if (loginModel.status == true && loginModel.data != null) {
+        // Save user data in shared preferences for persistence
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setString('user_token', loginModel.token ?? '');
+        prefs.setString('user_name', loginModel.data!.fullName);
+        prefs.setString('user_email', loginModel.data!.email);
+        prefs.setString('user_image', loginModel.data!.image ?? '');
+
+        // Show success toast
+        AppToast.show(
+          message: loginModel.message,
+          type: ToastificationType.success,
+        );
+
         emit(state.copyWith(
           isLoading: false,
-          errorMessage: 'Invalid email or password',
+          isSignInSuccess: true,
+          userData: loginModel.data,
+          token: loginModel.token,
+        ));
+      } else {
+        // Show error toast
+        AppToast.show(
+          message: loginModel.message,
+          type: ToastificationType.error,
+        );
+
+        emit(state.copyWith(
+          isLoading: false,
+          errorMessage: loginModel.message,
         ));
       }
     } catch (e) {
+      // Show error toast
+      AppToast.show(
+        message: e.toString(),
+        type: ToastificationType.error,
+      );
+
       emit(state.copyWith(
         isLoading: false,
-        errorMessage: 'Login failed: Invalid email or password',
+        errorMessage: e.toString(),
       ));
     }
   }

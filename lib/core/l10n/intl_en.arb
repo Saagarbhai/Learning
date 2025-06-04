@@ -71,5 +71,6 @@
   "hintEmailofPhone": "Email or phone number",
   "sendOTP": "Send OTP",
   "forgotPassword": "Forgot password?",
-  "dontHaveAccount": "Do not have an account?"
+  "dontHaveAccount": "Do not have an account?",
+  "logout": "Logout"
 }

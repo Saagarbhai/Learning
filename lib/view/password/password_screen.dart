@@ -5,7 +5,7 @@ class PasswordScreen extends StatelessWidget {
 
   // Method to navigate to profile screen
   void _navigateToProfileScreen(BuildContext context) {
-    print('Navigating to CreateProfileScreen');
+    debugPrint('Navigating to CreateProfileScreen');
     Navigator.of(context).pushReplacementNamed(AppConstants.createProfileRoute);
   }
 
@@ -24,16 +24,14 @@ class PasswordScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: BlocListener<PasswordBloc, PasswordState>(
-            // listenWhen: (previous, current) =>
-            //     previous.isSuccess != current.isSuccess ||
-            //     previous.errorMessage != current.errorMessage,
             listener: (context, state) {
-              print(
+              debugPrint(
                   'BlocListener: isSuccess: ${state.isSuccess}, errorMessage: ${state.errorMessage}');
               if (state.isSuccess) {
-                print('Navigation triggered: going to CreateProfileScreen');
+                debugPrint(
+                    'Navigation triggered: going to CreateProfileScreen');
                 // Show success message
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -47,7 +45,7 @@ class PasswordScreen extends StatelessWidget {
                 });
               }
               if (state.errorMessage != null) {
-                print('Error message shown: ${state.errorMessage}');
+                debugPrint('Error message shown: ${state.errorMessage}');
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.errorMessage!)),
                 );
@@ -140,7 +138,7 @@ class PasswordScreen extends StatelessWidget {
                       ),
                       // Register button at the bottom of the screen
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 24.0, top: 12.0),
+                        padding: EdgeInsets.only(bottom: 24.h, top: 12.h),
                         child: BlocBuilder<PasswordBloc, PasswordState>(
                           buildWhen: (previous, current) =>
                               previous.isPasswordValid !=
@@ -157,7 +155,7 @@ class PasswordScreen extends StatelessWidget {
                               text: Lang.of(context).register,
                               onPressed: canSubmit
                                   ? () {
-                                      print(
+                                      debugPrint(
                                           'Register button pressed, submitting password');
                                       context
                                           .read<PasswordBloc>()

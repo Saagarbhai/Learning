@@ -50,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hintGender": MessageLookupByLibrary.simpleMessage("Gender"),
     "hintPassword": MessageLookupByLibrary.simpleMessage("Enter Your Password"),
     "hintPhone": MessageLookupByLibrary.simpleMessage("Your Mobile Number"),
+    "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),

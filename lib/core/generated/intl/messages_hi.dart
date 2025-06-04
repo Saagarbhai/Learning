@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "अपना पासवर्ड दर्ज करें",
     ),
     "hintPhone": MessageLookupByLibrary.simpleMessage("आपका मोबाइल नंबर"),
+    "logout": MessageLookupByLibrary.simpleMessage("लॉगआउट"),
     "male": MessageLookupByLibrary.simpleMessage("पुरुष"),
     "name": MessageLookupByLibrary.simpleMessage("नाम"),
     "next": MessageLookupByLibrary.simpleMessage("आगे"),
