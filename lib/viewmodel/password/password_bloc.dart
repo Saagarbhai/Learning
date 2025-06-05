@@ -1,8 +1,8 @@
 import '../../core/utils/app_export.dart';
 
 class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
-  // Use the key from KeysManager
-  final formKey = KeysManager.passwordFormKey;
+  // Use the factory method to create a new key
+  final formKey = KeysManager.createPasswordFormKey();
 
   PasswordBloc() : super(PasswordState()) {
     on<PasswordChanged>(_onPasswordChanged);

@@ -15,8 +15,8 @@ class OtpVerificationBloc
   // Pin controller for CustomPinBox
   final TextEditingController pinController = TextEditingController();
 
-  // Use the key from KeysManager instead of creating a new one
-  final formKey = KeysManager.otpVerificationFormKey;
+  // Use the factory method to create a new key
+  final formKey = KeysManager.createOtpVerificationFormKey();
 
   OtpVerificationBloc() : super(OtpVerificationInitial()) {
     on<OtpChanged>(_onOtpChanged);

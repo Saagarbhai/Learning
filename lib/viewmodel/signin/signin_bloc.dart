@@ -2,7 +2,7 @@ import '../../core/utils/app_export.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthRepository authRepository = AuthRepository(apiClient: ApiClient());
-  final formKey = KeysManager.signInFormKey;
+  final formKey = KeysManager.createSignInFormKey();
 
   // Move controllers to bloc level
   final emailController = TextEditingController();

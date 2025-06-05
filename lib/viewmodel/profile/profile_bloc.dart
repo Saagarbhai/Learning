@@ -1,8 +1,8 @@
 import '../../core/utils/app_export.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  // Use the key from KeysManager
-  final formKey = KeysManager.profileFormKey;
+  // Use the factory method to create a new key
+  final formKey = KeysManager.createProfileFormKey();
 
   ProfileBloc() : super(ProfileState()) {
     on<InitializeProfile>(_onInitializeProfile);

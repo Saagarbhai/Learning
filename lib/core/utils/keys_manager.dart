@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
 /// A centralized manager for all GlobalKeys used across the application.
-/// This allows each screen to have its own unique key rather than sharing one global key.
+/// Using factory methods to create new GlobalKey instances each time they're needed,
+/// avoiding the "Multiple widgets used the same GlobalKey" error.
 class KeysManager {
-  // Sign Up Screen Keys
-  static final GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
+  // Private constructor to prevent instantiation
+  KeysManager._();
 
-  // Sign In Screen Keys
-  static final GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
+  // Factory methods for each form key
+  static GlobalKey<FormState> createSignUpFormKey() => GlobalKey<FormState>();
 
-  // OTP Verification Screen Keys
-  static final GlobalKey<FormState> otpVerificationFormKey =
+  static GlobalKey<FormState> createSignInFormKey() => GlobalKey<FormState>();
+
+  static GlobalKey<FormState> createOtpVerificationFormKey() =>
       GlobalKey<FormState>();
 
-  // Password Screen Keys
-  static final GlobalKey<FormState> passwordFormKey = GlobalKey<FormState>();
+  static GlobalKey<FormState> createPasswordFormKey() => GlobalKey<FormState>();
 
-  // Forgot Password Screen Keys
-  static final GlobalKey<FormState> forgotPasswordFormKey =
+  static GlobalKey<FormState> createForgotPasswordFormKey() =>
       GlobalKey<FormState>();
 
-  // Create Profile Screen Keys
-  static final GlobalKey<FormState> profileFormKey = GlobalKey<FormState>();
+  static GlobalKey<FormState> createProfileFormKey() => GlobalKey<FormState>();
 
-  // Add more keys for other screens as needed
+  // Add more factory methods for other screens as needed
 }

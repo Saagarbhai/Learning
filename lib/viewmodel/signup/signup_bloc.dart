@@ -14,8 +14,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ];
   String? selectedGender;
 
-  // Use the key from KeysManager instead of creating a new one
-  final formKey = KeysManager.signUpFormKey;
+  // Use the factory method to create a new key instead of the static field
+  final formKey = KeysManager.createSignUpFormKey();
 
   SignUpBloc() : super(SignUpState.initial()) {
     on<SignUpFormChanged>(_onSignUpFormChanged);

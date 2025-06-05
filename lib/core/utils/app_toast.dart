@@ -11,7 +11,7 @@ class AppToast {
         title: Text(message),
         type: type,
         style: ToastificationStyle.flatColored,
-        autoCloseDuration: const Duration(milliseconds: 1000),
+        autoCloseDuration: const Duration(milliseconds: 1700),
         alignment: Alignment.topCenter,
         showProgressBar: false,
         closeButtonShowType: CloseButtonShowType.always,
