@@ -12,22 +12,19 @@ class SignUpScreen extends StatelessWidget {
 
     return BlocListener<SignUpBloc, SignUpState>(
       listener: (context, state) {
-        if (state is SignUpSuccess) {
-          // Navigate to the OTP verification screen after successful signup
+        if (state.errorMessage != null) {
           AppToast.show(
-            message: Lang.of(context).signupSuccessful,
-            type: ToastificationType.success,
-          );
-
-          // Navigate to OTP verification screen
-          Navigator.of(context).pushNamed(AppConstants.otpVerificationRoute);
-        } else if (state is SignUpFailure) {
-          AppToast.show(
-            message: state.error,
+            message: state.errorMessage!,
             type: ToastificationType.error,
           );
         }
-        if (state is NavigateToSignInState) {
+
+        if (state.isSignUpSuccess) {
+          // Navigate to the OTP verification screen after successful signup
+          Navigator.of(context).pushNamed(AppConstants.otpVerificationRoute);
+        }
+
+        if (state.navigateToSignIn) {
           Navigator.of(context).pushNamed(AppConstants.signInRoute);
         }
       },
@@ -147,10 +144,6 @@ class SignUpForm extends StatelessWidget {
               BlocBuilder<SignUpBloc, SignUpState>(
                 builder: (context, state) {
                   final signUpBloc = context.read<SignUpBloc>();
-
-                  if (state is SignUpFormValidationState) {
-                    signUpBloc.selectedGender = state.gender;
-                  }
                   return CustomDropdownField(
                     hintText: Lang.of(context).hintGender,
                     items: signUpBloc.genders,
@@ -228,10 +221,8 @@ class SignUpForm extends StatelessWidget {
               BlocBuilder<SignUpBloc, SignUpState>(
                 builder: (context, state) {
                   final signUpBloc = context.read<SignUpBloc>();
-                  bool isLoading = state is SignUpLoading;
-                  bool isFormValid = state is SignUpFormValidationState
-                      ? (state).isFormValid
-                      : false;
+                  bool isLoading = state.isLoading;
+                  bool isFormValid = state.isFormValid;
 
                   return CustomButton(
                     text: Lang.of(context).signupButton,

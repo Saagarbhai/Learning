@@ -12,10 +12,9 @@ class PasswordScreen extends StatelessWidget {
     String? name;
     String? email;
 
-    if (signUpState is SignUpFormValidationState) {
-      name = signUpState.name;
-      email = signUpState.email;
-    }
+    // Extract data from SignUpState
+    name = signUpState.name;
+    email = signUpState.email;
 
     // Navigate to profile screen
     Navigator.of(context).pushReplacementNamed(AppConstants.createProfileRoute);

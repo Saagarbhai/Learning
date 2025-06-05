@@ -17,7 +17,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   // Use the key from KeysManager instead of creating a new one
   final formKey = KeysManager.signUpFormKey;
 
-  SignUpBloc() : super(SignUpInitial()) {
+  SignUpBloc() : super(SignUpState.initial()) {
     on<SignUpFormChanged>(_onSignUpFormChanged);
     on<SignUpWithEmailAndPassword>(_onSignUpWithEmailAndPassword);
     on<SignUpWithGmail>(_onSignUpWithGmail);
@@ -53,18 +53,17 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     phoneController.clear();
     selectedGender = null;
 
-    // Initialize form validation state with controllers
-    emit(SignUpFormValidationState(
+    // Initialize state with fresh controllers
+    emit(SignUpState(
       nameController: nameController,
       emailController: emailController,
       phoneController: phoneController,
-      isFormValid: false,
     ));
   }
 
   void _onDisposeSignUp(DisposeSignUp event, Emitter<SignUpState> emit) {
     // Don't dispose controllers here, they will be disposed in close()
-    emit(SignUpInitial(
+    emit(SignUpState(
       nameController: nameController,
       emailController: emailController,
       phoneController: phoneController,
@@ -75,45 +74,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     SignUpFormChanged event,
     Emitter<SignUpState> emit,
   ) {
-    if (state is SignUpFormValidationState) {
-      final currentState = state as SignUpFormValidationState;
-      final updatedState = currentState.copyWith(
-        name: event.name ?? currentState.name,
-        email: event.email ?? currentState.email,
-        phoneNumber: event.phoneNumber ?? currentState.phoneNumber,
-        gender: event.gender ?? currentState.gender,
-        nameController: nameController,
-        emailController: emailController,
-        phoneController: phoneController,
-      );
-
-      final bool isFormValid = _validateForm(
-        name: updatedState.name,
-        email: updatedState.email,
-        phoneNumber: updatedState.phoneNumber,
-        gender: updatedState.gender,
-      );
-
-      emit(updatedState.copyWith(isFormValid: isFormValid));
-    } else {
-      final bool isFormValid = _validateForm(
-        name: event.name,
-        email: event.email,
-        phoneNumber: event.phoneNumber,
-        gender: event.gender,
-      );
-
-      emit(SignUpFormValidationState(
-        name: event.name,
-        email: event.email,
-        phoneNumber: event.phoneNumber,
-        gender: event.gender,
-        isFormValid: isFormValid,
-        nameController: nameController,
-        emailController: emailController,
-        phoneController: phoneController,
-      ));
-    }
+    emit(state.copyWith(
+      name: event.name ?? state.name,
+      email: event.email ?? state.email,
+      phoneNumber: event.phoneNumber ?? state.phoneNumber,
+      gender: event.gender ?? state.gender,
+    ));
   }
 
   void _onUpdateSelectedGender(
@@ -128,19 +94,34 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     SignUpWithEmailAndPassword event,
     Emitter<SignUpState> emit,
   ) async {
-    emit(SignUpLoading());
+    emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
       // Here you would typically make an API call to register the user
       // For now, we'll just simulate a successful registration
       await Future.delayed(const Duration(seconds: 2));
 
-      // Emit success state and pop back to welcome screen
-      emit(SignUpSuccess());
+      // Show success toast
+      AppToast.show(
+        message: "Registration successful",
+        type: ToastificationType.success,
+      );
+
+      // Emit success state
+      emit(state.copyWith(isLoading: false, isSignUpSuccess: true));
 
       // The navigation will be handled in the UI with BlocListener
     } catch (e) {
-      emit(SignUpFailure(error: e.toString()));
+      // Show error toast
+      AppToast.show(
+        message: e.toString(),
+        type: ToastificationType.error,
+      );
+
+      emit(state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      ));
     }
   }
 
@@ -148,14 +129,30 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     SignUpWithGmail event,
     Emitter<SignUpState> emit,
   ) async {
-    emit(SignUpLoading());
+    emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
       // Here you would implement Gmail sign-up logic
       await Future.delayed(const Duration(seconds: 2));
-      emit(SignUpSuccess());
+
+      // Show success toast
+      AppToast.show(
+        message: "Gmail registration successful",
+        type: ToastificationType.success,
+      );
+
+      emit(state.copyWith(isLoading: false, isSignUpSuccess: true));
     } catch (e) {
-      emit(SignUpFailure(error: e.toString()));
+      // Show error toast
+      AppToast.show(
+        message: e.toString(),
+        type: ToastificationType.error,
+      );
+
+      emit(state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      ));
     }
   }
 
@@ -163,14 +160,30 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     SignUpWithFacebook event,
     Emitter<SignUpState> emit,
   ) async {
-    emit(SignUpLoading());
+    emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
       // Here you would implement Facebook sign-up logic
       await Future.delayed(const Duration(seconds: 2));
-      emit(SignUpSuccess());
+
+      // Show success toast
+      AppToast.show(
+        message: "Facebook registration successful",
+        type: ToastificationType.success,
+      );
+
+      emit(state.copyWith(isLoading: false, isSignUpSuccess: true));
     } catch (e) {
-      emit(SignUpFailure(error: e.toString()));
+      // Show error toast
+      AppToast.show(
+        message: e.toString(),
+        type: ToastificationType.error,
+      );
+
+      emit(state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      ));
     }
   }
 
@@ -178,14 +191,30 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     SignUpWithApple event,
     Emitter<SignUpState> emit,
   ) async {
-    emit(SignUpLoading());
+    emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
       // Here you would implement Apple sign-up logic
       await Future.delayed(const Duration(seconds: 2));
-      emit(SignUpSuccess());
+
+      // Show success toast
+      AppToast.show(
+        message: "Apple registration successful",
+        type: ToastificationType.success,
+      );
+
+      emit(state.copyWith(isLoading: false, isSignUpSuccess: true));
     } catch (e) {
-      emit(SignUpFailure(error: e.toString()));
+      // Show error toast
+      AppToast.show(
+        message: e.toString(),
+        type: ToastificationType.error,
+      );
+
+      emit(state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      ));
     }
   }
 
@@ -194,23 +223,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     Emitter<SignUpState> emit,
   ) {
     // Emit the navigation state
-    emit(NavigateToSignInState());
-  }
-
-  bool _validateForm({
-    String? name,
-    String? email,
-    String? phoneNumber,
-    String? gender,
-  }) {
-    // Simple validation
-    final bool isNameValid = name != null && name.isNotEmpty;
-    final bool isEmailValid = email != null &&
-        RegExp(r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$').hasMatch(email);
-    final bool isPhoneValid = phoneNumber != null && phoneNumber.isNotEmpty;
-    final bool isGenderValid = gender != null && gender.isNotEmpty;
-
-    return isNameValid && (isEmailValid || isPhoneValid) && isGenderValid;
+    emit(state.copyWith(navigateToSignIn: true));
   }
 
   @override
