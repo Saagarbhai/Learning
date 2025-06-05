@@ -57,3 +57,7 @@ class SignUpWithFacebook extends SignUpEvent {}
 class SignUpWithApple extends SignUpEvent {}
 
 class NavigateToSignIn extends SignUpEvent {}
+
+class InitializeSignUp extends SignUpEvent {}
+
+class DisposeSignUp extends SignUpEvent {}

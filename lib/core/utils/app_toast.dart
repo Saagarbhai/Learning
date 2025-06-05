@@ -7,12 +7,18 @@ class AppToast {
     required ToastificationType type,
   }) {
     toastification.show(
-      context: navigatorKey.currentContext!,
-      title: Text(message),
-      type: type,
-      style: ToastificationStyle.flatColored,
-      autoCloseDuration: const Duration(seconds: 3),
-    );
+        context: navigatorKey.currentContext!,
+        title: Text(message),
+        type: type,
+        style: ToastificationStyle.flatColored,
+        autoCloseDuration: const Duration(milliseconds: 1000),
+        alignment: Alignment.topCenter,
+        showProgressBar: false,
+        closeButtonShowType: CloseButtonShowType.always,
+        animationDuration: const Duration(milliseconds: 500),
+        closeButton: ToastCloseButton(
+          showType: CloseButtonShowType.always,
+        ));
   }
 }
 

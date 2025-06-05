@@ -13,8 +13,9 @@ class SignInScreen extends StatelessWidget {
     return BlocListener<SignInBloc, SignInState>(
       listener: (context, state) {
         if (state.errorMessage != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.errorMessage!)),
+          AppToast.show(
+            message: state.errorMessage!,
+            type: ToastificationType.error,
           );
         }
 

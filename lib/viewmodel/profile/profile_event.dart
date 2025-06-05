@@ -7,6 +7,25 @@ abstract class ProfileEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class InitializeProfile extends ProfileEvent {
+  final String? name;
+  final String? email;
+  final String? imagePath;
+
+  const InitializeProfile({
+    this.name,
+    this.email,
+    this.imagePath,
+  });
+
+  @override
+  List<Object> get props => [
+        name ?? '',
+        email ?? '',
+        imagePath ?? '',
+      ];
+}
+
 class NameChanged extends ProfileEvent {
   final String name;
 

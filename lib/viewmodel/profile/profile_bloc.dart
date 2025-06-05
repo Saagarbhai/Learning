@@ -5,6 +5,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final formKey = KeysManager.profileFormKey;
 
   ProfileBloc() : super(ProfileState()) {
+    on<InitializeProfile>(_onInitializeProfile);
     on<NameChanged>(_onNameChanged);
     on<PhoneChanged>(_onPhoneChanged);
     on<EmailChanged>(_onEmailChanged);
@@ -14,6 +15,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileImageChanged>(_onProfileImageChanged);
     on<ProfileSubmitted>(_onProfileSubmitted);
     on<NavigateToHome>(_onNavigateToHome);
+  }
+
+  void _onInitializeProfile(
+      InitializeProfile event, Emitter<ProfileState> emit) {
+    emit(state.copyWith(
+      name: event.name ?? state.name,
+      email: event.email ?? state.email,
+      profileImagePath: event.imagePath ?? state.profileImagePath,
+    ));
   }
 
   void _onNameChanged(NameChanged event, Emitter<ProfileState> emit) {
@@ -98,6 +108,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(state.copyWith(isSubmitting: true, errorMessage: null));
 
     try {
+      // Save user data to SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('user_name', state.name);
+      await prefs.setString('user_email', state.email);
+
+      // Save profile image path if available
+      if (state.profileImagePath != null &&
+          state.profileImagePath!.isNotEmpty) {
+        await prefs.setString('user_image', state.profileImagePath!);
+      }
+
       // Simulate API call to save profile
       await Future.delayed(const Duration(seconds: 1));
 

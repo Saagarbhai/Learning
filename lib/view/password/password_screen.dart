@@ -6,7 +6,29 @@ class PasswordScreen extends StatelessWidget {
   // Method to navigate to profile screen
   void _navigateToProfileScreen(BuildContext context) {
     debugPrint('Navigating to CreateProfileScreen');
+
+    // Get user data from SignUpBloc if available
+    final signUpState = context.read<SignUpBloc>().state;
+    String? name;
+    String? email;
+
+    if (signUpState is SignUpFormValidationState) {
+      name = signUpState.name;
+      email = signUpState.email;
+    }
+
+    // Navigate to profile screen
     Navigator.of(context).pushReplacementNamed(AppConstants.createProfileRoute);
+
+    // Initialize profile with existing data if available
+    if (name != null || email != null) {
+      Future.delayed(Duration.zero, () {
+        context.read<ProfileBloc>().add(InitializeProfile(
+              name: name,
+              email: email,
+            ));
+      });
+    }
   }
 
   @override
@@ -33,11 +55,9 @@ class PasswordScreen extends StatelessWidget {
                 debugPrint(
                     'Navigation triggered: going to CreateProfileScreen');
                 // Show success message
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(Lang.of(context).passwordsetsuccessfully),
-                    duration: const Duration(seconds: 1),
-                  ),
+                AppToast.show(
+                  message: Lang.of(context).passwordsetsuccessfully,
+                  type: ToastificationType.success,
                 );
                 // Navigate to create profile screen with a small delay to allow the snackbar to be seen
                 Future.delayed(const Duration(milliseconds: 200), () {
@@ -46,8 +66,9 @@ class PasswordScreen extends StatelessWidget {
               }
               if (state.errorMessage != null) {
                 debugPrint('Error message shown: ${state.errorMessage}');
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.errorMessage!)),
+                AppToast.show(
+                  message: state.errorMessage!,
+                  type: ToastificationType.error,
                 );
               }
             },

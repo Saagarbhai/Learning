@@ -13,8 +13,9 @@ class ForgotPasswordVerificationScreen extends StatelessWidget {
     return BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
       listener: (context, state) {
         if (state.errorMessage != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.errorMessage!)),
+          AppToast.show(
+            message: state.errorMessage!,
+            type: ToastificationType.error,
           );
         }
       },

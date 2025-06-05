@@ -47,7 +47,9 @@ class HomeScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: NetworkImage(state.userImage),
+                          image: state.userImage.startsWith('http')
+                              ? NetworkImage(state.userImage) as ImageProvider
+                              : FileImage(File(state.userImage)),
                           fit: BoxFit.cover,
                         ),
                       ),

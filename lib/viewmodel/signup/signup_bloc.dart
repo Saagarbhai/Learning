@@ -25,6 +25,50 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpWithApple>(_onSignUpWithApple);
     on<NavigateToSignIn>(_onNavigateToSignIn);
     on<UpdateSelectedGender>(_onUpdateSelectedGender);
+    on<InitializeSignUp>(_onInitializeSignUp);
+    on<DisposeSignUp>(_onDisposeSignUp);
+
+    // Initialize controllers with listeners
+    nameController.addListener(_nameControllerListener);
+    emailController.addListener(_emailControllerListener);
+    phoneController.addListener(_phoneControllerListener);
+  }
+
+  void _nameControllerListener() {
+    add(SignUpFormChanged(name: nameController.text));
+  }
+
+  void _emailControllerListener() {
+    add(SignUpFormChanged(email: emailController.text));
+  }
+
+  void _phoneControllerListener() {
+    add(SignUpFormChanged(phoneNumber: phoneController.text));
+  }
+
+  void _onInitializeSignUp(InitializeSignUp event, Emitter<SignUpState> emit) {
+    // Reset controllers if needed
+    nameController.clear();
+    emailController.clear();
+    phoneController.clear();
+    selectedGender = null;
+
+    // Initialize form validation state with controllers
+    emit(SignUpFormValidationState(
+      nameController: nameController,
+      emailController: emailController,
+      phoneController: phoneController,
+      isFormValid: false,
+    ));
+  }
+
+  void _onDisposeSignUp(DisposeSignUp event, Emitter<SignUpState> emit) {
+    // Don't dispose controllers here, they will be disposed in close()
+    emit(SignUpInitial(
+      nameController: nameController,
+      emailController: emailController,
+      phoneController: phoneController,
+    ));
   }
 
   void _onSignUpFormChanged(
@@ -38,6 +82,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         email: event.email ?? currentState.email,
         phoneNumber: event.phoneNumber ?? currentState.phoneNumber,
         gender: event.gender ?? currentState.gender,
+        nameController: nameController,
+        emailController: emailController,
+        phoneController: phoneController,
       );
 
       final bool isFormValid = _validateForm(
@@ -62,6 +109,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         phoneNumber: event.phoneNumber,
         gender: event.gender,
         isFormValid: isFormValid,
+        nameController: nameController,
+        emailController: emailController,
+        phoneController: phoneController,
       ));
     }
   }
@@ -143,8 +193,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     NavigateToSignIn event,
     Emitter<SignUpState> emit,
   ) {
-    // This state can be used to navigate to sign in screen
-    // The actual navigation will be handled in the UI
+    // Emit the navigation state
+    emit(NavigateToSignInState());
   }
 
   bool _validateForm({
@@ -165,6 +215,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
   @override
   Future<void> close() {
+    // Remove listeners
+    nameController.removeListener(_nameControllerListener);
+    emailController.removeListener(_emailControllerListener);
+    phoneController.removeListener(_phoneControllerListener);
+
     // Dispose controllers when bloc is closed
     nameController.dispose();
     emailController.dispose();

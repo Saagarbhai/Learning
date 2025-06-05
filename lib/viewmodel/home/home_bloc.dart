@@ -6,6 +6,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<RefreshHomeData>(_onRefreshHomeData);
     on<LoadUserData>(_onLoadUserData);
     on<LogoutUser>(_onLogoutUser);
+    on<SetUserData>(_onSetUserData);
   }
 
   Future<void> _onLoadHomeData(
@@ -84,6 +85,31 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           userImage: '',
         ));
       }
+    }
+  }
+
+  Future<void> _onSetUserData(
+    SetUserData event,
+    Emitter<HomeState> emit,
+  ) async {
+    try {
+      // Save data to SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('user_name', event.name);
+      await prefs.setString('user_email', event.email);
+      if (event.imagePath.isNotEmpty) {
+        await prefs.setString('user_image', event.imagePath);
+      }
+
+      // Update state with new data
+      emit(HomeLoaded(
+        userName: event.name,
+        userEmail: event.email,
+        userImage: event.imagePath,
+      ));
+    } catch (e) {
+      print('Error setting user data: $e');
+      emit(HomeError('Error setting user data: $e'));
     }
   }
 

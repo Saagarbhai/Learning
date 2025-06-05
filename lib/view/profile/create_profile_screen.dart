@@ -30,21 +30,26 @@ class CreateProfileScreen extends StatelessWidget {
         listener: (context, state) {
           if (state.isSuccess) {
             // Show success message and navigate to home
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(Lang.of(context).profilecreatedsuccesfully),
-                duration: const Duration(seconds: 1),
-              ),
+            AppToast.show(
+              message: Lang.of(context).profilecreatedsuccesfully,
+              type: ToastificationType.success,
             );
             // Navigate to home screen
             Future.delayed(const Duration(milliseconds: 500), () {
+              // Pass user data directly to HomeBloc
+              context.read<HomeBloc>().add(SetUserData(
+                    name: state.name,
+                    email: state.email,
+                    imagePath: state.profileImagePath ?? '',
+                  ));
               Navigator.of(context)
                   .pushReplacementNamed(AppConstants.homeRoute);
             });
           }
           if (state.errorMessage != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorMessage!)),
+            AppToast.show(
+              message: state.errorMessage!,
+              type: ToastificationType.error,
             );
           }
         },

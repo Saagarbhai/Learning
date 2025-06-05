@@ -9,40 +9,23 @@ class OtpVerificationScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is OtpVerificationSuccess) {
           // Navigate to the next screen after successful verification
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(Lang.of(context).verificationSuccessful),
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
+          AppToast.show(
+            message: Lang.of(context).verificationSuccessful,
+            type: ToastificationType.success,
           );
 
           // Navigate to password screen after successful verification
           Navigator.of(context)
               .pushReplacementNamed(AppConstants.passwordRoute);
         } else if (state is OtpVerificationFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Verification failed: ${state.error}'),
-              backgroundColor: Colors.red,
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
+          AppToast.show(
+            message: 'Verification failed: ${state.error}',
+            type: ToastificationType.error,
           );
         } else if (state is OtpResendSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(Lang.of(context).otpResent),
-              backgroundColor: const Color(0xFF00A86B),
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
+          AppToast.show(
+            message: Lang.of(context).otpResent,
+            type: ToastificationType.success,
           );
         }
       },

@@ -5,30 +5,29 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the bloc when the widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SignUpBloc>().add(InitializeSignUp());
+    });
+
     return BlocListener<SignUpBloc, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
           // Navigate to the OTP verification screen after successful signup
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(Lang.of(context).signupSuccessful),
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-            ),
+          AppToast.show(
+            message: Lang.of(context).signupSuccessful,
+            type: ToastificationType.success,
           );
 
           // Navigate to OTP verification screen
           Navigator.of(context).pushNamed(AppConstants.otpVerificationRoute);
         } else if (state is SignUpFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(Lang.of(context).signupFail + ': ${state.error}'),
-            ),
+          AppToast.show(
+            message: state.error,
+            type: ToastificationType.error,
           );
         }
-        if (state is NavigateToSignIn) {
+        if (state is NavigateToSignInState) {
           Navigator.of(context).pushNamed(AppConstants.signInRoute);
         }
       },
@@ -37,7 +36,13 @@ class SignUpScreen extends StatelessWidget {
           automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: Colors.white,
-          title: const CustomBackButton(),
+          title: CustomBackButton(
+            onPressed: () {
+              // Dispose the bloc before popping
+              context.read<SignUpBloc>().add(DisposeSignUp());
+              Navigator.of(context).pop();
+            },
+          ),
           actions: [
             LanguageButton(),
           ],
@@ -316,8 +321,7 @@ class SignUpForm extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context)
-                            .pushNamed(AppConstants.signInRoute);
+                        context.read<SignUpBloc>().add(NavigateToSignIn());
                       },
                       child: Text(
                         Lang.of(context).signIn,
