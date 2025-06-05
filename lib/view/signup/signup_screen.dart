@@ -5,11 +5,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the bloc when the widget is built
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<SignUpBloc>().add(InitializeSignUp());
-    });
-
     return BlocListener<SignUpBloc, SignUpState>(
       listener: (context, state) {
         if (state.errorMessage != null) {

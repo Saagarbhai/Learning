@@ -7,27 +7,7 @@ class PasswordScreen extends StatelessWidget {
   void _navigateToProfileScreen(BuildContext context) {
     debugPrint('Navigating to CreateProfileScreen');
 
-    // Get user data from SignUpBloc if available
-    final signUpState = context.read<SignUpBloc>().state;
-    String? name;
-    String? email;
-
-    // Extract data from SignUpState
-    name = signUpState.name;
-    email = signUpState.email;
-
-    // Navigate to profile screen
     Navigator.of(context).pushReplacementNamed(AppConstants.createProfileRoute);
-
-    // Initialize profile with existing data if available
-    if (name != null || email != null) {
-      Future.delayed(Duration.zero, () {
-        context.read<ProfileBloc>().add(InitializeProfile(
-              name: name,
-              email: email,
-            ));
-      });
-    }
   }
 
   @override

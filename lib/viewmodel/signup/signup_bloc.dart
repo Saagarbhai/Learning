@@ -87,7 +87,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     Emitter<SignUpState> emit,
   ) {
     selectedGender = event.gender;
-    add(SignUpFormChanged(gender: event.gender));
+    emit(state.copyWith(gender: event.gender));
   }
 
   void _onSignUpWithEmailAndPassword(
