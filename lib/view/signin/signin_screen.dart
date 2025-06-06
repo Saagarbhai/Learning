@@ -20,6 +20,8 @@ class SignInScreen extends StatelessWidget {
         }
 
         if (state.isSignInSuccess) {
+          state.emailController.clear();
+          state.passwordController.clear();
           // Navigate to home screen or dashboard
           Navigator.of(context).pushReplacementNamed(AppConstants.homeRoute);
         }
@@ -143,6 +145,11 @@ class SignInScreen extends StatelessWidget {
                     onPressed: state.isLoading
                         ? null
                         : () {
+                            context
+                                .read<SignInBloc>()
+                                .formKey
+                                .currentState!
+                                .reset();
                             if (context
                                     .read<SignInBloc>()
                                     .formKey

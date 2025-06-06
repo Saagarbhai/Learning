@@ -15,11 +15,20 @@ class SignUpScreen extends StatelessWidget {
         }
 
         if (state.isSignUpSuccess) {
+          state.nameController.clear();
+          state.emailController.clear();
+          state.phoneController.clear();
+          context.read<SignUpBloc>().add(UpdateSelectedGender(gender: ''));
           // Navigate to the OTP verification screen after successful signup
           Navigator.of(context).pushNamed(AppConstants.otpVerificationRoute);
         }
 
         if (state.navigateToSignIn) {
+          context.read<SignUpBloc>().add(DisposeSignUp());
+          state.nameController.clear();
+          state.emailController.clear();
+          state.phoneController.clear();
+          context.read<SignUpBloc>().add(UpdateSelectedGender(gender: ''));
           Navigator.of(context).pushNamed(AppConstants.signInRoute);
         }
       },
@@ -226,6 +235,7 @@ class SignUpForm extends StatelessWidget {
                     onPressed: isLoading || !isFormValid
                         ? null
                         : () {
+                            bloc.formKey.currentState!.reset();
                             if (signUpBloc.formKey.currentState!.validate()) {
                               context.read<SignUpBloc>().add(
                                     SignUpWithEmailAndPassword(

@@ -374,6 +374,11 @@ class CreateProfileScreen extends StatelessWidget {
                                     : () {
                                         context
                                             .read<ProfileBloc>()
+                                            .formKey
+                                            .currentState!
+                                            .reset();
+                                        context
+                                            .read<ProfileBloc>()
                                             .add(ProfileSubmitted());
                                         debugPrint(state.profileImagePath);
                                         debugPrint('ProfileSubmitted');
