@@ -16,7 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(const HomeLoading());
     try {
       // Add your home data loading logic here
-      await Future.delayed(const Duration(seconds: 1)); // Simulated delay
+      // await Future.delayed(const Duration(seconds: 1)); // Simulated delay
 
       // Load user data as part of home data loading
       final userData = await _getUserData();
@@ -44,7 +44,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     try {
       // Add your refresh logic here
-      await Future.delayed(const Duration(seconds: 1)); // Simulated delay
+      //  await Future.delayed(const Duration(seconds: 1)); // Simulated delay
 
       // Reload user data
       final userData = await _getUserData();

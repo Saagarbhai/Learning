@@ -78,7 +78,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     try {
       // Simulate image processing delay (you can remove this in production)
-      await Future.delayed(const Duration(milliseconds: 300));
+      //  await Future.delayed(const Duration(milliseconds: 300));
 
       // Update state with new image path and set loading to false
       emit(state.copyWith(
@@ -120,7 +120,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
 
       // Simulate API call to save profile
-      await Future.delayed(const Duration(seconds: 1));
+      //await Future.delayed(const Duration(seconds: 1));
 
       // Profile saved successfully
       emit(state.copyWith(

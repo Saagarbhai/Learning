@@ -38,10 +38,8 @@ class PasswordScreen extends StatelessWidget {
                   message: Lang.of(context).passwordsetsuccessfully,
                   type: ToastificationType.success,
                 );
-                // Navigate to create profile screen with a small delay to allow the snackbar to be seen
-                Future.delayed(const Duration(milliseconds: 200), () {
-                  _navigateToProfileScreen(context);
-                });
+                // Navigate to create profile screen with a small delay to allow the snackbar to be
+                _navigateToProfileScreen(context);
               }
               if (state.errorMessage != null) {
                 debugPrint('Error message shown: ${state.errorMessage}');

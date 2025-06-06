@@ -85,7 +85,7 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
 
     // Simulate API call with async/await pattern
     try {
-      await Future.delayed(const Duration(seconds: 1));
+      //await Future.delayed(const Duration(seconds: 1));
 
       // This emit will now properly update the state
       emit(state.copyWith(

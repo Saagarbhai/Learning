@@ -97,10 +97,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
-      // Here you would typically make an API call to register the user
-      // For now, we'll just simulate a successful registration
-      await Future.delayed(const Duration(seconds: 2));
-
       // Show success toast
       AppToast.show(
         message: "Registration successful",
@@ -133,7 +129,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
     try {
       // Here you would implement Gmail sign-up logic
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
 
       // Show success toast
       AppToast.show(
@@ -164,7 +160,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
     try {
       // Here you would implement Facebook sign-up logic
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
 
       // Show success toast
       AppToast.show(
@@ -195,7 +191,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
     try {
       // Here you would implement Apple sign-up logic
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
 
       // Show success toast
       AppToast.show(

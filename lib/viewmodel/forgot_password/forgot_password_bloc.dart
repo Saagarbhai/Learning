@@ -61,7 +61,7 @@ class ForgotPasswordBloc
 
     try {
       // Simulate API call with delay
-      await Future.delayed(const Duration(seconds: 1));
+      //await Future.delayed(const Duration(seconds: 1));
 
       // For demo purposes, always succeed
       emit(state.copyWith(isLoading: false, isOtpSent: true));

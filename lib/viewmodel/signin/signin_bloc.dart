@@ -124,7 +124,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
     try {
       // Simulate API call with delay
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
       emit(state.copyWith(isLoading: false, isSignInSuccess: true));
     } catch (e) {
       emit(state.copyWith(
@@ -140,7 +140,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
     try {
       // Simulate API call with delay
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
       emit(state.copyWith(isLoading: false, isSignInSuccess: true));
     } catch (e) {
       emit(state.copyWith(

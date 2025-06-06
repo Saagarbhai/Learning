@@ -15,21 +15,20 @@ class SignUpScreen extends StatelessWidget {
         }
 
         if (state.isSignUpSuccess) {
+          // Navigate to the OTP verification screen after successful signup
+          Navigator.of(context).pushNamed(AppConstants.otpVerificationRoute);
           state.nameController.clear();
           state.emailController.clear();
           state.phoneController.clear();
-          context.read<SignUpBloc>().add(UpdateSelectedGender(gender: ''));
-          // Navigate to the OTP verification screen after successful signup
-          Navigator.of(context).pushNamed(AppConstants.otpVerificationRoute);
+          // context.read<SignUpBloc>().add(UpdateSelectedGender(gender: null));
         }
 
         if (state.navigateToSignIn) {
-          context.read<SignUpBloc>().add(DisposeSignUp());
+          Navigator.of(context).pushNamed(AppConstants.signInRoute);
           state.nameController.clear();
           state.emailController.clear();
           state.phoneController.clear();
-          context.read<SignUpBloc>().add(UpdateSelectedGender(gender: ''));
-          Navigator.of(context).pushNamed(AppConstants.signInRoute);
+          // context.read<SignUpBloc>().add(UpdateSelectedGender(gender: null));
         }
       },
       child: Scaffold(
@@ -235,7 +234,6 @@ class SignUpForm extends StatelessWidget {
                     onPressed: isLoading || !isFormValid
                         ? null
                         : () {
-                            bloc.formKey.currentState!.reset();
                             if (signUpBloc.formKey.currentState!.validate()) {
                               context.read<SignUpBloc>().add(
                                     SignUpWithEmailAndPassword(

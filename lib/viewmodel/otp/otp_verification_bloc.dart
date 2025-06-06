@@ -58,7 +58,7 @@ class OtpVerificationBloc
     try {
       // Here you would typically make an API call to verify the OTP
       // For now, we'll just simulate a verification process
-      await Future.delayed(const Duration(seconds: 2));
+      //  await Future.delayed(const Duration(seconds: 2));
 
       // Check if OTP is correct (12345)
       if (event.otp == '12345') {
@@ -80,7 +80,7 @@ class OtpVerificationBloc
   ) async {
     try {
       // Simulate resending OTP
-      await Future.delayed(const Duration(seconds: 1));
+      // await Future.delayed(const Duration(seconds: 1));
 
       // Reset form validation state
       add(const OtpChanged(otp: ''));
@@ -92,7 +92,7 @@ class OtpVerificationBloc
       emit(OtpResendSuccess());
 
       // Restore the validation state
-      await Future.delayed(const Duration(milliseconds: 100));
+      // await Future.delayed(const Duration(milliseconds: 100));
       add(const OtpChanged(otp: ''));
     } catch (e) {
       emit(OtpVerificationFailure(error: e.toString()));
