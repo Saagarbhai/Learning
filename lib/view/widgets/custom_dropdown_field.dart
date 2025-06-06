@@ -20,61 +20,70 @@ class CustomDropdownField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
-      value: value,
-      isExpanded: isExpanded,
-      icon: Icon(
-        Icons.keyboard_arrow_down,
-        color: Color(0xFF666666),
-        size: 24.sp,
+    return Theme(
+      data: Theme.of(context).copyWith(
+        // Make sure the dropdown menu background matches the dropdown field
+        canvasColor: Colors.white,
       ),
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: TextStyle(
+      child: DropdownButtonFormField<String>(
+        value: value,
+        isExpanded: isExpanded,
+        icon: Icon(
+          Icons.keyboard_arrow_down,
+          color: Color(0xFF666666),
+          size: 24.sp,
+        ),
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: TextStyle(
+            fontSize: 16.sp,
+            color: Color(0xFFAAAAAA),
+            fontFamily: 'Poppins',
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: Color(0xFFE0E0E0), width: 1.w),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: Color(0xFF00A86B), width: 1.5.w),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: Colors.red, width: 1.w),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.r),
+            borderSide: BorderSide(color: Colors.red, width: 1.5.w),
+          ),
+        ),
+        style: TextStyle(
           fontSize: 16.sp,
-          color: Color(0xFFAAAAAA),
+          color: Color(0xFF1A1A1A),
           fontFamily: 'Poppins',
         ),
-        filled: true,
-        fillColor: Colors.white,
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide(color: Color(0xFFE0E0E0), width: 1.w),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide(color: Color(0xFF00A86B), width: 1.5.w),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide(color: Colors.red, width: 1.w),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide(color: Colors.red, width: 1.5.w),
-        ),
-      ),
-      style: TextStyle(
-        fontSize: 16.sp,
-        color: Color(0xFF1A1A1A),
-        fontFamily: 'Poppins',
-      ),
-      onChanged: onChanged,
-      validator: validator,
-      items: items.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(
-            value,
-            style: TextStyle(
-              fontSize: 16.sp,
-              color: Color(0xFF1A1A1A),
-              fontFamily: 'Poppins',
+        onChanged: onChanged,
+        validator: validator,
+        dropdownColor: Colors.white,
+        menuMaxHeight: 300.h, // Set a maximum height for the dropdown menu
+        items: items.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: Color(0xFF1A1A1A),
+                fontFamily: 'Poppins',
+              ),
             ),
-          ),
-        );
-      }).toList(),
+          );
+        }).toList(),
+      ),
     );
   }
 }

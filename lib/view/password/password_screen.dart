@@ -1,7 +1,8 @@
 import '../../core/utils/app_export.dart';
 
 class PasswordScreen extends StatelessWidget {
-  const PasswordScreen({super.key});
+  PasswordScreen({super.key});
+  final _formKey = GlobalKey<FormState>();
 
   // Method to navigate to profile screen
   void _navigateToProfileScreen(BuildContext context) {
@@ -52,7 +53,7 @@ class PasswordScreen extends StatelessWidget {
             child: BlocBuilder<PasswordBloc, PasswordState>(
               builder: (context, state) {
                 return Form(
-                  key: context.read<PasswordBloc>().formKey,
+                  key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

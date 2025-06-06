@@ -1,13 +1,6 @@
 import '../../core/utils/app_export.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  final AuthRepository authRepository = AuthRepository(apiClient: ApiClient());
-  final formKey = KeysManager.createSignInFormKey();
-
-  // Move controllers to bloc level
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
   SignInBloc() : super(SignInState.initial()) {
     on<UpdateEmail>(_onUpdateEmail);
     on<UpdatePassword>(_onUpdatePassword);
@@ -23,16 +16,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<DisposeSignIn>(_onDisposeSignIn);
 
     // Initialize controllers
-    emailController.addListener(_emailControllerListener);
-    passwordController.addListener(_passwordControllerListener);
+    state.emailController.addListener(_emailControllerListener);
+    state.passwordController.addListener(_passwordControllerListener);
   }
 
   void _emailControllerListener() {
-    add(UpdateEmail(emailController.text));
+    add(UpdateEmail(state.emailController.text));
   }
 
   void _passwordControllerListener() {
-    add(UpdatePassword(passwordController.text));
+    add(UpdatePassword(state.passwordController.text));
   }
 
   void _onInitializeSignIn(InitializeSignIn event, Emitter<SignInState> emit) {
@@ -45,8 +38,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   void _onDisposeSignIn(DisposeSignIn event, Emitter<SignInState> emit) {
     // Don't dispose controllers here, they will be disposed in close()
     emit(SignInState(
-      emailController: emailController,
-      passwordController: passwordController,
+      emailController: state.emailController,
+      passwordController: state.passwordController,
     ));
   }
 
@@ -67,7 +60,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       SignInWithEmailPasswordPressed event, Emitter<SignInState> emit) async {
     emit(state.copyWith(isLoading: true, errorMessage: null));
     try {
-      final loginModel = await authRepository.loginWithEmailPassword(
+      final loginModel = await state.authRepository.loginWithEmailPassword(
         email: event.email,
         password: event.password,
       );
@@ -183,12 +176,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   @override
   Future<void> close() {
     // Remove listeners
-    emailController.removeListener(_emailControllerListener);
-    passwordController.removeListener(_passwordControllerListener);
+    state.emailController.removeListener(_emailControllerListener);
+    state.passwordController.removeListener(_passwordControllerListener);
 
     // Dispose controllers
-    emailController.dispose();
-    passwordController.dispose();
+    state.emailController.dispose();
+    state.passwordController.dispose();
 
     return super.close();
   }

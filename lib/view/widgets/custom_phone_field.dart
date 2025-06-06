@@ -47,50 +47,59 @@ class CustomPhoneField extends StatelessWidget {
         ),
         filled: true,
         fillColor: Colors.white,
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-        prefixIcon: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          margin: EdgeInsets.only(right: 8.w),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Country flag
-              Container(
-                width: 24.w,
-                height: 18.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2.r),
+        contentPadding:
+            EdgeInsets.only(left: 100.w, right: 16.w, top: 16.h, bottom: 16.h),
+        prefixIcon: InkWell(
+          onTap: () {
+            // Show country code picker if needed
+            if (onCountryCodeChanged != null) {
+              // Implement country code picker logic here
+            }
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            margin: EdgeInsets.only(right: 8.w),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Country flag
+                Container(
+                  width: 24.w,
+                  height: 18.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2.r),
+                  ),
+                  child: SvgPicture.asset(
+                    Assets.images.flag.indian.path,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                child: SvgPicture.asset(
-                  Assets.images.flag.indian.path,
-                  fit: BoxFit.cover,
+                SizedBox(width: 8.w),
+                // Dropdown icon
+                Icon(
+                  Icons.keyboard_arrow_down,
+                  size: 16.sp,
+                  color: Color(0xFF666666),
                 ),
-              ),
-              SizedBox(width: 8.w),
-              // Dropdown icon
-              Icon(
-                Icons.keyboard_arrow_down,
-                size: 16.sp,
-                color: Color(0xFF666666),
-              ),
-              SizedBox(width: 8.w),
-              // Country code
-              Text(
-                countryCode,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  color: Color(0xFF1A1A1A),
-                  fontFamily: 'Poppins',
+                SizedBox(width: 8.w),
+                // Country code
+                Text(
+                  countryCode,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: Color(0xFF1A1A1A),
+                    fontFamily: 'Poppins',
+                  ),
                 ),
-              ),
-              SizedBox(width: 8.w),
-              // Vertical divider
-              Container(
-                height: 24.h,
-                width: 1.w,
-                color: const Color(0xFFE0E0E0),
-              ),
-            ],
+                SizedBox(width: 8.w),
+                // Vertical divider
+                Container(
+                  height: 24.h,
+                  width: 1.w,
+                  color: const Color(0xFFE0E0E0),
+                ),
+              ],
+            ),
           ),
         ),
         enabledBorder: OutlineInputBorder(

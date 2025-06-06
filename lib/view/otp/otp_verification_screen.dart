@@ -1,13 +1,13 @@
 import 'package:learning/core/utils/app_export.dart';
 
 class OtpVerificationScreen extends StatelessWidget {
-  const OtpVerificationScreen({Key? key}) : super(key: key);
+  OtpVerificationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<OtpVerificationBloc, OtpVerificationState>(
       listener: (context, state) {
-        if (state is OtpVerificationSuccess) {
+        if (state.status == OtpVerificationStatus.success) {
           // Navigate to the next screen after successful verification
           AppToast.show(
             message: Lang.of(context).verificationSuccessful,
@@ -17,12 +17,13 @@ class OtpVerificationScreen extends StatelessWidget {
           // Navigate to password screen after successful verification
           Navigator.of(context)
               .pushReplacementNamed(AppConstants.passwordRoute);
-        } else if (state is OtpVerificationFailure) {
+        } else if (state.status == OtpVerificationStatus.failure &&
+            state.errorMessage != null) {
           AppToast.show(
-            message: 'Verification failed: ${state.error}',
+            message: 'Verification failed: ${state.errorMessage}',
             type: ToastificationType.error,
           );
-        } else if (state is OtpResendSuccess) {
+        } else if (state.status == OtpVerificationStatus.resendSuccess) {
           AppToast.show(
             message: Lang.of(context).otpResent,
             type: ToastificationType.success,
@@ -40,7 +41,7 @@ class OtpVerificationScreen extends StatelessWidget {
             LanguageButton(),
           ],
         ),
-        body: const SafeArea(
+        body: SafeArea(
           child: OtpVerificationForm(),
         ),
       ),
@@ -49,132 +50,137 @@ class OtpVerificationScreen extends StatelessWidget {
 }
 
 class OtpVerificationForm extends StatelessWidget {
-  const OtpVerificationForm({Key? key}) : super(key: key);
+  OtpVerificationForm({Key? key}) : super(key: key);
 
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<OtpVerificationBloc>();
-
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      behavior: HitTestBehavior.opaque,
-      child: Container(
-        padding: const EdgeInsets.all(24.0),
-        child: Form(
-          key: bloc.formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // Title
-                      Text(
-                        Lang.of(context).phoneVerification,
-                        style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1A1A1A),
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      SizedBox(height: 12.h),
-
-                      // Subtitle
-                      Text(
-                        Lang.of(context).enterOtpCode,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: Color(0xFF666666),
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      SizedBox(height: 40.h),
-
-                      // OTP fields with CustomPinBox
-                      CustomPinBox(
-                        controller: bloc.pinController,
-                        onCompleted: (pin) {
-                          context.read<OtpVerificationBloc>().add(
-                                VerifyOtp(otp: pin),
-                              );
-                        },
-                        onChanged: (value) {
-                          context.read<OtpVerificationBloc>().add(
-                                OtpChanged(otp: value),
-                              );
-                        },
-                      ),
-                      SizedBox(height: 20.h),
-
-                      // Resend code text
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+    final otpVerificationBloc = context.read<OtpVerificationBloc>();
+    return BlocBuilder<OtpVerificationBloc, OtpVerificationState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          behavior: HitTestBehavior.opaque,
+          child: Container(
+            padding: const EdgeInsets.all(24.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          // Title
                           Text(
-                            Lang.of(context).didntReceiveCode,
+                            Lang.of(context).phoneVerification,
                             style: TextStyle(
-                              fontSize: 14.sp,
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1A1A1A),
+                              fontFamily: 'Poppins',
+                            ),
+                          ),
+                          SizedBox(height: 12.h),
+
+                          // Subtitle
+                          Text(
+                            Lang.of(context).enterOtpCode,
+                            style: TextStyle(
+                              fontSize: 16.sp,
                               color: Color(0xFF666666),
                               fontFamily: 'Poppins',
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<OtpVerificationBloc>()
-                                  .add(ResendOtp());
+                          SizedBox(height: 40.h),
+
+                          // OTP fields with CustomPinBox
+                          CustomPinBox(
+                            controller: state.pinController,
+                            onCompleted: (pin) {
+                              otpVerificationBloc.add(
+                                VerifyOtp(otp: pin),
+                              );
                             },
-                            child: Text(
-                              Lang.of(context).resendAgain,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF00A86B),
-                                fontFamily: 'Poppins',
+                            onChanged: (value) {
+                              otpVerificationBloc.add(
+                                OtpChanged(otp: value),
+                              );
+                            },
+                          ),
+                          SizedBox(height: 20.h),
+
+                          // Resend code text
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                Lang.of(context).didntReceiveCode,
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: Color(0xFF666666),
+                                  fontFamily: 'Poppins',
+                                ),
                               ),
-                            ),
+                              GestureDetector(
+                                onTap: () {
+                                  otpVerificationBloc.add(ResendOtp());
+                                },
+                                child: Text(
+                                  Lang.of(context).resendAgain,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xFF00A86B),
+                                    fontFamily: 'Poppins',
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
 
-              SizedBox(height: 24.h),
+                  SizedBox(height: 24.h),
 
-              // Verify button at the bottom
-              BlocBuilder<OtpVerificationBloc, OtpVerificationState>(
-                builder: (context, state) {
-                  final isLoading = state is OtpVerificationLoading;
+                  // Verify button at the bottom
+                  BlocBuilder<OtpVerificationBloc, OtpVerificationState>(
+                    builder: (context, state) {
+                      final isLoading =
+                          state.status == OtpVerificationStatus.loading;
 
-                  return CustomButton(
-                    text: Lang.of(context).verify,
-                    onPressed: isLoading
-                        ? null
-                        : () {
-                            context.read<OtpVerificationBloc>().add(
-                                  VerifyOtp(otp: bloc.pinController.text),
+                      return CustomButton(
+                        text: Lang.of(context).verify,
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                                otpVerificationBloc.add(
+                                  VerifyOtp(
+                                    otp: state.pinController.text,
+                                  ),
                                 );
-                          },
-                    width: double.infinity,
-                    height: 58.h,
-                    isLoading: isLoading,
-                    showShadow: true,
-                    fontSize: 18.sp,
-                    padding: EdgeInsets.symmetric(vertical: 16.h),
-                    fontWeight: FontWeight.w600,
-                    margin: EdgeInsets.only(bottom: 16.h),
-                  );
-                },
+                              },
+                        width: double.infinity,
+                        height: 58.h,
+                        isLoading: isLoading,
+                        showShadow: true,
+                        fontSize: 18.sp,
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                        fontWeight: FontWeight.w600,
+                        margin: EdgeInsets.only(bottom: 16.h),
+                      );
+                    },
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

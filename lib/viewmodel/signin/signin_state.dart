@@ -13,6 +13,8 @@ class SignInState extends Equatable {
   final TextEditingController passwordController;
   final UserData? userData;
   final String? token;
+  final AuthRepository authRepository;
+  final GlobalKey<FormState> formKey;
 
   SignInState({
     this.email = '',
@@ -27,7 +29,11 @@ class SignInState extends Equatable {
     required this.passwordController,
     this.userData,
     this.token,
-  });
+    AuthRepository? authRepository,
+    GlobalKey<FormState>? formKey,
+  })  : this.authRepository =
+            authRepository ?? AuthRepository(apiClient: ApiClient()),
+        this.formKey = formKey ?? KeysManager.createSignInFormKey();
 
   factory SignInState.initial() {
     return SignInState(
@@ -62,6 +68,8 @@ class SignInState extends Equatable {
       passwordController: passwordController,
       userData: userData ?? this.userData,
       token: token ?? this.token,
+      authRepository: authRepository,
+      formKey: formKey,
     );
   }
 

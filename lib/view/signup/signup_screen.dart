@@ -48,12 +48,8 @@ class SignUpScreen extends StatelessWidget {
           ],
         ),
         backgroundColor: Colors.white,
-        body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          behavior: HitTestBehavior.opaque,
-          child: const SafeArea(
-            child: SignUpForm(),
-          ),
+        body: SafeArea(
+          child: SignUpForm(),
         ),
       ),
     );
@@ -61,17 +57,19 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class SignUpForm extends StatelessWidget {
-  const SignUpForm({Key? key}) : super(key: key);
+  SignUpForm({Key? key}) : super(key: key);
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<SignUpBloc>();
+    final state = context.read<SignUpBloc>().state;
+    final signUpBloc = context.read<SignUpBloc>();
 
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(24.0.r),
         child: Form(
-          key: bloc.formKey,
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -88,7 +86,7 @@ class SignUpForm extends StatelessWidget {
               // Name field
               CustomTextField(
                 hintText: Lang.of(context).name,
-                controller: bloc.nameController,
+                controller: state.nameController,
                 textInputAction: TextInputAction.next,
                 onChanged: (value) {
                   context.read<SignUpBloc>().add(
@@ -107,7 +105,7 @@ class SignUpForm extends StatelessWidget {
               // Email field
               CustomTextField(
                 hintText: Lang.of(context).hintEmail,
-                controller: bloc.emailController,
+                controller: state.emailController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
                 onChanged: (value) {
@@ -130,7 +128,7 @@ class SignUpForm extends StatelessWidget {
               // Phone field
               CustomPhoneField(
                 hintText: Lang.of(context).hintPhone,
-                controller: bloc.phoneController,
+                controller: state.phoneController,
                 textInputAction: TextInputAction.next,
                 onChanged: (value) {
                   context.read<SignUpBloc>().add(
@@ -138,6 +136,9 @@ class SignUpForm extends StatelessWidget {
                       );
                 },
                 validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your phone number';
+                  }
                   return null; // Either email or phone is required, handled in the bloc
                 },
               ),
@@ -146,11 +147,10 @@ class SignUpForm extends StatelessWidget {
               // Gender dropdown
               BlocBuilder<SignUpBloc, SignUpState>(
                 builder: (context, state) {
-                  final signUpBloc = context.read<SignUpBloc>();
                   return CustomDropdownField(
                     hintText: Lang.of(context).hintGender,
-                    items: signUpBloc.genders,
-                    value: signUpBloc.selectedGender,
+                    items: state.genders,
+                    value: state.selectedGender,
                     onChanged: (value) {
                       if (value != null) {
                         context.read<SignUpBloc>().add(
@@ -223,7 +223,6 @@ class SignUpForm extends StatelessWidget {
               // Sign Up button
               BlocBuilder<SignUpBloc, SignUpState>(
                 builder: (context, state) {
-                  final signUpBloc = context.read<SignUpBloc>();
                   bool isLoading = state.isLoading;
                   bool isFormValid = state.isFormValid;
 
@@ -234,16 +233,17 @@ class SignUpForm extends StatelessWidget {
                     onPressed: isLoading || !isFormValid
                         ? null
                         : () {
-                            if (signUpBloc.formKey.currentState!.validate()) {
-                              context.read<SignUpBloc>().add(
-                                    SignUpWithEmailAndPassword(
-                                      name: signUpBloc.nameController.text,
-                                      email: signUpBloc.emailController.text,
-                                      phoneNumber:
-                                          signUpBloc.phoneController.text,
-                                      gender: signUpBloc.selectedGender!,
-                                    ),
-                                  );
+                            // Hide keyboard when button is pressed
+                            FocusScope.of(context).unfocus();
+                            if (_formKey.currentState!.validate()) {
+                              signUpBloc.add(
+                                SignUpWithEmailAndPassword(
+                                  name: state.nameController.text,
+                                  email: state.emailController.text,
+                                  phoneNumber: state.phoneController.text,
+                                  gender: state.selectedGender!,
+                                ),
+                              );
                             }
                           },
                   );
@@ -279,7 +279,7 @@ class SignUpForm extends StatelessWidget {
               SocialSignButton.gmail(
                 text: Lang.of(context).signupwithGmail,
                 onPressed: () {
-                  context.read<SignUpBloc>().add(SignUpWithGmail());
+                  signUpBloc.add(SignUpWithGmail());
                 },
                 isDisabled: true,
               ),
@@ -287,7 +287,7 @@ class SignUpForm extends StatelessWidget {
               SocialSignButton.facebook(
                 text: Lang.of(context).signupwithFaceBook,
                 onPressed: () {
-                  context.read<SignUpBloc>().add(SignUpWithFacebook());
+                  signUpBloc.add(SignUpWithFacebook());
                 },
                 isDisabled: true,
               ),
@@ -295,7 +295,7 @@ class SignUpForm extends StatelessWidget {
               SocialSignButton.apple(
                 text: Lang.of(context).signupwithApple,
                 onPressed: () {
-                  context.read<SignUpBloc>().add(SignUpWithApple());
+                  signUpBloc.add(SignUpWithApple());
                 },
                 isDisabled: true,
               ),
@@ -315,7 +315,7 @@ class SignUpForm extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.read<SignUpBloc>().add(NavigateToSignIn());
+                        signUpBloc.add(NavigateToSignIn());
                       },
                       child: Text(
                         Lang.of(context).signIn,

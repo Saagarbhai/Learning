@@ -1,7 +1,8 @@
 import '../../core/utils/app_export.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  SignInScreen({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class SignInScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0.w),
             child: Form(
-              key: context.read<SignInBloc>().formKey,
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -145,17 +146,8 @@ class SignInScreen extends StatelessWidget {
                     onPressed: state.isLoading
                         ? null
                         : () {
-                            context
-                                .read<SignInBloc>()
-                                .formKey
-                                .currentState!
-                                .reset();
-                            if (context
-                                    .read<SignInBloc>()
-                                    .formKey
-                                    .currentState
-                                    ?.validate() ??
-                                false) {
+                            _formKey.currentState!.reset();
+                            if (_formKey.currentState?.validate() ?? false) {
                               context.read<SignInBloc>().add(
                                     SignInWithEmailPasswordPressed(
                                       email: state.emailController.text,

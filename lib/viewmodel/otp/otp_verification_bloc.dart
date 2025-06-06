@@ -2,23 +2,7 @@ import 'package:learning/core/utils/app_export.dart';
 
 class OtpVerificationBloc
     extends Bloc<OtpVerificationEvent, OtpVerificationState> {
-  // Controllers for OTP verification
-  final List<TextEditingController> otpControllers = List.generate(
-    5,
-    (_) => TextEditingController(),
-  );
-  final List<FocusNode> otpFocusNodes = List.generate(
-    5,
-    (_) => FocusNode(),
-  );
-
-  // Pin controller for CustomPinBox
-  final TextEditingController pinController = TextEditingController();
-
-  // Use the factory method to create a new key
-  final formKey = KeysManager.createOtpVerificationFormKey();
-
-  OtpVerificationBloc() : super(OtpVerificationInitial()) {
+  OtpVerificationBloc() : super(OtpVerificationState()) {
     on<OtpChanged>(_onOtpChanged);
     on<VerifyOtp>(_onVerifyOtp);
     on<ResendOtp>(_onResendOtp);
@@ -34,26 +18,18 @@ class OtpVerificationBloc
     final currentOtp = event.otp;
     final bool isComplete = currentOtp.length == 5;
 
-    if (state is OtpFormValidationState) {
-      final currentState = state as OtpFormValidationState;
-      final updatedState = currentState.copyWith(
-        otp: currentOtp,
-        isFormValid: isComplete,
-      );
-      emit(updatedState);
-    } else {
-      emit(OtpFormValidationState(
-        otp: currentOtp,
-        isFormValid: isComplete,
-      ));
-    }
+    emit(state.copyWith(
+      status: OtpVerificationStatus.formValidation,
+      otp: currentOtp,
+      isFormValid: isComplete,
+    ));
   }
 
   void _onVerifyOtp(
     VerifyOtp event,
     Emitter<OtpVerificationState> emit,
   ) async {
-    emit(OtpVerificationLoading());
+    emit(state.copyWith(status: OtpVerificationStatus.loading));
 
     try {
       // Here you would typically make an API call to verify the OTP
@@ -63,14 +39,19 @@ class OtpVerificationBloc
       // Check if OTP is correct (12345)
       if (event.otp == '12345') {
         // Clear the pin input on success
-        pinController.clear();
-        emit(OtpVerificationSuccess());
+        state.pinController.clear();
+        emit(state.copyWith(status: OtpVerificationStatus.success));
       } else {
-        emit(const OtpVerificationFailure(
-            error: 'Invalid OTP. Please try again.'));
+        emit(state.copyWith(
+          status: OtpVerificationStatus.failure,
+          errorMessage: 'Invalid OTP. Please try again.',
+        ));
       }
     } catch (e) {
-      emit(OtpVerificationFailure(error: e.toString()));
+      emit(state.copyWith(
+        status: OtpVerificationStatus.failure,
+        errorMessage: e.toString(),
+      ));
     }
   }
 
@@ -78,42 +59,32 @@ class OtpVerificationBloc
     ResendOtp event,
     Emitter<OtpVerificationState> emit,
   ) async {
+    emit(state.copyWith(status: OtpVerificationStatus.resendLoading));
+
     try {
       // Simulate resending OTP
       // await Future.delayed(const Duration(seconds: 1));
 
-      // Reset form validation state
-      add(const OtpChanged(otp: ''));
-
       // Clear the pin input when resending OTP
-      pinController.clear();
+      state.pinController.clear();
 
       // Show resend OTP success notification
-      emit(OtpResendSuccess());
+      emit(state.copyWith(status: OtpVerificationStatus.resendSuccess));
 
-      // Restore the validation state
-      // await Future.delayed(const Duration(milliseconds: 100));
+      // Reset form validation state
       add(const OtpChanged(otp: ''));
     } catch (e) {
-      emit(OtpVerificationFailure(error: e.toString()));
+      emit(state.copyWith(
+        status: OtpVerificationStatus.resendFailure,
+        errorMessage: e.toString(),
+      ));
     }
-  }
-
-  // Helper method to get combined OTP
-  String getCombinedOtp() {
-    return otpControllers.map((controller) => controller.text).join();
   }
 
   @override
   Future<void> close() {
-    // Dispose controllers and focus nodes when bloc is closed
-    for (var controller in otpControllers) {
-      controller.dispose();
-    }
-    for (var node in otpFocusNodes) {
-      node.dispose();
-    }
-    pinController.dispose();
+    // Dispose controller
+    state.pinController.dispose();
     return super.close();
   }
 }

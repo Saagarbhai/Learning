@@ -12,8 +12,11 @@ class SignUpState extends Equatable {
   final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController phoneController;
+  final GlobalKey<FormState> formKey;
+  final List<String> genders;
+  final String? selectedGender;
 
-  const SignUpState({
+  SignUpState({
     this.name = '',
     this.email = '',
     this.phoneNumber = '',
@@ -25,7 +28,11 @@ class SignUpState extends Equatable {
     required this.nameController,
     required this.emailController,
     required this.phoneController,
-  });
+    GlobalKey<FormState>? formKey,
+    List<String>? genders,
+    this.selectedGender,
+  })  : this.formKey = formKey ?? KeysManager.createSignUpFormKey(),
+        this.genders = genders ?? ['Male', 'Female', 'Other'];
 
   factory SignUpState.initial() {
     return SignUpState(
@@ -44,6 +51,7 @@ class SignUpState extends Equatable {
     String? errorMessage,
     bool? isSignUpSuccess,
     bool? navigateToSignIn,
+    String? selectedGender,
   }) {
     return SignUpState(
       name: name ?? this.name,
@@ -57,6 +65,9 @@ class SignUpState extends Equatable {
       nameController: nameController,
       emailController: emailController,
       phoneController: phoneController,
+      formKey: formKey,
+      genders: genders,
+      selectedGender: selectedGender ?? this.selectedGender,
     );
   }
 
@@ -81,5 +92,11 @@ class SignUpState extends Equatable {
         errorMessage,
         isSignUpSuccess,
         navigateToSignIn,
+        nameController,
+        emailController,
+        phoneController,
+        formKey,
+        genders,
+        selectedGender,
       ];
 }

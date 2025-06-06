@@ -7,6 +7,7 @@ class ForgotPasswordState extends Equatable {
   final bool isOtpSent;
   final bool isInputValid;
   final TextEditingController inputController;
+  final GlobalKey<FormState> formKey;
 
   ForgotPasswordState({
     this.verificationInput = '',
@@ -15,7 +16,9 @@ class ForgotPasswordState extends Equatable {
     this.isOtpSent = false,
     this.isInputValid = false,
     TextEditingController? inputController,
-  }) : inputController = inputController ?? TextEditingController();
+    GlobalKey<FormState>? formKey,
+  })  : this.inputController = inputController ?? TextEditingController(),
+        this.formKey = formKey ?? KeysManager.createForgotPasswordFormKey();
 
   ForgotPasswordState copyWith({
     String? verificationInput,
@@ -31,6 +34,7 @@ class ForgotPasswordState extends Equatable {
       isOtpSent: isOtpSent ?? this.isOtpSent,
       isInputValid: isInputValid ?? this.isInputValid,
       inputController: inputController,
+      formKey: formKey,
     );
   }
 
@@ -41,5 +45,6 @@ class ForgotPasswordState extends Equatable {
         errorMessage,
         isOtpSent,
         isInputValid,
+        formKey,
       ];
 }

@@ -1,45 +1,43 @@
 import 'package:learning/core/utils/app_export.dart';
 
-abstract class OtpVerificationState extends Equatable {
-  const OtpVerificationState();
-
-  @override
-  List<Object?> get props => [];
+enum OtpVerificationStatus {
+  initial,
+  loading,
+  success,
+  failure,
+  formValidation,
+  resendLoading,
+  resendSuccess,
+  resendFailure,
 }
 
-class OtpVerificationInitial extends OtpVerificationState {}
-
-class OtpVerificationLoading extends OtpVerificationState {}
-
-class OtpVerificationSuccess extends OtpVerificationState {}
-
-class OtpResendSuccess extends OtpVerificationState {}
-
-class OtpVerificationFailure extends OtpVerificationState {
-  final String error;
-
-  const OtpVerificationFailure({required this.error});
-
-  @override
-  List<Object> get props => [error];
-}
-
-class OtpFormValidationState extends OtpVerificationState {
+class OtpVerificationState extends Equatable {
+  final OtpVerificationStatus status;
   final String otp;
   final bool isFormValid;
+  final String? errorMessage;
+  final TextEditingController pinController;
 
-  const OtpFormValidationState({
+  OtpVerificationState({
+    this.status = OtpVerificationStatus.initial,
     this.otp = '',
     this.isFormValid = false,
-  });
+    this.errorMessage,
+    TextEditingController? pinController,
+  }) : this.pinController = pinController ?? TextEditingController();
 
-  OtpFormValidationState copyWith({
+  OtpVerificationState copyWith({
+    OtpVerificationStatus? status,
     String? otp,
     bool? isFormValid,
+    String? errorMessage,
   }) {
-    return OtpFormValidationState(
+    return OtpVerificationState(
+      status: status ?? this.status,
       otp: otp ?? this.otp,
       isFormValid: isFormValid ?? this.isFormValid,
+      errorMessage: errorMessage,
+      pinController: pinController,
     );
   }
 
@@ -48,5 +46,6 @@ class OtpFormValidationState extends OtpVerificationState {
   }
 
   @override
-  List<Object?> get props => [otp, isFormValid];
+  List<Object?> get props =>
+      [status, otp, isFormValid, errorMessage, pinController];
 }

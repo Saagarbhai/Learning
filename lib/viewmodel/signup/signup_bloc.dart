@@ -1,22 +1,6 @@
 import 'package:learning/core/utils/app_export.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  // Controllers moved from the widget
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final phoneController = TextEditingController();
-
-  // Gender list moved from the widget
-  final List<String> genders = [
-    'Male',
-    'Female',
-    'Other',
-  ];
-  String? selectedGender;
-
-  // Use the factory method to create a new key instead of the static field
-  final formKey = KeysManager.createSignUpFormKey();
-
   SignUpBloc() : super(SignUpState.initial()) {
     on<SignUpFormChanged>(_onSignUpFormChanged);
     on<SignUpWithEmailAndPassword>(_onSignUpWithEmailAndPassword);
@@ -29,44 +13,43 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<DisposeSignUp>(_onDisposeSignUp);
 
     // Initialize controllers with listeners
-    nameController.addListener(_nameControllerListener);
-    emailController.addListener(_emailControllerListener);
-    phoneController.addListener(_phoneControllerListener);
+    state.nameController.addListener(_nameControllerListener);
+    state.emailController.addListener(_emailControllerListener);
+    state.phoneController.addListener(_phoneControllerListener);
   }
 
   void _nameControllerListener() {
-    add(SignUpFormChanged(name: nameController.text));
+    add(SignUpFormChanged(name: state.nameController.text));
   }
 
   void _emailControllerListener() {
-    add(SignUpFormChanged(email: emailController.text));
+    add(SignUpFormChanged(email: state.emailController.text));
   }
 
   void _phoneControllerListener() {
-    add(SignUpFormChanged(phoneNumber: phoneController.text));
+    add(SignUpFormChanged(phoneNumber: state.phoneController.text));
   }
 
   void _onInitializeSignUp(InitializeSignUp event, Emitter<SignUpState> emit) {
     // Reset controllers if needed
-    nameController.clear();
-    emailController.clear();
-    phoneController.clear();
-    selectedGender = null;
+    state.nameController.clear();
+    state.emailController.clear();
+    state.phoneController.clear();
 
     // Initialize state with fresh controllers
     emit(SignUpState(
-      nameController: nameController,
-      emailController: emailController,
-      phoneController: phoneController,
+      nameController: state.nameController,
+      emailController: state.emailController,
+      phoneController: state.phoneController,
     ));
   }
 
   void _onDisposeSignUp(DisposeSignUp event, Emitter<SignUpState> emit) {
     // Don't dispose controllers here, they will be disposed in close()
     emit(SignUpState(
-      nameController: nameController,
-      emailController: emailController,
-      phoneController: phoneController,
+      nameController: state.nameController,
+      emailController: state.emailController,
+      phoneController: state.phoneController,
     ));
   }
 
@@ -86,8 +69,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     UpdateSelectedGender event,
     Emitter<SignUpState> emit,
   ) {
-    selectedGender = event.gender;
-    emit(state.copyWith(gender: event.gender));
+    emit(state.copyWith(
+      gender: event.gender,
+      selectedGender: event.gender,
+    ));
   }
 
   void _onSignUpWithEmailAndPassword(
@@ -128,23 +113,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
-      // Here you would implement Gmail sign-up logic
-      // await Future.delayed(const Duration(seconds: 2));
-
-      // Show success toast
-      AppToast.show(
-        message: "Gmail registration successful",
-        type: ToastificationType.success,
-      );
-
+      // Simulate API call
+      await Future.delayed(const Duration(seconds: 1));
+      // Emit success state
       emit(state.copyWith(isLoading: false, isSignUpSuccess: true));
     } catch (e) {
-      // Show error toast
-      AppToast.show(
-        message: e.toString(),
-        type: ToastificationType.error,
-      );
-
       emit(state.copyWith(
         isLoading: false,
         errorMessage: e.toString(),
@@ -159,23 +132,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
-      // Here you would implement Facebook sign-up logic
-      // await Future.delayed(const Duration(seconds: 2));
-
-      // Show success toast
-      AppToast.show(
-        message: "Facebook registration successful",
-        type: ToastificationType.success,
-      );
-
+      // Simulate API call
+      await Future.delayed(const Duration(seconds: 1));
+      // Emit success state
       emit(state.copyWith(isLoading: false, isSignUpSuccess: true));
     } catch (e) {
-      // Show error toast
-      AppToast.show(
-        message: e.toString(),
-        type: ToastificationType.error,
-      );
-
       emit(state.copyWith(
         isLoading: false,
         errorMessage: e.toString(),
@@ -190,23 +151,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
     try {
-      // Here you would implement Apple sign-up logic
-      // await Future.delayed(const Duration(seconds: 2));
-
-      // Show success toast
-      AppToast.show(
-        message: "Apple registration successful",
-        type: ToastificationType.success,
-      );
-
+      // Simulate API call
+      await Future.delayed(const Duration(seconds: 1));
+      // Emit success state
       emit(state.copyWith(isLoading: false, isSignUpSuccess: true));
     } catch (e) {
-      // Show error toast
-      AppToast.show(
-        message: e.toString(),
-        type: ToastificationType.error,
-      );
-
       emit(state.copyWith(
         isLoading: false,
         errorMessage: e.toString(),
@@ -218,21 +167,21 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     NavigateToSignIn event,
     Emitter<SignUpState> emit,
   ) {
-    // Emit the navigation state
     emit(state.copyWith(navigateToSignIn: true));
   }
 
   @override
   Future<void> close() {
     // Remove listeners
-    nameController.removeListener(_nameControllerListener);
-    emailController.removeListener(_emailControllerListener);
-    phoneController.removeListener(_phoneControllerListener);
+    state.nameController.removeListener(_nameControllerListener);
+    state.emailController.removeListener(_emailControllerListener);
+    state.phoneController.removeListener(_phoneControllerListener);
 
-    // Dispose controllers when bloc is closed
-    nameController.dispose();
-    emailController.dispose();
-    phoneController.dispose();
+    // Dispose controllers
+    state.nameController.dispose();
+    state.emailController.dispose();
+    state.phoneController.dispose();
+
     return super.close();
   }
 }

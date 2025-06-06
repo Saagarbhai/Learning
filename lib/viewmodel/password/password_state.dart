@@ -10,6 +10,7 @@ class PasswordState extends Equatable {
   final String? errorMessage;
   final bool isPasswordVisible;
   final bool isConfirmPasswordVisible;
+  final GlobalKey<FormState> formKey;
 
   PasswordState({
     this.password = '',
@@ -21,7 +22,8 @@ class PasswordState extends Equatable {
     this.errorMessage,
     this.isPasswordVisible = false,
     this.isConfirmPasswordVisible = false,
-  });
+    GlobalKey<FormState>? formKey,
+  }) : this.formKey = formKey ?? KeysManager.createPasswordFormKey();
 
   PasswordState copyWith({
     String? password,
@@ -46,6 +48,7 @@ class PasswordState extends Equatable {
       isPasswordVisible: isPasswordVisible ?? this.isPasswordVisible,
       isConfirmPasswordVisible:
           isConfirmPasswordVisible ?? this.isConfirmPasswordVisible,
+      formKey: formKey,
     );
   }
 
@@ -60,5 +63,6 @@ class PasswordState extends Equatable {
         errorMessage,
         isPasswordVisible,
         isConfirmPasswordVisible,
+        formKey,
       ];
 }

@@ -14,6 +14,7 @@ class ProfileState extends Equatable {
   final String? errorMessage;
   final List<String> cities;
   final List<String> districts;
+  final GlobalKey<FormState> formKey;
 
   ProfileState({
     this.name = '',
@@ -56,7 +57,8 @@ class ProfileState extends Equatable {
       'Sabarkantha',
       'Kutch'
     ],
-  });
+    GlobalKey<FormState>? formKey,
+  }) : this.formKey = formKey ?? KeysManager.createProfileFormKey();
 
   ProfileState copyWith({
     String? name,
@@ -87,6 +89,7 @@ class ProfileState extends Equatable {
       errorMessage: errorMessage,
       cities: cities ?? this.cities,
       districts: districts ?? this.districts,
+      formKey: formKey,
     );
   }
 
@@ -105,5 +108,6 @@ class ProfileState extends Equatable {
         errorMessage,
         cities,
         districts,
+        formKey,
       ];
 }

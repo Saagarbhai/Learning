@@ -1,8 +1,9 @@
 import 'package:learning/core/utils/app_export.dart';
 
 class ForgotPasswordVerificationScreen extends StatelessWidget {
-  const ForgotPasswordVerificationScreen({Key? key}) : super(key: key);
+  ForgotPasswordVerificationScreen({Key? key}) : super(key: key);
 
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     // Initialize the bloc when the widget is built
@@ -46,7 +47,7 @@ class ForgotPasswordVerificationScreen extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Form(
-              key: context.read<ForgotPasswordBloc>().formKey,
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

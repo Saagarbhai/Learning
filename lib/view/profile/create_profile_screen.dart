@@ -1,7 +1,8 @@
 import '../../core/utils/app_export.dart';
 
 class CreateProfileScreen extends StatelessWidget {
-  const CreateProfileScreen({Key? key}) : super(key: key);
+  CreateProfileScreen({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +167,7 @@ class CreateProfileScreen extends StatelessWidget {
                     child: BlocBuilder<ProfileBloc, ProfileState>(
                       builder: (context, state) {
                         return Form(
-                          key: context.read<ProfileBloc>().formKey,
+                          key: _formKey,
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
@@ -372,11 +373,7 @@ class CreateProfileScreen extends StatelessWidget {
                                         state.name.trim().isEmpty
                                     ? null
                                     : () {
-                                        context
-                                            .read<ProfileBloc>()
-                                            .formKey
-                                            .currentState!
-                                            .reset();
+                                        _formKey.currentState!.reset();
                                         context
                                             .read<ProfileBloc>()
                                             .add(ProfileSubmitted());
