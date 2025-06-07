@@ -1,12 +1,31 @@
 import '../../core/utils/app_export.dart';
 
-class PasswordScreen extends StatelessWidget {
-  PasswordScreen({super.key});
+class PasswordScreen extends StatefulWidget {
+  const PasswordScreen({super.key});
+
+  @override
+  State<PasswordScreen> createState() => _PasswordScreenState();
+}
+
+class _PasswordScreenState extends State<PasswordScreen> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   // Method to navigate to profile screen
   void _navigateToProfileScreen(BuildContext context) {
     debugPrint('Navigating to CreateProfileScreen');
+
+    // Reset password validation state before navigating
+    context.read<PasswordBloc>().add(ResetPasswordValidation());
 
     Navigator.of(context).pushReplacementNamed(AppConstants.createProfileRoute);
   }
@@ -30,7 +49,17 @@ class PasswordScreen extends StatelessWidget {
           child: BlocListener<PasswordBloc, PasswordState>(
             listener: (context, state) {
               debugPrint(
-                  'BlocListener: isSuccess: ${state.isSuccess}, errorMessage: ${state.errorMessage}');
+                  'BlocListener: isSuccess: ${state.isSuccess}, errorMessage: ${state.errorMessage}, isPasswordValid: ${state.isPasswordValid}, isConfirmPasswordValid: ${state.isConfirmPasswordValid}');
+
+              // Update controllers when state changes
+              if (_passwordController.text != state.password) {
+                _passwordController.text = state.password;
+              }
+
+              if (_confirmPasswordController.text != state.confirmPassword) {
+                _confirmPasswordController.text = state.confirmPassword;
+              }
+
               if (state.isSuccess) {
                 debugPrint(
                     'Navigation triggered: going to CreateProfileScreen');
@@ -86,11 +115,14 @@ class PasswordScreen extends StatelessWidget {
                               // Password field
                               BlocBuilder<PasswordBloc, PasswordState>(
                                 buildWhen: (previous, current) =>
-                                    previous.password != current.password,
+                                    previous.password != current.password ||
+                                    previous.isPasswordValid !=
+                                        current.isPasswordValid,
                                 builder: (context, state) {
                                   return CustomPasswordField(
                                     hintText: Lang.of(context).hintPassword,
                                     isValid: state.isPasswordValid,
+                                    controller: _passwordController,
                                     onChanged: (value) {
                                       context
                                           .read<PasswordBloc>()
@@ -111,8 +143,10 @@ class PasswordScreen extends StatelessWidget {
                                   return CustomPasswordField(
                                     hintText: Lang.of(context).confirmPassword,
                                     confirmField: true,
+                                    isValid: state.isConfirmPasswordValid,
                                     isConfirmMatch:
                                         state.isConfirmPasswordValid,
+                                    controller: _confirmPasswordController,
                                     onChanged: (value) {
                                       context
                                           .read<PasswordBloc>()
@@ -159,6 +193,8 @@ class PasswordScreen extends StatelessWidget {
                                       context
                                           .read<PasswordBloc>()
                                           .add(PasswordSubmitted());
+                                      // Hide keyboard when button is pressed
+                                      FocusScope.of(context).unfocus();
                                     }
                                   : null,
                               width: double.infinity,

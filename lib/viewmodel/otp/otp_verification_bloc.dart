@@ -34,7 +34,7 @@ class OtpVerificationBloc
     try {
       // Here you would typically make an API call to verify the OTP
       // For now, we'll just simulate a verification process
-      //  await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
 
       // Check if OTP is correct (12345)
       if (event.otp == '12345') {
@@ -63,7 +63,6 @@ class OtpVerificationBloc
 
     try {
       // Simulate resending OTP
-      // await Future.delayed(const Duration(seconds: 1));
 
       // Clear the pin input when resending OTP
       state.pinController.clear();

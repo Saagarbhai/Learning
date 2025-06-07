@@ -92,12 +92,7 @@ class SignInScreen extends StatelessWidget {
                     onChanged: (value) {
                       context.read<SignInBloc>().add(UpdateEmail(value));
                     },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email or phone number';
-                      }
-                      return null;
-                    },
+                    validator: Validators.validateEmailOrPhone,
                   ),
                   SizedBox(height: 16.h),
 

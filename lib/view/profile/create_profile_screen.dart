@@ -187,12 +187,7 @@ class CreateProfileScreen extends StatelessWidget {
                                       hintText: Lang.of(context).fullName,
                                       controller: nameController,
                                       textInputAction: TextInputAction.next,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return "Please enter your name";
-                                        }
-                                        return null;
-                                      },
+                                      validator: Validators.validateName,
                                       onChanged: (value) {
                                         context
                                             .read<ProfileBloc>()

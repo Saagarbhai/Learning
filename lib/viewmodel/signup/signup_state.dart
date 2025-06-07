@@ -72,11 +72,14 @@ class SignUpState extends Equatable {
   }
 
   bool get isFormValid {
-    // Simple validation
+    // Use validator utilities
     final bool isNameValid = name != null && name!.isNotEmpty;
-    final bool isEmailValid = email != null &&
-        RegExp(r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$').hasMatch(email!);
-    final bool isPhoneValid = phoneNumber != null && phoneNumber!.isNotEmpty;
+    final bool isEmailValid = email != null && email!.isNotEmpty
+        ? Validators.isEmailValid(email!)
+        : false;
+    final bool isPhoneValid = phoneNumber != null && phoneNumber!.isNotEmpty
+        ? Validators.isPhoneValid(phoneNumber!)
+        : false;
     final bool isGenderValid = gender != null && gender!.isNotEmpty;
 
     return isNameValid && (isEmailValid || isPhoneValid) && isGenderValid;

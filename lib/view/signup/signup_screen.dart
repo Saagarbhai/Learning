@@ -113,15 +113,7 @@ class SignUpForm extends StatelessWidget {
                         SignUpFormChanged(email: value),
                       );
                 },
-                validator: (value) {
-                  if (value != null && value.isNotEmpty) {
-                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                        .hasMatch(value)) {
-                      return 'Please enter a valid email';
-                    }
-                  }
-                  return null;
-                },
+                validator: Validators.validateEmail,
               ),
               SizedBox(height: 16.h),
 
@@ -135,12 +127,7 @@ class SignUpForm extends StatelessWidget {
                         SignUpFormChanged(phoneNumber: value),
                       );
                 },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your phone number';
-                  }
-                  return null; // Either email or phone is required, handled in the bloc
-                },
+                validator: Validators.validatePhone,
               ),
               SizedBox(height: 16.h),
 

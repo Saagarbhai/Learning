@@ -84,3 +84,4 @@ export 'package:learning/core/api_config/endpoints/api_endpoint.dart';
 export 'package:toastification/toastification.dart';
 export 'app_toast.dart';
 export 'package:learning/repository/auth_repository.dart';
+export 'validators.dart';

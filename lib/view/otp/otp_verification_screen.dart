@@ -158,6 +158,7 @@ class OtpVerificationForm extends StatelessWidget {
                         onPressed: isLoading
                             ? null
                             : () {
+                                FocusScope.of(context).unfocus();
                                 otpVerificationBloc.add(
                                   VerifyOtp(
                                     otp: state.pinController.text,

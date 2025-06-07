@@ -33,10 +33,7 @@ class ForgotPasswordBloc
     final input = event.input;
 
     // Validate input - can be either email or phone number
-    final bool isEmail =
-        RegExp(r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$').hasMatch(input);
-    final bool isPhone = RegExp(r'^\d{10}$').hasMatch(input);
-    final bool isInputValid = isEmail || isPhone;
+    final bool isInputValid = Validators.isEmailOrPhoneValid(input);
 
     emit(state.copyWith(
       verificationInput: input,
@@ -58,7 +55,7 @@ class ForgotPasswordBloc
 
     try {
       // Simulate API call with delay
-      //await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 2));
 
       // For demo purposes, always succeed
       emit(state.copyWith(isLoading: false, isOtpSent: true));

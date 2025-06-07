@@ -6,14 +6,13 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
     on<ConfirmPasswordChanged>(_onConfirmPasswordChanged);
     on<PasswordSubmitted>(_onPasswordSubmitted);
     on<TogglePasswordVisibility>(_onTogglePasswordVisibility);
+    on<ResetPasswordValidation>(_onResetPasswordValidation);
   }
 
   void _onPasswordChanged(PasswordChanged event, Emitter<PasswordState> emit) {
     final password = event.password;
-    // Password validation: At least 1 number or special character
-    final isPasswordValid = password.length >= 6 &&
-        (RegExp(r'[0-9]').hasMatch(password) ||
-            RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password));
+    // Use the validator utility
+    final isPasswordValid = Validators.isPasswordValid(password);
 
     debugPrint('Password: $password, Valid: $isPasswordValid');
 
@@ -52,6 +51,25 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
     }
   }
 
+  void _onResetPasswordValidation(
+      ResetPasswordValidation event, Emitter<PasswordState> emit) {
+    debugPrint(
+        'Before reset - Password: ${state.password}, isPasswordValid: ${state.isPasswordValid}, confirmPassword: ${state.confirmPassword}, isConfirmPasswordValid: ${state.isConfirmPasswordValid}');
+
+    final newState = state.copyWith(
+      isPasswordValid: false,
+      isConfirmPasswordValid: false,
+      password: '',
+      confirmPassword: '',
+      isSuccess: false, // Reset success state too
+    );
+
+    emit(newState);
+
+    debugPrint(
+        'After reset - Password: ${newState.password}, isPasswordValid: ${newState.isPasswordValid}, confirmPassword: ${newState.confirmPassword}, isConfirmPasswordValid: ${newState.isConfirmPasswordValid}');
+  }
+
   void _onPasswordSubmitted(
       PasswordSubmitted event, Emitter<PasswordState> emit) async {
     debugPrint(
@@ -84,13 +102,26 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
     try {
       //await Future.delayed(const Duration(seconds: 1));
 
+      debugPrint(
+          'Before success state update - Password: ${state.password}, isPasswordValid: ${state.isPasswordValid}, confirmPassword: ${state.confirmPassword}, isConfirmPasswordValid: ${state.isConfirmPasswordValid}');
+
       // This emit will now properly update the state
-      emit(state.copyWith(
+      final newState = state.copyWith(
         isSubmitting: false,
         isSuccess: true,
-      ));
+        // Reset validation state on success
+        isPasswordValid: false,
+        isConfirmPasswordValid: false,
+        password: '',
+        confirmPassword: '',
+      );
 
-      debugPrint('Password submission successful, isSuccess: true');
+      emit(newState);
+
+      debugPrint(
+          'After success state update - Password: ${newState.password}, isPasswordValid: ${newState.isPasswordValid}, confirmPassword: ${newState.confirmPassword}, isConfirmPasswordValid: ${newState.isConfirmPasswordValid}');
+      debugPrint(
+          'Password submission successful, isSuccess: true, validation state reset');
     } catch (e) {
       emit(state.copyWith(
         isSubmitting: false,

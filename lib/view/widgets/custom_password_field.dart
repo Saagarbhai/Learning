@@ -134,8 +134,8 @@ class CustomPasswordField extends StatelessWidget {
 
     // For confirm password field
     else {
-      // Only show check icon if the confirmation matches and is not empty
-      if (isConfirmMatch && controller?.text.isNotEmpty == true) {
+      // Only show check icon if the confirmation matches
+      if (isConfirmMatch) {
         return Container(
           width: 24.w,
           alignment: Alignment.center,
