@@ -5,6 +5,22 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the signup form when the screen is built
+    // This ensures all fields are cleared, especially when coming from logout
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final prefs = await SharedPreferences.getInstance();
+      final wasLoggedOut = prefs.getBool('was_logged_out') ?? false;
+
+      // Always initialize the signup form
+      context.read<SignUpBloc>().add(InitializeSignUp());
+
+      if (wasLoggedOut) {
+        // If user was logged out, make sure to reset any stored data
+        // The InitializeSignUp event should handle this, but we're being extra careful
+        await prefs.setBool('was_logged_out', false);
+      }
+    });
+
     return BlocListener<SignUpBloc, SignUpState>(
       listener: (context, state) {
         if (state.errorMessage != null) {

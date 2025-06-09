@@ -12,15 +12,28 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileImageChanged>(_onProfileImageChanged);
     on<ProfileSubmitted>(_onProfileSubmitted);
     on<NavigateToHome>(_onNavigateToHome);
+    on<ResetProfile>(_onResetProfile);
   }
 
   void _onInitializeProfile(
-      InitializeProfile event, Emitter<ProfileState> emit) {
-    emit(state.copyWith(
-      name: event.name ?? state.name,
-      email: event.email ?? state.email,
-      profileImagePath: event.imagePath ?? state.profileImagePath,
-    ));
+      InitializeProfile event, Emitter<ProfileState> emit) async {
+    // Check if user was logged out
+    final prefs = await SharedPreferences.getInstance();
+    final wasLoggedOut = prefs.getBool('was_logged_out') ?? false;
+
+    if (wasLoggedOut) {
+      // If user was logged out, start with a clean state
+      emit(ProfileState());
+      // Reset the flag
+      await prefs.setBool('was_logged_out', false);
+    } else {
+      // Otherwise, initialize with provided values or current state
+      emit(state.copyWith(
+        name: event.name ?? state.name,
+        email: event.email ?? state.email,
+        profileImagePath: event.imagePath ?? state.profileImagePath,
+      ));
+    }
   }
 
   void _onNameChanged(NameChanged event, Emitter<ProfileState> emit) {
@@ -135,5 +148,24 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   void _onNavigateToHome(NavigateToHome event, Emitter<ProfileState> emit) {
     // This event will be handled by the BlocListener in the UI
     // No state changes needed here, just trigger the event
+  }
+
+  void _onResetProfile(ResetProfile event, Emitter<ProfileState> emit) async {
+    // Clear profile data in SharedPreferences
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('user_name');
+      await prefs.remove('user_email');
+      await prefs.remove('user_image');
+      await prefs.remove('user_phone');
+      await prefs.remove('user_street');
+      await prefs.remove('user_city');
+      await prefs.remove('user_district');
+
+      // Reset the state to initial values
+      emit(ProfileState());
+    } catch (e) {
+      print('Error resetting profile data: $e');
+    }
   }
 }

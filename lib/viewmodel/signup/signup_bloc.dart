@@ -31,16 +31,25 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   void _onInitializeSignUp(InitializeSignUp event, Emitter<SignUpState> emit) {
-    // Reset controllers if needed
+    // Reset controllers
     state.nameController.clear();
     state.emailController.clear();
     state.phoneController.clear();
 
-    // Initialize state with fresh controllers
+    // Initialize state with fresh controllers and reset all validation states
     emit(SignUpState(
       nameController: state.nameController,
       emailController: state.emailController,
       phoneController: state.phoneController,
+      name: '',
+      email: '',
+      phoneNumber: '',
+      gender: null,
+      selectedGender: null,
+      isSignUpSuccess: false,
+      navigateToSignIn: false,
+      errorMessage: null,
+      isLoading: false,
     ));
   }
 

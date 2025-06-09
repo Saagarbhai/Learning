@@ -1,12 +1,36 @@
 import '../../core/utils/app_export.dart';
 
 class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
-  PasswordBloc() : super(PasswordState()) {
+  PasswordBloc() : super(PasswordState.initial()) {
     on<PasswordChanged>(_onPasswordChanged);
     on<ConfirmPasswordChanged>(_onConfirmPasswordChanged);
     on<PasswordSubmitted>(_onPasswordSubmitted);
     on<TogglePasswordVisibility>(_onTogglePasswordVisibility);
     on<ResetPasswordValidation>(_onResetPasswordValidation);
+    on<InitializePassword>(_onInitializePassword);
+    on<DisposePassword>(_onDisposePassword);
+
+    // Initialize controller listeners
+    state.passwordController.addListener(_passwordControllerListener);
+    state.confirmPasswordController
+        .addListener(_confirmPasswordControllerListener);
+  }
+
+  void _passwordControllerListener() {
+    add(PasswordChanged(state.passwordController.text));
+  }
+
+  void _confirmPasswordControllerListener() {
+    add(ConfirmPasswordChanged(state.confirmPasswordController.text));
+  }
+
+  void _onInitializePassword(
+      InitializePassword event, Emitter<PasswordState> emit) {
+    // No need to do anything as controllers are already initialized in constructor
+  }
+
+  void _onDisposePassword(DisposePassword event, Emitter<PasswordState> emit) {
+    // Don't dispose controllers here, they will be disposed in close()
   }
 
   void _onPasswordChanged(PasswordChanged event, Emitter<PasswordState> emit) {
@@ -55,6 +79,10 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       ResetPasswordValidation event, Emitter<PasswordState> emit) {
     debugPrint(
         'Before reset - Password: ${state.password}, isPasswordValid: ${state.isPasswordValid}, confirmPassword: ${state.confirmPassword}, isConfirmPasswordValid: ${state.isConfirmPasswordValid}');
+
+    // Update the controllers too
+    state.passwordController.text = '';
+    state.confirmPasswordController.text = '';
 
     final newState = state.copyWith(
       isPasswordValid: false,
@@ -105,6 +133,10 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       debugPrint(
           'Before success state update - Password: ${state.password}, isPasswordValid: ${state.isPasswordValid}, confirmPassword: ${state.confirmPassword}, isConfirmPasswordValid: ${state.isConfirmPasswordValid}');
 
+      // Clear controller text
+      state.passwordController.text = '';
+      state.confirmPasswordController.text = '';
+
       // This emit will now properly update the state
       final newState = state.copyWith(
         isSubmitting: false,
@@ -129,5 +161,19 @@ class PasswordBloc extends Bloc<PasswordEvent, PasswordState> {
       ));
       debugPrint('Password submission failed: $e');
     }
+  }
+
+  @override
+  Future<void> close() {
+    // Remove listeners
+    state.passwordController.removeListener(_passwordControllerListener);
+    state.confirmPasswordController
+        .removeListener(_confirmPasswordControllerListener);
+
+    // Dispose controllers
+    state.passwordController.dispose();
+    state.confirmPasswordController.dispose();
+
+    return super.close();
   }
 }

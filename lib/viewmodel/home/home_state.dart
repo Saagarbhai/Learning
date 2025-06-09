@@ -44,3 +44,8 @@ class HomeError extends HomeState {
     super.userImage,
   });
 }
+
+// Special state for logout to handle navigation to signup screen
+class HomeLoggedOut extends HomeState {
+  const HomeLoggedOut() : super();
+}

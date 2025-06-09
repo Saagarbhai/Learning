@@ -15,6 +15,16 @@ class HomeScreen extends StatelessWidget {
         if (state is HomeInitial) {
           // After logout, navigate to welcome screen
           Navigator.of(context).pushReplacementNamed(AppConstants.welcomeRoute);
+        } else if (state is HomeLoggedOut) {
+          // Navigate directly to signup screen with cleared data
+          // Using pushNamedAndRemoveUntil to clear the navigation stack
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            AppConstants.welcomeRoute,
+            (route) => false, // This removes all previous routes
+          );
+
+          // Reset the SignUpBloc to ensure all fields are cleared
+          context.read<SignUpBloc>().add(InitializeSignUp());
         } else if (state is HomeError) {
           // Show error message
           AppToast.show(
@@ -101,6 +111,9 @@ class HomeScreen extends StatelessWidget {
                           message: 'Logged out successfully',
                           type: ToastificationType.success,
                         );
+
+                        // Reset profile data
+                        context.read<ProfileBloc>().add(ResetProfile());
 
                         // Dispatch logout event
                         context.read<HomeBloc>().add(LogoutUser());

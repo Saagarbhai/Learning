@@ -92,3 +92,6 @@ class ProfileImageChanged extends ProfileEvent {
 class ProfileSubmitted extends ProfileEvent {}
 
 class NavigateToHome extends ProfileEvent {}
+
+// New event to reset profile data when user logs out
+class ResetProfile extends ProfileEvent {}

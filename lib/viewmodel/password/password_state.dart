@@ -10,7 +10,8 @@ class PasswordState extends Equatable {
   final String? errorMessage;
   final bool isPasswordVisible;
   final bool isConfirmPasswordVisible;
-  final GlobalKey<FormState> formKey;
+  final TextEditingController passwordController;
+  final TextEditingController confirmPasswordController;
 
   PasswordState({
     this.password = '',
@@ -22,8 +23,18 @@ class PasswordState extends Equatable {
     this.errorMessage,
     this.isPasswordVisible = false,
     this.isConfirmPasswordVisible = false,
-    GlobalKey<FormState>? formKey,
-  }) : this.formKey = formKey ?? KeysManager.createPasswordFormKey();
+    TextEditingController? passwordController,
+    TextEditingController? confirmPasswordController,
+  })  : this.passwordController = passwordController ?? TextEditingController(),
+        this.confirmPasswordController =
+            confirmPasswordController ?? TextEditingController();
+
+  factory PasswordState.initial() {
+    return PasswordState(
+      passwordController: TextEditingController(),
+      confirmPasswordController: TextEditingController(),
+    );
+  }
 
   PasswordState copyWith({
     String? password,
@@ -48,7 +59,8 @@ class PasswordState extends Equatable {
       isPasswordVisible: isPasswordVisible ?? this.isPasswordVisible,
       isConfirmPasswordVisible:
           isConfirmPasswordVisible ?? this.isConfirmPasswordVisible,
-      formKey: formKey,
+      passwordController: passwordController,
+      confirmPasswordController: confirmPasswordController,
     );
   }
 
@@ -63,6 +75,6 @@ class PasswordState extends Equatable {
         errorMessage,
         isPasswordVisible,
         isConfirmPasswordVisible,
-        formKey,
+        // Don't include controllers in props to avoid unnecessary rebuilds
       ];
 }

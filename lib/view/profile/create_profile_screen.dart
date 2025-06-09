@@ -6,6 +6,23 @@ class CreateProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Check if we're coming from a fresh start or logout
+    // This ensures the profile form is initialized with empty data
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final prefs = await SharedPreferences.getInstance();
+      final wasLoggedOut = prefs.getBool('was_logged_out') ?? false;
+
+      // Always initialize the profile
+      context.read<ProfileBloc>().add(InitializeProfile());
+
+      // If user was logged out, ensure profile data is reset
+      if (wasLoggedOut) {
+        context.read<ProfileBloc>().add(ResetProfile());
+        // Reset the flag
+        await prefs.setBool('was_logged_out', false);
+      }
+    });
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

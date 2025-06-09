@@ -118,10 +118,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     try {
+      // Clear all user data from SharedPreferences
       await _clearUserData();
 
-      // Show success message is handled in the UI
-      emit(const HomeInitial());
+      // Reset any form data and validations by emitting a special logout state
+      // This will be handled in the UI to navigate directly to signup screen
+      emit(const HomeLoggedOut());
     } catch (e) {
       print('Error during logout: $e');
       emit(HomeError('Error during logout: $e'));
@@ -149,9 +151,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<void> _clearUserData() async {
     final prefs = await SharedPreferences.getInstance();
+    // Clear all user-related data
     await prefs.remove('user_token');
     await prefs.remove('user_name');
     await prefs.remove('user_email');
     await prefs.remove('user_image');
+    // Clear any form data or validation states
+    await prefs.remove('form_data');
+    await prefs.remove('validation_states');
+    // Clear any other cached data that might be used in the signup screen
+    await prefs.remove('selected_gender');
+    await prefs.remove('phone_number');
+
+    // Set a flag to indicate user has logged out
+    // This will be used by other screens to reset their data
+    await prefs.setBool('was_logged_out', true);
   }
 }

@@ -5,6 +5,21 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Check if we're coming from logout and reset all relevant blocs
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final prefs = await SharedPreferences.getInstance();
+      final wasLoggedOut = prefs.getBool('was_logged_out') ?? false;
+
+      if (wasLoggedOut) {
+        // Reset all relevant blocs to ensure no data persists
+        context.read<SignUpBloc>().add(InitializeSignUp());
+        context.read<ProfileBloc>().add(ResetProfile());
+
+        // Reset the flag
+        await prefs.setBool('was_logged_out', false);
+      }
+    });
+
     return BlocListener<WelcomeBloc, WelcomeState>(
       listener: (context, state) {},
       child: Scaffold(
