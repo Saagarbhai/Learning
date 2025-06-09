@@ -1,6 +1,14 @@
 # Learning App
 
-A feature-rich Flutter application for e-learning platforms with multi-language support, clean architecture, and modern UI.
+A feature-rich Flutter application for e-learning platforms with multi-language support, clean architecture, and modern UI design.
+
+![Flutter Version](https://img.shields.io/badge/Flutter-≥3.0.0-blue.svg)
+![Dart Version](https://img.shields.io/badge/Dart-≥3.0.0-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+
+## 📱 Overview
+
+Learning App is a modern mobile application built with Flutter that provides a comprehensive e-learning experience. The app features a complete authentication flow, multi-language support, and a clean, intuitive user interface designed with the latest UI/UX principles.
 
 ## 🚀 Features
 
@@ -10,27 +18,28 @@ A feature-rich Flutter application for e-learning platforms with multi-language 
 - Sign in for existing users
 - OTP verification
 - Forgot password flow
-- Profile creation
+- Profile creation with image upload
 - Form validation for all inputs
 
 ### 🌐 Internationalization
 - Multi-language support (English, Hindi, Gujarati)
-- Easy language switching
-- Localized content throughout the app
+- Easy language switching within the app
+- Localized content throughout the application
 
 ### 📱 UI/UX
 - Engaging onboarding flow with animations
 - Modern and clean UI design
 - Responsive layouts using Flutter ScreenUtil
-- Custom form components
-- Loading indicators and feedback
-- Toast notifications for user feedback
+- Custom form components and widgets
+- Loading indicators and progress feedback
+- Toast notifications for user interactions
 
 ### 🏗️ Architecture
 - BLoC pattern for state management
 - Clean architecture with separation of concerns
 - Repository pattern for data access
 - API integration for backend services
+- Modular code organization
 
 ## 📂 Project Structure
 
@@ -83,11 +92,17 @@ lib/
 
 ### Getting Started
 1. Clone the repository
-2. Install dependencies:
+   ```bash
+   git clone https://github.com/yourusername/learning-app.git
+   cd learning-app
+   ```
+
+2. Install dependencies
    ```bash
    flutter pub get
    ```
-3. Run the app:
+
+3. Run the app
    ```bash
    flutter run
    ```
@@ -105,29 +120,50 @@ flutter pub run build_runner build
 
 # Generate localization files
 flutter pub run intl_utils:generate
-
-# Generate native splash screens
-flutter pub run flutter_native_splash:create
-
-# Continuous code generation during development
-flutter pub run build_runner watch
 ```
 
 ## 📦 Dependencies
 
-- **State Management**: `flutter_bloc`, `bloc`, `equatable`
-- **UI**: `flutter_screenutil`, `flutter_svg`, `pinput`, `percent_indicator`, `shimmer`, `toastification`
-- **Networking**: `dio`, `http`, `pretty_dio_logger`
-- **Storage**: `shared_preferences`
-- **Localization**: `intl`, `flutter_localizations`
-- **Media**: `image_picker`
-- **Code Generation**: `build_runner`, `flutter_gen_runner`, `intl_utils`
+### State Management
+- `flutter_bloc` (^9.1.1): BLoC pattern implementation
+- `bloc` (^9.0.0): Core BLoC library
+- `equatable` (^2.0.5): Equality comparisons
+
+### UI Components
+- `flutter_screenutil` (^5.9.0): Responsive UI
+- `flutter_svg` (^2.1.0): SVG rendering
+- `pinput` (^5.0.1): PIN input fields
+- `percent_indicator` (^4.2.5): Progress indicators
+- `shimmer` (^3.0.0): Loading effects
+- `toastification` (^3.0.2): Toast messages
+
+### Networking
+- `dio` (^5.4.0): HTTP client
+- `http` (^1.1.0): HTTP requests
+- `pretty_dio_logger` (^1.3.1): Network logging
+
+### Storage
+- `shared_preferences` (^2.2.2): Local storage
+
+### Localization
+- `intl` (^0.19.0): Internationalization
+- `flutter_localizations`: Flutter localization
+
+### Media
+- `image_picker` (^1.0.4): Image selection
+
+### Development
+- `build_runner` (^2.4.15): Code generation
+- `flutter_gen_runner` (^5.10.0): Asset generation
+- `intl_utils` (^2.8.10): Localization utilities
+- `flutter_lints` (^5.0.0): Linting rules
+- `flutter_launcher_icons` (^0.14.3): App icon generation
 
 ## 🔄 App Flow
 
-1. **Onboarding**: First-time users see onboarding screens
+1. **Onboarding**: First-time users see engaging onboarding screens
 2. **Welcome**: Choose to sign up or sign in
-3. **Authentication**: Register or login with form validation
+3. **Authentication**: Register or login with email/password
 4. **Verification**: OTP verification for new accounts
 5. **Profile Creation**: Set up user profile with picture
 6. **Home**: Main app experience after authentication
@@ -158,3 +194,31 @@ flutter pub run build_runner watch
 - Repository pattern for data access
 - API client configuration
 - Error handling and response parsing
+
+## 📱 Supported Platforms
+
+- Android
+- iOS
+- Web (partial support)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 📞 Contact
+
+Project Link: [https://github.com/yourusername/learning-app](https://github.com/yourusername/learning-app)
+
+---
+
+Built with ❤️ using Flutter
