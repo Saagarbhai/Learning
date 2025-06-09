@@ -29,10 +29,6 @@ class PasswordSubmitted extends PasswordEvent {}
 
 class ResetPasswordValidation extends PasswordEvent {}
 
-class InitializePassword extends PasswordEvent {}
-
-class DisposePassword extends PasswordEvent {}
-
 class TogglePasswordVisibility extends PasswordEvent {
   final bool isConfirmField;
 

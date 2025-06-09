@@ -166,7 +166,7 @@ class SignInScreen extends StatelessWidget {
                     onPressed: () {
                       context.read<SignInBloc>().add(SignInWithGmailPressed());
                     },
-                    isDisabled: true,
+                    isDisabled: false,
                   ),
                   SocialSignButton.facebook(
                     text: Lang.of(context).signupwithFaceBook,
@@ -175,14 +175,14 @@ class SignInScreen extends StatelessWidget {
                           .read<SignInBloc>()
                           .add(SignInWithFacebookPressed());
                     },
-                    isDisabled: true,
+                    isDisabled: false,
                   ),
                   SocialSignButton.apple(
                     text: Lang.of(context).signupwithApple,
                     onPressed: () {
                       context.read<SignInBloc>().add(SignInWithApplePressed());
                     },
-                    isDisabled: true,
+                    isDisabled: false,
                   ),
 
                   // Don't have an account

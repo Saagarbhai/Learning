@@ -36,7 +36,7 @@ class SignUpScreen extends StatelessWidget {
           state.nameController.clear();
           state.emailController.clear();
           state.phoneController.clear();
-          // context.read<SignUpBloc>().add(UpdateSelectedGender(gender: null));
+          //  context.read<SignUpBloc>().add(UpdateSelectedGender(gender: ''));
         }
 
         if (state.navigateToSignIn) {
